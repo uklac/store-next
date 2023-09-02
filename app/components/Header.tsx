@@ -270,7 +270,7 @@ const Header = () => {
                   className="menu sf-arrows sf-js-enabled"
                 >
                   <li className="megamenu-container active">
-                    <a href="index.html" className="sf-with-ul">
+                    <a href="/" className="sf-with-ul">
                       Home
                     </a>
                   </li>
