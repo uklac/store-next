@@ -1,4 +1,3 @@
-import Header from './components/Header';
 import Product from './components/Product';
 
 export default async function Index() {
@@ -17,26 +16,21 @@ export default async function Index() {
   const products = data.products;
 
   return (
-    <div className="page-wrapper">
-      <div className="wrapper">
-        <Header></Header>
-        <div className="container">
-          <div className="products row">
-            {products.map((product: any, index: number) => (
-              <div
-                className="product-item furniture col-6 col-md-4 col-lg-3"
-                key={index}
-              >
-                <Product
-                  name={product.name}
-                  displayPrice={product.display_price}
-                  image={product.master.images[0]}
-                  id={product.id}
-                />
-              </div>
-            ))}
+    <div className="container">
+      <div className="products row">
+        {products.map((product: any, index: number) => (
+          <div
+            className="product-item furniture col-6 col-md-4 col-lg-3"
+            key={index}
+          >
+            <Product
+              name={product.name}
+              displayPrice={product.display_price}
+              image={product.master.images[0]}
+              id={product.id}
+            />
           </div>
-        </div>
+        ))}
       </div>
     </div>
   );

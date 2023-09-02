@@ -1,3 +1,4 @@
+import Header from './components/Header';
 import './global.scss';
 
 export const metadata = {
@@ -12,7 +13,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <div className="page-wrapper">
+          <Header></Header>
+          <main>
+            {children}
+          </main>
+        </div>
+      </body>
     </html>
   );
 }
