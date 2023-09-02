@@ -1,0 +1,202 @@
+@charset "UTF-8";
+
+@import 'styles/css/bootstrap.min.css';
+@import 'styles/css/fonts-molla.min.css';
+
+
+/* Main CSS File */
+@import 'styles/scss/mixins/clearfix';
+@import 'styles/scss/mixins/breakpoints';
+@import 'styles/scss/mixins/lazy';
+@import 'styles/scss/mixins/buttons';
+
+@import 'styles/scss/config/variables';
+
+/*-------------------- 1.General Styles ---------- */
+@import 'styles/scss/base/base';
+@import 'styles/scss/base/type';
+@import 'styles/scss/base/layout';
+
+/*-------------------- 2.Headers --------------------*/
+@import 'styles/scss/base/headers/header';
+
+/*-------------------- 2.1.Menu --------------------*/
+@import 'styles/scss/base/headers/menu';
+
+/*-------------------- 2.2.Vertical Menu --------------------*/
+@import 'styles/scss/base/headers/vertical-menu';
+
+/*-------------------- 2.3.Sticky Header --------------------*/
+@import 'styles/scss/base/headers/sticky-header';
+
+/*-------------------- 2.4.Mobiel Menu --------------------*/
+@import 'styles/scss/base/headers/mobile-menu';
+@import 'styles/scss/base/headers/mobile-menu-light';
+
+/*-------------------- 3.Footer --------------------*/
+@import 'styles/scss/base/footer';
+
+/*-------------------- 4.Elements --------------------*/
+/*-------------------- 4.1.Page Header --------------------*/
+@import 'styles/scss/elements/page-header';
+
+/*-------------------- 4.2.BreadCrumbs --------------------*/
+@import 'styles/scss/elements/breadcrumb';
+
+/*-------------------- 4.3.Titles --------------------*/
+@import 'styles/scss/elements/titles';
+
+/*-------------------- 4.4.Icon boxes --------------------*/
+@import 'styles/scss/elements/icon-boxes';
+
+/*-------------------- 4.5.Cards --------------------*/
+@import 'styles/scss/elements/cards';
+
+/*-------------------- 4.6.Tabs --------------------*/
+@import 'styles/scss/elements/tabs';
+
+/*-------------------- 4.7.Buttons --------------------*/
+@import 'styles/scss/elements/buttons';
+
+/*-------------------- 4.8.Products --------------------*/
+@import 'styles/scss/elements/products';
+
+/*-------------------- 4.9.Banners --------------------*/
+@import 'styles/scss/elements/banners';
+
+/*-------------------- 4.10.Banners Video --------------------*/
+@import 'styles/scss/elements/banners-video';
+
+/*-------------------- 4.11.Banners Category --------------------*/
+@import 'styles/scss/elements/banners-category';
+
+/*-------------------- 4.12.Social Icons --------------------*/
+@import 'styles/scss/elements/social-icons';
+
+/*-------------------- 4.13.Testimonials --------------------*/
+@import 'styles/scss/elements/testimonials';
+
+/*-------------------- 4.14.Forms --------------------*/
+@import 'styles/scss/elements/forms';
+
+/*-------------------- 4.15.Call to Actions --------------------*/
+@import 'styles/scss/elements/cta';
+
+/*-------------------- 4.16.Tables --------------------*/
+@import 'styles/scss/elements/tables';
+
+/*-------------------- 4.17. Counters --------------------*/
+@import 'styles/scss/elements/counters';
+
+/*-------------------- 4.18.Pagination --------------------*/
+@import 'styles/scss/elements/pagination';
+
+/*-------------------- 4.19.Modals --------------------*/
+@import 'styles/scss/elements/modals';
+
+/*-------------------- 4.20.Alerts --------------------*/
+@import 'styles/scss/elements/alerts';
+
+/*-------------------- 4.21.Instagram Feeds --------------------*/
+@import 'styles/scss/elements/instagram-feed';
+
+/*-------------------- 4.22.Elements list --------------------*/
+@import 'styles/scss/elements/list';
+
+/*-------------------- 4.23.Overlay --------------------*/
+@import 'styles/scss/elements/overlay';
+
+/*-------------------- 4.24.Countdown --------------------*/
+@import 'styles/scss/elements/countdown';
+
+/*-------------------- 4.25.LightBox --------------------*/
+@import 'styles/scss/elements/image-lightbox';
+
+/*-------------------- 4.26.Slider --------------------*/
+@import 'styles/scss/elements/slider';
+
+/*-------------------- 4.27.Toast --------------------*/
+@import 'styles/scss/elements/toast';
+
+/*-------------------- 4.28.Skeleton --------------------*/
+@import 'styles/scss/elements/skeleton';
+
+/*-------------------- 4.29.Animations --------------------*/
+@import 'styles/scss/elements/animations';
+
+/*-------------------- 4.30.Lazy --------------------*/
+@import 'styles/scss/elements/lazy-load';
+
+/*-------------------- 4.31.Grid --------------------*/
+@import 'styles/scss/elements/grid';
+
+/*-------------------- 5.Pages --------------------*/
+/*-------------------- 5.1.Home --------------------*/
+@import 'styles/scss/pages/home';
+
+/*-------------------- 5.2.Category --------------------*/
+@import 'styles/scss/pages/category';
+
+/*-------------------- 5.3.Product Pages --------------------*/
+@import 'styles/scss/pages/product';
+
+/*-------------------- 5.4.Blog --------------------*/
+@import 'styles/scss/pages/blog';
+
+/*-------------------- 5.5.Single/Blog Post --------------------*/
+@import 'styles/scss/pages/single';
+
+/*-------------------- 5.6.Portfolio --------------------*/
+@import 'styles/scss/pages/portfolio';
+
+/*-------------------- 5.7.About --------------------*/
+@import 'styles/scss/pages/about';
+
+/*-------------------- 5.8.About 2 --------------------*/
+@import 'styles/scss/pages/about-2';
+
+/*-------------------- 5.9.Contact --------------------*/
+@import 'styles/scss/pages/contact';
+
+/*-------------------- 5.10.Contact 2 --------------------*/
+@import 'styles/scss/pages/contact-2';
+
+/*-------------------- 5.11.Login --------------------*/
+@import 'styles/scss/pages/login';
+
+/*-------------------- 5.12.Category Banner Page --------------------*/
+@import 'styles/scss/pages/category-banner-page';
+
+/*-------------------- 5.13.Checkout --------------------*/
+@import 'styles/scss/pages/checkout';
+
+/*-------------------- 5.14.Wishlist --------------------*/
+@import 'styles/scss/pages/wishlist';
+
+/*-------------------- 5.15.Cart --------------------*/
+@import 'styles/scss/pages/cart';
+
+/*-------------------- 5.16.Dashboard --------------------*/
+@import 'styles/scss/pages/dashboard';
+
+/*-------------------- 5.17.404 --------------------*/
+@import 'styles/scss/pages/404';
+
+/*-------------------- 5.18.Coming Soon --------------------*/
+@import 'styles/scss/pages/coming-soon';
+
+/*-------------------- 5.19.Category Market --------------------*/
+@import 'styles/scss/pages/category-market';
+
+/*-------------------- 6.Spacing + Helpers --------------------*/
+@import 'styles/scss/config/helpers';
+@import 'styles/scss/config/spacing';
+
+/*-------------------- 7.Font Icons --------------------*/
+/* @import 'styles/scss/elements/font-icons'; */
+
+/*-------------------- 8.HomePage --------------------*/
+@import 'styles/scss/plugins/plugin';
+@import 'styles/scss/skins/skin';
+
+@import 'styles/scss/custom';
