@@ -22,16 +22,16 @@
       "executor": "@nx/next:server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "no:build",
+        "buildTarget": "store-next:build",
         "dev": true
       },
       "configurations": {
         "development": {
-          "buildTarget": "no:build:development",
+          "buildTarget": "store-next:build:development",
           "dev": true
         },
         "production": {
-          "buildTarget": "no:build:production",
+          "buildTarget": "store-next:build:production",
           "dev": false
         }
       }
@@ -39,7 +39,7 @@
     "export": {
       "executor": "@nx/next:export",
       "options": {
-        "buildTarget": "no:build:production"
+        "buildTarget": "store-next:build:production"
       }
     },
     "test": {
