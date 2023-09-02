@@ -15,7 +15,7 @@ export default async function Index() {
   const response = await fetch(url, options);
   const data = await response.json();
   const products = data.products;
-  
+
   return (
     <div className="page-wrapper">
       <div className="wrapper">
@@ -23,8 +23,16 @@ export default async function Index() {
         <div className="container">
           <div className="products row">
             {products.map((product: any, index: number) => (
-              <div className="product-item furniture col-6 col-md-4 col-lg-3" key={index}>
-                <Product name={product.name} displayPrice={product.display_price} image={product.master.images[0]}/>
+              <div
+                className="product-item furniture col-6 col-md-4 col-lg-3"
+                key={index}
+              >
+                <Product
+                  name={product.name}
+                  displayPrice={product.display_price}
+                  image={product.master.images[0]}
+                  id={product.id}
+                />
               </div>
             ))}
           </div>

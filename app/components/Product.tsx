@@ -1,7 +1,9 @@
 import React from 'react';
+import Link from 'next/link';
 
 interface Product {
   name: string;
+  id: number;
   displayPrice: string;
   image: {
     position: number;
@@ -10,22 +12,22 @@ interface Product {
     product_url: string;
     large_url: string;
     alt: string;
-  }
+  };
 }
 
 export default function Product(props: Product) {
-  const { name, displayPrice, image } = props;
-  
+  const { name, displayPrice, image, id } = props;
+
   return (
     <article className="product product-2">
       <figure className="product-media">
-        <a href="/products/new-york-map">
+        <Link href={`products/${id}`}>
           <img
             alt={image.alt}
             className="product-image"
             src={image.product_url}
           />
-        </a>
+        </Link>
         <div className="product-action-vertical">
           <a
             href="#"
@@ -43,14 +45,10 @@ export default function Product(props: Product) {
       </figure>
       <div className="product-body">
         <h3 className="product-title">
-          <a className="info" title="Caos Art" href="/products/new-york-map">
-            {name}
-          </a>
+          <Link href={`products/${id}`}>{name}</Link>
         </h3>
         <div className="product-price">
-          <section className="product-card_price">
-            {displayPrice}
-          </section>
+          <section className="product-card_price">{displayPrice}</section>
         </div>
       </div>
     </article>
