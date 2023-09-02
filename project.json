@@ -9,7 +9,7 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/no"
+        "outputPath": "dist/store-next"
       },
       "configurations": {
         "development": {
