@@ -46,6 +46,6 @@
     "src/**/*.spec.ts",
     "src/**/*.test.ts",
     "**e2e/**/*",
-    "dist/no/**/*"
+    "dist/store-next/**/*"
   ]
 }
