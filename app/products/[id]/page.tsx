@@ -1,18 +1,9 @@
 import React from 'react';
+import { getProduct } from 'app/apis/get-product';
+import { ImageAttribute } from 'app/interfaces/image';
 
 export default async function ProductPage({ params }: { params: any }) {
-  const myApiKey = process.env.API_TOKEN_AUTH;
-  const url = `http://localhost:3000/api/products/${params.id}`;
-  const options = {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      Authorization: `Bearer ${myApiKey}`,
-    },
-  };
-
-  const response = await fetch(url, options);
-  const product = await response.json();
+  const product = await getProduct(params.id);
 
   return (
     <article className="product-page container mt-5">
@@ -27,7 +18,7 @@ export default async function ProductPage({ params }: { params: any }) {
               </div>
               <div className="product-zoom-gallery">
                 <ul className="product-thumbnails">
-                  {product.master.images.map((image: any, index: number) => (
+                  {product.master.images.map((image: ImageAttribute, index: number) => (
                     <li className="product-thumbnails__all" key={index}>
                       <a href={image.product_url}>
                         <img src={image.mini_url} />
@@ -50,7 +41,7 @@ export default async function ProductPage({ params }: { params: any }) {
             <div className="product-content">
               <div className="product-page__description">
                 <p className="product-content">
-                  Cuadro de illustracion mascotas en invierno coleccion n32
+                  {product.description}
                 </p>
               </div>
             </div>
