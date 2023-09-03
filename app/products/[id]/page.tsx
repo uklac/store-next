@@ -1,5 +1,5 @@
 import React from 'react';
-import { getProduct } from 'app/apis/get-product';
+import { getProduct } from 'app/apis/products-api';
 import { ImageAttribute } from 'app/interfaces/image';
 
 export default async function ProductPage({ params }: { params: any }) {
@@ -18,13 +18,15 @@ export default async function ProductPage({ params }: { params: any }) {
               </div>
               <div className="product-zoom-gallery">
                 <ul className="product-thumbnails">
-                  {product.master.images.map((image: ImageAttribute, index: number) => (
-                    <li className="product-thumbnails__all" key={index}>
-                      <a href={image.product_url}>
-                        <img src={image.mini_url} />
-                      </a>
-                    </li>
-                  ))}
+                  {product.master.images.map(
+                    (image: ImageAttribute, index: number) => (
+                      <li className="product-thumbnails__all" key={index}>
+                        <a href={image.product_url}>
+                          <img src={image.mini_url} />
+                        </a>
+                      </li>
+                    )
+                  )}
                 </ul>
               </div>
             </div>
@@ -40,9 +42,7 @@ export default async function ProductPage({ params }: { params: any }) {
             </header>
             <div className="product-content">
               <div className="product-page__description">
-                <p className="product-content">
-                  {product.description}
-                </p>
+                <p className="product-content">{product.description}</p>
               </div>
             </div>
           </div>

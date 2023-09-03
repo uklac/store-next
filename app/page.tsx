@@ -1,19 +1,8 @@
+import { getProducts } from './apis/products-api';
 import Product from './components/Product';
 
 export default async function Index() {
-  const myApiKey = process.env.API_TOKEN_AUTH;
-  const url = 'http://localhost:3000/api/products';
-  const options = {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      Authorization: `Bearer ${myApiKey}`,
-    },
-  };
-
-  const response = await fetch(url, options);
-  const data = await response.json();
-  const products = data.products;
+  const { products } = await getProducts();
 
   return (
     <div className="container">

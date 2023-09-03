@@ -1,5 +1,3 @@
-import Alink from 'app/components/Alink';
-
 export default async function Home() {
   return (
     <div className="page-content">
@@ -168,7 +166,6 @@ export default async function Home() {
           </div>
         </div>
       </div>
-
       <div className="buttons">
         <div className="row">
           <div className="col-6 col-lg-4 col-xl-2">

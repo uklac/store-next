@@ -74,6 +74,15 @@ export interface Product {
   }[];
 }
 
+export interface ListProducts {
+  count: number;
+  current_page: number;
+  pages: number;
+  per_page: number;
+  total_count: number;
+  products: Product[];
+}
+
 export interface ProductProperty {
   id: number;
   product_id: number;
