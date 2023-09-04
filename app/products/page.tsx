@@ -152,7 +152,7 @@ export default async function ProductsPage({
           <div className="col-lg-9">
             {productsList.length ? (
               <>
-                <ProductList products={productsList} />
+                <ProductList products={productsList} columns={3}/>
                 {total_count > PRODUCTS_PER_PAGE && (
                   <Pagination currentPage={current_page} totalPages={pages} />
                 )}
