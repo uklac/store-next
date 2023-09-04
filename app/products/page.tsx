@@ -150,10 +150,14 @@ export default async function ProductsPage({
             </div>
           </aside>
           <div className="col-lg-9">
-            <ProductList products={productsList} />
-            {total_count > PRODUCTS_PER_PAGE && (
-              <Pagination currentPage={current_page} totalPages={pages} />
-            )}
+            {productsList.length ? (
+              <>
+                <ProductList products={productsList} />
+                {total_count > PRODUCTS_PER_PAGE && (
+                  <Pagination currentPage={current_page} totalPages={pages} />
+                )}
+              </>
+            ) : <div className='text-center'> No se encontraron resultados</div>}
           </div>
         </div>
       </div>
