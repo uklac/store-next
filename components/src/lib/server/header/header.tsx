@@ -1,4 +1,14 @@
-export async function Header() {
+import Link from 'next/link';
+
+interface HeaderProps {
+  links: {
+    title: string;
+    url: string;
+  }[];
+}
+
+export async function Header(props: HeaderProps) {
+  const { links } = props;
   return (
     <header className="header  header-intro-clearance">
       <div className="header-top">
@@ -254,40 +264,16 @@ export async function Header() {
                 </div>
               </div>
             </div>
-
             <div className="header-center">
               <nav className="main-nav">
                 <ul className="menu sf-arrows sf-js-enabled">
-                  <li className="megamenu-container active">
-                    <a href="/" className="sf-with-ul">
-                      Home
-                    </a>
-                  </li>
-                  <li>
-                    <a href="category.html" className="sf-with-ul">
-                      Shop
-                    </a>
-                  </li>
-                  <li>
-                    <a href="product.html" className="sf-with-ul">
-                      Product
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="sf-with-ul">
-                      Pages
-                    </a>
-                  </li>
-                  <li>
-                    <a href="blog.html" className="sf-with-ul">
-                      Blog
-                    </a>
-                  </li>
-                  <li>
-                    <a href="elements-list.html" className="sf-with-ul">
-                      Elements
-                    </a>
-                  </li>
+                  {links.map((link, index) => (
+                    <li key={index}>
+                      <Link href={link.url} className="sf-with-ul">
+                        {link.title}
+                      </Link>
+                    </li>
+                  ))}
                 </ul>
               </nav>
             </div>

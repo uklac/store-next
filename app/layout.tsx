@@ -11,11 +11,21 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const links = [
+    {
+      title: 'Home',
+      url: '/'
+    },
+    {
+      title: 'Productos',
+      url: '/products'
+    }
+  ]
   return (
     <html lang="en">
       <body>
         <div className="page-wrapper">
-          <Header />
+          <Header links={links}/>
           <main>
             {children}
           </main>
