@@ -1,3 +1,4 @@
+import { HelloServer } from 'components/server';
 import { getProducts } from './apis/products-api';
 import Product from './components/Product';
 
@@ -6,6 +7,7 @@ export default async function Index() {
 
   return (
     <div className="container">
+      <HelloServer></HelloServer>
       <div className="products row">
         {products.map((product: any, index: number) => (
           <div
