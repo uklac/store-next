@@ -1,4 +1,4 @@
-import Header from './components/Header';
+import { Header } from 'components/server';
 import './global.scss';
 
 export const metadata = {
@@ -15,7 +15,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <div className="page-wrapper">
-          <Header></Header>
+          <Header />
           <main>
             {children}
           </main>

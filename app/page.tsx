@@ -1,20 +1,18 @@
-import { HelloServer } from 'components/server';
+import { ProductCard } from 'components/server';
 import { getProducts } from './apis/products-api';
-import Product from './components/Product';
 
 export default async function Index() {
   const { products } = await getProducts();
 
   return (
     <div className="container">
-      <HelloServer></HelloServer>
       <div className="products row">
         {products.map((product: any, index: number) => (
           <div
             className="product-item furniture col-6 col-md-4 col-lg-3"
             key={index}
           >
-            <Product
+            <ProductCard
               name={product.name}
               displayPrice={product.display_price}
               image={product.master.images[0]}

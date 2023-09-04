@@ -1,7 +1,6 @@
-import React from 'react';
 import Link from 'next/link';
 
-interface Product {
+interface ProductCardProps {
   name: string;
   id: number;
   displayPrice: string;
@@ -15,7 +14,7 @@ interface Product {
   };
 }
 
-export default function Product(props: Product) {
+export async function ProductCard(props: ProductCardProps) {
   const { name, displayPrice, image, id } = props;
 
   return (
