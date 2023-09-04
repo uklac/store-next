@@ -4,7 +4,10 @@ const PRODUCTS_URL = `${API_URL}/products`;
 
 export async function getProducts(): Promise<ListProducts> {
   const response = await fetch(PRODUCTS_URL, {
-    cache: 'no-cache',
+    // cache: 'no-cache',
+    next: {
+      revalidate: 3600
+    },
     headers: HEADERS_REQUEST,
   });
   return await response.json();
