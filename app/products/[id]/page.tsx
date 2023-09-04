@@ -53,7 +53,6 @@ export default async function ProductPage({ params }: { params: any }) {
                 type="number"
                 id="qty"
                 className="form-control"
-                value="1"
                 min="1"
                 max="10"
                 step="1"

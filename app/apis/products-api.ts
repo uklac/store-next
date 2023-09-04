@@ -14,9 +14,7 @@ export async function getProducts(page?: number, perPage?: number ): Promise<Lis
 export async function getProduct(productId: number): Promise<Product> {
   const url = `${PRODUCTS_URL}/${productId}`;
   const response = await fetch(url, {
-    next: {
-      revalidate: 3600
-    },
+    cache: 'no-cache',
     headers: HEADERS_REQUEST,
   });
   return await response.json();
