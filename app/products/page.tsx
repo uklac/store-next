@@ -3,22 +3,27 @@ import { ProductList } from 'components/server';
 import Pagination from 'components/src/lib/server/pagination/pagination';
 import React from 'react';
 
-export default async function ProductsPage() {
-  const { products, current_page, per_page, total_count, pages } = await getProducts();
-  // count: number;
-  // current_page: number;
-  // pages: number;
-  // per_page: number;
-  // total_count: number;
-  const productsList = products.map((product)=>{
+const PRODUCTS_PER_PAGE = 12;
+
+export default async function ProductsPage({
+  searchParams,
+}: {
+  searchParams: any;
+}) {
+  const { page } = searchParams;
+  const { products, current_page, total_count, pages } = await getProducts(
+    page,
+    PRODUCTS_PER_PAGE
+  );
+  const productsList = products.map((product) => {
     return {
       name: product.name,
       id: product.id,
       price: product.display_price,
-      image: product.master.images[0]
-    }
-  })
-  
+      image: product.master.images[0],
+    };
+  });
+
   return (
     <div className="container">
       <nav>Breadcrumbs here</nav>
@@ -146,7 +151,9 @@ export default async function ProductsPage() {
           </aside>
           <div className="col-lg-9">
             <ProductList products={productsList} />
-            <Pagination currentPage={current_page} totalPages={pages} />
+            {total_count > PRODUCTS_PER_PAGE && (
+              <Pagination currentPage={current_page} totalPages={pages} />
+            )}
           </div>
         </div>
       </div>

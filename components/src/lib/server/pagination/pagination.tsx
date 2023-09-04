@@ -16,10 +16,14 @@ export default function Pagination(props: PaginationProps) {
   return (
     <nav aria-label="Page navigation">
       <ul className="pagination justify-content-center">
-        <li className={`page-item ${currentPage - 1 < totalPages ? 'disabled' : '' }`}>
+        <li
+          className={`page-item ${
+            currentPage - 1 === 0 ? 'disabled' : ''
+          }`}
+        >
           <Link
             className="page-link page-link-prev"
-            href={`/products/?page=${currentPage + 1}`}
+            href={`/products/?page=${currentPage - 1}`}
           >
             <span aria-hidden="true">
               <i className="icon-long-arrow-left"></i>
@@ -35,7 +39,7 @@ export default function Pagination(props: PaginationProps) {
           >
             <Link
               className="page-link"
-              href={`/products/?page=${currentPage + 1}`}
+              href={`/products/?page=${page.value}`}
               key={index}
             >
               {page.text}
@@ -43,7 +47,10 @@ export default function Pagination(props: PaginationProps) {
           </li>
         ))}
         <li className="page-item-total">de {totalPages}</li>
-        <li className="page-item">
+        <li className={`page-item ${
+            currentPage + 1 > totalPages ? 'disabled' : ''
+          }`}
+        >
           <Link
             className="page-link page-link-next"
             href={`/products/?page=${currentPage + 1}`}
