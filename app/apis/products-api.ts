@@ -1,9 +1,9 @@
 import { ListProducts, Product } from 'app/interfaces/product';
 import { API_URL, HEADERS_REQUEST } from './constants';
+const PRODUCTS_URL = `${API_URL}/products`;
 
 export async function getProducts(): Promise<ListProducts> {
-  const url = `${API_URL}/products`;
-  const response = await fetch(url, {
+  const response = await fetch(PRODUCTS_URL, {
     cache: 'no-cache',
     headers: HEADERS_REQUEST,
   });
@@ -11,7 +11,7 @@ export async function getProducts(): Promise<ListProducts> {
 }
 
 export async function getProduct(productId: number): Promise<Product> {
-  const url = `${API_URL}/products/${productId}`;
+  const url = `${PRODUCTS_URL}/${productId}`;
   const response = await fetch(url, {
     next: {
       revalidate: 3600
