@@ -80,7 +80,7 @@ export default function RootLayout({
   const accountLinks = [
     {
       title: 'Iniciar sesión',
-      url: '/login',
+      url: '/account',
     },
     {
       title: 'Ver carrito',
