@@ -1,5 +1,5 @@
 
-export default async function Login() {
+export default async function Account() {
   return (
     <h1>Inicio Session</h1>
   );
