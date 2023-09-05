@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-interface BannerProps {
+export interface BannerProps {
   image: string;
   title: string;
   subtitle?: string;
