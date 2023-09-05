@@ -1,19 +1,8 @@
-import { ProductList } from 'components/server';
-import { getProducts } from './apis/products-api';
 import IconBoxes from 'components/src/lib/server/icon-boxes/icon-boxes';
 import Slider from 'components/src/lib/client/slider/slider';
+import ProductsLatest from 'components/src/lib/server/products-latest/products-latest';
 
 export default async function Index() {
-  const { products } = await getProducts();
-  const productsList = products.map((product) => {
-    return {
-      name: product.name,
-      id: product.id,
-      price: product.display_price,
-      image: product.master.images[0],
-    };
-  });
-
   const options = [
     {
       title: 'Envió Gratis',
@@ -56,7 +45,7 @@ export default async function Index() {
         </div>
       </div>
       <div className="container">
-        <ProductList products={productsList} />
+        <ProductsLatest />
       </div>
     </>
   );

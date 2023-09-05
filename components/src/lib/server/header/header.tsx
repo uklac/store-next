@@ -280,7 +280,7 @@ export async function Header(props: HeaderProps) {
             <div className="header-right">
               <i className="la la-lightbulb-o"></i>
               <p>
-                Clearance<span className="highlight">&nbsp;Up to 30% Off</span>
+                <span className="highlight">10% descuento</span> nuevos clientes
               </p>
             </div>
           </div>
