@@ -7,3 +7,4 @@ export * from './lib/server/pagination/pagination';
 export * from './lib/server/icon-boxes/icon-boxes';
 export * from './lib/server/banner/banner';
 export * from './lib/server/products-latest/products-latest';
+export * from './lib/server/grid-banners/grid-banners';
