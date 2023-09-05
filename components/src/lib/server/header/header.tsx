@@ -1,6 +1,14 @@
-import React from 'react';
+import Link from 'next/link';
 
-const Header = () => {
+interface HeaderProps {
+  links: {
+    title: string;
+    url: string;
+  }[];
+}
+
+export async function Header(props: HeaderProps) {
+  const { links } = props;
   return (
     <header className="header  header-intro-clearance">
       <div className="header-top">
@@ -46,11 +54,6 @@ const Header = () => {
                         </ul>
                       </div>
                     </div>
-                  </li>
-                  <li>
-                    <a href="#signin-modal" data-toggle="modal">
-                      Sign in / Sign up
-                    </a>
                   </li>
                 </ul>
               </li>
@@ -222,9 +225,7 @@ const Header = () => {
 
                 <div className="dropdown-menu">
                   <nav className="side-nav">
-                    <ul
-                      className="menu-vertical sf-arrows sf-js-enabled"
-                    >
+                    <ul className="menu-vertical sf-arrows sf-js-enabled">
                       <li className="item-lead">
                         <a href="#">Daily offers</a>
                       </li>
@@ -263,42 +264,16 @@ const Header = () => {
                 </div>
               </div>
             </div>
-
             <div className="header-center">
               <nav className="main-nav">
-                <ul
-                  className="menu sf-arrows sf-js-enabled"
-                >
-                  <li className="megamenu-container active">
-                    <a href="/" className="sf-with-ul">
-                      Home
-                    </a>
-                  </li>
-                  <li>
-                    <a href="category.html" className="sf-with-ul">
-                      Shop
-                    </a>
-                  </li>
-                  <li>
-                    <a href="product.html" className="sf-with-ul">
-                      Product
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="sf-with-ul">
-                      Pages
-                    </a>
-                  </li>
-                  <li>
-                    <a href="blog.html" className="sf-with-ul">
-                      Blog
-                    </a>
-                  </li>
-                  <li>
-                    <a href="elements-list.html" className="sf-with-ul">
-                      Elements
-                    </a>
-                  </li>
+                <ul className="menu sf-arrows sf-js-enabled">
+                  {links.map((link, index) => (
+                    <li key={index}>
+                      <Link href={link.url} className="sf-with-ul">
+                        {link.title}
+                      </Link>
+                    </li>
+                  ))}
                 </ul>
               </nav>
             </div>
@@ -313,6 +288,4 @@ const Header = () => {
       </div>
     </header>
   );
-};
-
-export default Header;
+}

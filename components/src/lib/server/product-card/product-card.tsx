@@ -1,10 +1,9 @@
-import React from 'react';
 import Link from 'next/link';
 
-interface Product {
+export interface ProductCardProps {
   name: string;
   id: number;
-  displayPrice: string;
+  price: string;
   image: {
     position: number;
     mini_url: string;
@@ -15,8 +14,8 @@ interface Product {
   };
 }
 
-export default function Product(props: Product) {
-  const { name, displayPrice, image, id } = props;
+export async function ProductCard(props: ProductCardProps) {
+  const { name, price, image, id } = props;
 
   return (
     <article className="product product-2">
@@ -48,7 +47,7 @@ export default function Product(props: Product) {
           <Link href={`products/${id}`}>{name}</Link>
         </h3>
         <div className="product-price">
-          <section className="product-card_price">{displayPrice}</section>
+          <section className="product-card_price">{price}</section>
         </div>
       </div>
     </article>
