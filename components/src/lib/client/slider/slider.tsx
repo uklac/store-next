@@ -8,7 +8,7 @@ interface SliderProps {
   slides: BannerProps[];
 }
 
-export default function Slider(props: SliderProps) {
+export async function Slider(props: SliderProps) {
   const { slides } = props;
   return (
     <Swiper

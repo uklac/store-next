@@ -1,9 +1,8 @@
-import IconBoxes from 'components/src/lib/server/icon-boxes/icon-boxes';
-import Slider from 'components/src/lib/client/slider/slider';
-import ProductsLatest from 'components/src/lib/server/products-latest/products-latest';
-import GridBanners from 'components/src/lib/server/grid-banners/grid-banners';
+import { Suspense } from 'react';
+import { ProductsSkeleton, GridBanners, ProductsLatest, IconBoxes } from 'components/server';
+import { Slider } from 'components';
 
-export default async function Index() {
+export default function Index() {
   const options = [
     {
       title: 'Envió Gratis',
@@ -70,7 +69,10 @@ export default async function Index() {
         <GridBanners banners={banners}/>
       </div>
       <div className="container">
-        <ProductsLatest />
+        <h3 className="text-center mb-3 mt-3">Últimos Productos</h3>
+        <Suspense fallback={<ProductsSkeleton/>}>
+          <ProductsLatest />
+        </Suspense>
       </div>
     </>
   );

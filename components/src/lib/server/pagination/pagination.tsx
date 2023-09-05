@@ -5,7 +5,7 @@ interface PaginationProps {
   totalPages: number;
 }
 
-export default function Pagination(props: PaginationProps) {
+export async function Pagination(props: PaginationProps) {
   const { currentPage, totalPages } = props;
 
   const arrayValues = Array.from(Array(totalPages).keys());

@@ -1,7 +1,6 @@
-import { getProducts } from 'app/apis/products-api';
-import { ProductList } from 'components/server';
-import Pagination from 'components/src/lib/server/pagination/pagination';
 import React from 'react';
+import { getProducts } from 'app/apis/products-api';
+import { ProductList, Pagination } from 'components/server';
 
 const PRODUCTS_PER_PAGE = 12;
 

@@ -5,12 +5,12 @@ export interface ProductCardProps {
   id: number;
   price: string;
   image: {
-    position: number;
-    mini_url: string;
-    small_url: string;
+    position?: number;
+    mini_url?: string;
+    small_url?: string;
     product_url: string;
-    large_url: string;
-    alt: string;
+    large_url?: string;
+    alt?: string;
   };
 }
 

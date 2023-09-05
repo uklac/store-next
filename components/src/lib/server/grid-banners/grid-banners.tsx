@@ -4,7 +4,7 @@ interface GridBannersProps {
   banners: BannerProps[];
 }
 
-export default function GridBanners(props: GridBannersProps) {
+export async function GridBanners(props: GridBannersProps) {
   const { banners } = props;
   const mainBanner = banners[0];
   const secondBanner = banners[1];

@@ -8,7 +8,7 @@ interface IconBoxesProps {
   }[];
 }
 
-export default function IconBoxes(props: IconBoxesProps) {
+export function IconBoxes(props: IconBoxesProps) {
   const { position, icons, options } = props;
   const iconClass = icons === 'circle' ? 'icon-box-circle' : '';
   const positionClass = position === 'left' ? 'icon-box-side' : 'text-center';
