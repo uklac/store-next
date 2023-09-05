@@ -1,6 +1,7 @@
 import { ProductList } from 'components/server';
 import { getProducts } from './apis/products-api';
 import IconBoxes from 'components/src/lib/server/icon-boxes/icon-boxes';
+import Banner from 'components/src/lib/server/banner/banner';
 
 export default async function Index() {
   const { products } = await getProducts();
@@ -33,8 +34,14 @@ export default async function Index() {
 
   return (
     <>
+      <Banner
+        image="/slider-1.jpeg"
+        title="Dale vida a tus espacios"
+        subtitle='Decoración'
+        link={{ url: '/products', text: 'Ver productos' }}
+      />
       <div className="icon-boxes-container">
-        <div className='container'>
+        <div className="container">
           <IconBoxes options={options} position="left" />
         </div>
       </div>
