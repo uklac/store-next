@@ -99,7 +99,7 @@ export async function Footer(props: FooterProps) {
       <div className="footer-bottom">
         <div className="container">
           <p className="footer-copyright">
-            Copyright © 2019 Molla Store. All Rights Reserved.
+            Copyright © 2023 Kamura. All Rights Reserved.
           </p>
         </div>
       </div>
