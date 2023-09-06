@@ -1,6 +1,7 @@
 import React from 'react';
 import { getProduct } from 'app/apis/products-api';
 import PickImageProduct from 'components/src/lib/client/pick-image-product/pick-image-product';
+import { ProductInformation } from 'components';
 
 export default async function ProductPage({ params }: { params: any }) {
   const product = await getProduct(params.id);
@@ -80,90 +81,7 @@ export default async function ProductPage({ params }: { params: any }) {
             </div>
           </div>
         </div>
-        <div className="product-details-tab">
-          <ul className="nav nav-pills justify-content-center" role="tablist">
-            <li className="nav-item">
-              <a
-                className="nav-link active"
-                id="product-info-link"
-                data-toggle="tab"
-                href="#product-info-tab"
-                role="tab"
-                aria-controls="product-info-tab"
-                aria-selected="false"
-              >
-                Additional information
-              </a>
-            </li>
-            <li className="nav-item">
-              <a
-                className="nav-link"
-                id="product-shipping-link"
-                data-toggle="tab"
-                href="#product-shipping-tab"
-                role="tab"
-                aria-controls="product-shipping-tab"
-                aria-selected="false"
-              >
-                Shipping &amp; Returns
-              </a>
-            </li>
-          </ul>
-          <div className="tab-content container">
-            <div
-              className="tab-pane fade show active"
-              id="product-info-tab"
-              role="tabpanel"
-              aria-labelledby="product-info-link"
-            >
-              <div className="product-desc-content">
-                <div className="product-page__details">
-                  <div className="product-properties">
-                    <h2 className="product-properties__title">
-                      Property Types
-                    </h2>
-
-                    <table className="product-properties__table">
-                      <tbody>
-                        <tr>
-                          <td>Material</td>
-                          <td>Paper Banner</td>
-                        </tr>
-                        <tr>
-                          <td>Impresora</td>
-                          <td>Epson 2400</td>
-                        </tr>
-                        <tr>
-                          <td>Marco</td>
-                          <td>Madera Laurel</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              className="tab-pane fade"
-              id="product-shipping-tab"
-              role="tabpanel"
-              aria-labelledby="product-shipping-link"
-            >
-              <div className="product-desc-content">
-                <h3>Delivery &amp; returns</h3>
-                <p>
-                  We deliver to over 100 countries around the world. For full
-                  details of the delivery options we offer, please view our
-                  <a href="#">Delivery information</a>
-                  We hope you’ll love every purchase, but if you ever need to
-                  return an item you can do so within a month of receipt. For
-                  full details of how to make a return, please view our
-                  <a href="#">Returns information</a>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <ProductInformation />
       </div>
     </article>
   );

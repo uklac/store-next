@@ -2,3 +2,4 @@
 
 export * from './lib/components';
 export * from './lib/client/slider/slider';
+export * from './lib/client/product-information/product-information';
