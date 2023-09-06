@@ -1,6 +1,7 @@
 'use client';
 import { ImageAttribute } from 'app/interfaces/image';
 import { useState } from 'react';
+import InnerImageZoom from 'react-inner-image-zoom';
 
 interface PickImageProductProps {
   productImages: ImageAttribute[];
@@ -15,11 +16,20 @@ export default function PickImageProduct(props: PickImageProductProps) {
   };
   return (
     <div className="product-page-row col-md-6">
-      <div className="product-page__images product-gallery product-gallery-vertical">
+      <div className="product-gallery product-gallery-vertical">
         <div className="row">
           <div className="product-main-image ml-5">
             <picture className="product-image">
-              <img src={selectedImage.product_url} />
+            <div style={{ marginBottom: '30px' }}>
+            <InnerImageZoom
+                src={selectedImage.product_url}
+                zoomSrc={ selectedImage.large_url 
+                }
+                fullscreenOnMobile={false}
+              />
+              {/* <img src={selectedImage.product_url} /> */}
+              </div>
+         
             </picture>
           </div>
           <div className="product-zoom-gallery">
