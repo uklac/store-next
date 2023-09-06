@@ -29,15 +29,18 @@ export default function Index() {
 
   const slides = [
     {
-      image: '/slider-1.jpeg',
-      title: 'Dale vida a tus espacios',
-      subtitle: 'Decoración',
+      image: '/slider-2.jpeg',
+      title: 'Dale vida a<br /> tus espacios',
+      subtitle: 'Decoración & Print Art',
+      position: 'right',
+      dark: true,
       link: { url: '/products', text: 'Ver productos' },
     },
     {
       image: '/slider-1.jpeg',
-      title: 'Dale vida a tus espacios',
+      title: 'Crea tu propio arte <br /> en tus paredes',
       subtitle: 'Decoración',
+      position: 'left',
       link: { url: '/products', text: 'Ver cuadros' },
     },
   ];

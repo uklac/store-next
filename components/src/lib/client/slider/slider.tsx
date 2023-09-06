@@ -2,10 +2,10 @@
 
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import Banner, { BannerProps } from '../../server/banner/banner';
+import { Hero, HeroProps } from 'components/server';
 
 interface SliderProps {
-  slides: BannerProps[];
+  slides: HeroProps[];
 }
 
 export async function Slider(props: SliderProps) {
@@ -22,11 +22,14 @@ export async function Slider(props: SliderProps) {
     >
       {slides.map((slides, index) => (
         <SwiperSlide key={index}>
-          <Banner
+          <Hero
             image={slides.image}
             title={slides.title}
+            subtitle={slides.subtitle}
+            text={slides.text}
             link={slides.link}
-            size="big"
+            dark={slides.dark}
+            position={slides.position}
           />
         </SwiperSlide>
       ))}
