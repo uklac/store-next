@@ -1,6 +1,6 @@
 import React from 'react';
 import { getProduct } from 'app/apis/products-api';
-import { ImageAttribute } from 'app/interfaces/image';
+import PickImageProduct from 'components/src/lib/client/pick-image-product/pick-image-product';
 
 export default async function ProductPage({ params }: { params: any }) {
   const product = await getProduct(params.id);
@@ -8,30 +8,7 @@ export default async function ProductPage({ params }: { params: any }) {
   return (
     <article className="product-page container mt-5">
       <div className="row">
-        <div className="product-page-row col-md-6">
-          <div className="product-page__images product-gallery product-gallery-vertical">
-            <div className="row">
-              <div className="product-main-image ml-5">
-                <picture className="product-image">
-                  <img src={product.master.images[0].product_url} />
-                </picture>
-              </div>
-              <div className="product-zoom-gallery">
-                <ul className="product-thumbnails">
-                  {product.master.images.map(
-                    (image: ImageAttribute, index: number) => (
-                      <li className="product-thumbnails__all" key={index}>
-                        <a href={image.product_url}>
-                          <img src={image.mini_url} />
-                        </a>
-                      </li>
-                    )
-                  )}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
+        <PickImageProduct productImages={product.master.images}/>
         <div className="product-page-row col-md-6">
           <div className="product-page__info product-details">
             <header className="product-header">
