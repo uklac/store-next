@@ -69,8 +69,13 @@ export async function Header(props: HeaderProps) {
               <i className="icon-bars"></i>
             </button>
 
-            <a href="index.html" className="logo">
-              {/* <img src="assets/images/demos/demo-2/logo.png" alt="Molla Logo" width="105" height="25"> */}
+            <a href="/" className="logo">
+              <img
+                src="/images/logo-app.png"
+                alt="Aiprint Logo"
+                width="105"
+                height="25"
+              />
             </a>
           </div>
 
@@ -100,21 +105,11 @@ export async function Header(props: HeaderProps) {
 
           <div className="header-right">
             <div className="account">
-              <a href="dashboard.html" title="My account">
+              <a href="/account" title="My account">
                 <div className="icon">
                   <i className="icon-user"></i>
                 </div>
                 <p>Account</p>
-              </a>
-            </div>
-
-            <div className="wishlist">
-              <a href="wishlist.html" title="Wishlist">
-                <div className="icon">
-                  <i className="icon-heart-o"></i>
-                  <span className="wishlist-count badge">3</span>
-                </div>
-                <p>Wishlist</p>
               </a>
             </div>
 
