@@ -18,22 +18,19 @@ export async function Footer(props: FooterProps) {
   const { helpfulLinks, serviceLinks, accountLinks } = props;
 
   return (
-    <footer className="footer footer-dark">
+    <footer className="footer">
       <div className="footer-middle">
         <div className="container">
           <div className="row">
             <div className="col-sm-6 col-lg-3">
               <div className="widget widget-about">
                 <div className="wrap-logo">
-                  <h1 className="title-logo">AI PRINT</h1>
+                  <img
+                    src="/images/logo-app.png"
+                    className="footer-logo"
+                    alt="Footer Logo"
+                  />
                 </div>
-                {/* <img
-                  src="assets/images/logo-footer.png"
-                  className="footer-logo"
-                  alt="Footer Logo"
-                  width="105"
-                  height="25"
-                /> */}
                 <p className="description-footer">
                   Praesent dapibus, neque id cursus ucibus, tortor neque egestas
                   augue, eu vulputate magna eros eu erat.{' '}

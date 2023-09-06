@@ -4,7 +4,7 @@
 	font-weight: 300;
 	font-size: 1.4rem;
 	color: #777;
-	background-color: #333333;
+	background-color: #fff;
 
 	a {
 		color: inherit;
@@ -20,8 +20,8 @@
 	}
 
 	.widget-title {
-		color: white;
-		font-weight: 500;
+		color: #333333;
+		font-weight: 600;
 		font-size: 1.6rem;
 		letter-spacing: -.01em;
 		margin-top: 0;
@@ -39,10 +39,11 @@
 }
 
 .footer-logo {
-	// margin-bottom: 2rem;
-	// margin-top: -.8rem;
 	width: 105px; 
 	height: 25px;
+	display: block;
+	max-width: 100%;
+	height: auto;;
 }
 
 .wrap-logo {
@@ -53,9 +54,9 @@
 }
 
 .title-logo {
-	color: white;
+	color: #333333;
+	font-weight: 600;
 	font-size: 20px;
-	font-weight: 500;
 	margin: 0;
 }
 
