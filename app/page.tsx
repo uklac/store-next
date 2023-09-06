@@ -81,14 +81,15 @@ export default function Index() {
         <h3 className="text-center mb-3 mt-3">Últimos Productos</h3>
         <Suspense fallback={<ProductsSkeleton />}>
           <ProductsLatest />
+          <div className="text-center mt-2 mb-5">
+            <LinkButton
+              outline="dark"
+              icon="icon-long-arrow-right"
+              url='/products'
+              text='Ver mas productos'
+            />
+          </div>
         </Suspense>
-        <div className="more-container text-center mt-2">
-          <LinkButton
-            outline="primary"
-            url='/products'
-            text='Ver mas productos'
-          />
-        </div>
       </div>
     </>
   );
