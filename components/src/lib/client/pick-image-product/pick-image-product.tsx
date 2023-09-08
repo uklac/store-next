@@ -15,35 +15,32 @@ export default function PickImageProduct(props: PickImageProductProps) {
     setSelectedImage(newImage);
   };
   return (
-    <div className="product-page-row col-md-6">
-      <div className="product-gallery product-gallery-vertical">
-        <div className="row">
-          <div className="product-main-image ml-5">
-            <picture className="product-image">
+    <div className="product-gallery product-gallery-vertical">
+      <div className="row">
+        <div className="product-main-image ml-5">
+          <picture className="product-image">
             <div style={{ marginBottom: '30px' }}>
-            <InnerImageZoom
+              <InnerImageZoom
                 src={selectedImage.product_url}
-                zoomSrc={ selectedImage.large_url 
-                }
+                zoomSrc={selectedImage.large_url}
                 fullscreenOnMobile={false}
               />
               {/* <img src={selectedImage.product_url} /> */}
-              </div>
-            </picture>
-          </div>
-          <div className="product-zoom-gallery">
-            <ul className="product-thumbnails">
-              {productImages.map((image: ImageAttribute, index: number) => (
-                <li
-                  className="product-thumbnails__all"
-                  key={index}
-                  onClick={() => handleImageChange(image)}
-                >
-                  <img src={image.mini_url} />
-                </li>
-              ))}
-            </ul>
-          </div>
+            </div>
+          </picture>
+        </div>
+        <div className="product-zoom-gallery">
+          <ul className="product-thumbnails">
+            {productImages.map((image: ImageAttribute, index: number) => (
+              <li
+                className="product-thumbnails__all"
+                key={index}
+                onClick={() => handleImageChange(image)}
+              >
+                <img src={image.mini_url} />
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>
