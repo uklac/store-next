@@ -7,3 +7,12 @@ export interface Taxon {
   taxonomy_id: number;
   taxons: any[];
 }
+
+export interface ListTaxon {
+  count: number;
+  current_page: number;
+  pages: number;
+  per_page: number;
+  total_count: number;
+  taxons: Taxon[];
+}
