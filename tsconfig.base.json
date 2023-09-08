@@ -14,10 +14,7 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {
-      "components": ["components/src/index.ts"],
-      "components/server": ["components/src/server.ts"]
-    }
+    "paths": {}
   },
   "exclude": [
     "node_modules",
