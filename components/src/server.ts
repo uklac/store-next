@@ -10,3 +10,4 @@ export * from './lib/server/products-latest/products-latest';
 export * from './lib/server/grid-banners/grid-banners';
 export * from './lib/server/products-skeleton/products-skeleton';
 export * from './lib/server/hero/hero';
+export * from './lib/server/product-details/product-details';

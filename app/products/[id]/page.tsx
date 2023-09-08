@@ -3,6 +3,7 @@ import { getProduct } from 'app/apis/products-api';
 import PickImageProduct from 'components/src/lib/client/pick-image-product/pick-image-product';
 import { ProductInformation } from 'components';
 import VariantsList from 'components/src/lib/client/variants-list/variants-list';
+import { ProductDetails } from 'components/server';
 
 export default async function ProductPage({ params }: { params: any }) {
   const product = await getProduct(params.id);
@@ -14,19 +15,11 @@ export default async function ProductPage({ params }: { params: any }) {
           <PickImageProduct productImages={product.master.images} />
         </div>
         <div className="product-page-row col-md-6">
-          <div className="product-page__info product-details">
-            <header className="product-header">
-              <h1 className="product-title">{product.name}</h1>
-              <h2 className="product-price" id="product-price">
-                {product.display_price}
-              </h2>
-            </header>
-            <div className="product-content">
-              <div className="product-page__description">
-                <p className="product-content">{product.description}</p>
-              </div>
-            </div>
-          </div>
+          <ProductDetails
+            name={product.name}
+            price={product.display_price}
+            description={product.description}
+          />
           <div className="details-filter-row details-row-size">
             <label>Qty:</label>
             <div className="product-details-quantity">
@@ -70,10 +63,12 @@ export default async function ProductPage({ params }: { params: any }) {
               </div>
             </div>
           </div>
-          <VariantsList
-            optionTypes={product.option_types}
-            variants={product.variants}
-          />
+          {product.has_variants && (
+            <VariantsList
+              optionTypes={product.option_types}
+              variants={product.variants}
+            />
+          )}
           <div className="product-details-action">
             <a href="#" className="btn-product btn-cart">
               <span>add to cart</span>
