@@ -1,6 +1,6 @@
 'use client';
 
-import { Hero, HeroProps } from 'app-components';
+import { Hero, HeroProps } from 'components';
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 

@@ -1,4 +1,4 @@
-import { Footer, Header } from 'app-components';
+import { Footer, Header } from 'components';
 import './global.scss';
 
 export const metadata = {

@@ -1,5 +1,5 @@
 'use client';
-import { Button } from 'app-components';
+import { Button } from 'components';
 
 export default async function Account() {
   return (

@@ -6,7 +6,7 @@ import {
   IconBoxes,
   LinkButton,
   SliderHero
-} from 'app-components';
+} from 'components';
 
 export default function Index() {
   const options = [

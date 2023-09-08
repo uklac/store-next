@@ -1,5 +1,5 @@
 import { getProducts } from 'apis/products-api';
-import { Filters, Pagination, ProductList } from 'app-components';
+import { Filters, Pagination, ProductList } from 'components';
 import React from 'react';
 
 const PRODUCTS_PER_PAGE = 12;
