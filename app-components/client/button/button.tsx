@@ -18,7 +18,7 @@ const outlineClasses = {
   primary: 'btn-outline-primary',
 };
 
-export default function Button(props: ButtonProps) {
+export function Button(props: ButtonProps) {
   const { style, outline, onClick, children } = props;
 
   const btnClass = style ? btnClasses[style] : btnClasses.rounded;

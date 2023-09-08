@@ -1,7 +1,7 @@
 'use client';
-import Button from 'components/src/lib/client/button/button';
 import Link from 'next/link';
 import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
+import { Button } from "app-components";
 
 export default async function Account() {
   return (

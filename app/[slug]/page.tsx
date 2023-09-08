@@ -1,6 +1,5 @@
-import { getTaxons, getTaxonsProducts } from "app/apis/taxons-api"
-import { Filters } from "components";
-import { ProductList } from "components/server";
+import { getTaxons, getTaxonsProducts } from "apis/taxons-api";
+import { ProductList, Filters } from "app-components";
 
 export default async function ProductsCategoryPage({ params }: { params: any }) {
   const { taxons } = await getTaxons();

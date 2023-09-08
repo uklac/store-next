@@ -1,6 +1,5 @@
-import { Header } from 'components/server';
+import { Footer, Header } from 'app-components';
 import './global.scss';
-import { Footer } from 'components/src/lib/server/footer/footer';
 
 export const metadata = {
   title: 'Welcome to no',

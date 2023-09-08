@@ -1,6 +1,6 @@
-import { ListProducts } from 'app/interfaces/product';
+import { ListProducts } from 'interfaces';
 import { API_URL, HEADERS_REQUEST } from './constants';
-import { ListTaxon } from 'app/interfaces/taxon';
+import { ListTaxon } from 'interfaces';
 const BASE_URL_TAXONS = `${API_URL}/taxons`;
 
 export async function getTaxons(): Promise<ListTaxon> {

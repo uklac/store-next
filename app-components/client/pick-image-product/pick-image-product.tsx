@@ -1,5 +1,5 @@
 'use client';
-import { ImageAttribute } from 'app/interfaces/image';
+import { ImageAttribute } from 'interfaces';
 import { useState } from 'react';
 import InnerImageZoom from 'react-inner-image-zoom';
 

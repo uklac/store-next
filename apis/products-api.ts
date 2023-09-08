@@ -1,4 +1,4 @@
-import { ListProducts, Product } from 'app/interfaces/product';
+import { ListProducts, Product } from 'interfaces';
 import { API_URL, HEADERS_REQUEST } from './constants';
 const PRODUCTS_URL = `${API_URL}/products`;
 

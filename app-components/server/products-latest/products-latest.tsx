@@ -1,4 +1,4 @@
-import { getProducts } from '../../../../../app/apis/products-api';
+import { getProducts } from 'apis/products-api';
 import { ProductCard } from '../product-card/product-card';
 
 export async function ProductsLatest() {

@@ -1,7 +1,6 @@
 import React from 'react';
-import { getProduct } from 'app/apis/products-api';
-import { ProductInformation, VariantsList, PickImageProduct } from 'components';
-import { ProductDetails } from 'components/server';
+import { getProduct } from 'apis/products-api';
+import { PickImageProduct, ProductDetails, ProductInformation, VariantsList } from 'app-components';
 
 export default async function ProductPage({ params }: { params: any }) {
   const product = await getProduct(params.id);

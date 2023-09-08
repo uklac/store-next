@@ -1,4 +1,4 @@
-import { Classification } from 'app/interfaces/classification';
+import { Classification } from 'interfaces';
 import Link from 'next/link';
 
 interface ProductDetailsProps {

@@ -4,9 +4,9 @@ import {
   GridBanners,
   ProductsLatest,
   IconBoxes,
-} from 'components/server';
-import { SliderHero } from 'components/src/lib/client/slider-hero/slider-hero';
-import { LinkButton } from 'components/src/lib/server/link-button/link-button';
+  LinkButton,
+  SliderHero
+} from 'app-components';
 
 export default function Index() {
   const options = [

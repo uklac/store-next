@@ -1,6 +1,5 @@
 'use client';
-import Button from 'components/src/lib/client/button/button';
-import Link from 'next/link';
+import { Button } from 'app-components';
 
 export default async function Account() {
   return (

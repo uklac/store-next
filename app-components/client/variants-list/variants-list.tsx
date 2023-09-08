@@ -1,6 +1,6 @@
 'use client';
 
-import { OptionType, Variant } from 'app/interfaces/product';
+import { OptionType, Variant } from 'interfaces';
 import { VariantSelection } from '../variant-selection/variant-selection';
 
 interface VariantsListProps {

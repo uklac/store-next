@@ -1,4 +1,4 @@
-import { OptionType } from 'app/interfaces/product';
+import { OptionType } from 'interfaces';
 import { API_URL, HEADERS_REQUEST } from './constants';
 const OPTION_TYPES_URL = `${API_URL}/option_types`;
 
