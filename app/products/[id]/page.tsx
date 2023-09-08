@@ -10,7 +10,9 @@ export default async function ProductPage({ params }: { params: any }) {
     <article className="product-page container mt-5">
       <div className="row">
         <div className="product-page-row col-md-6">
-          <PickImageProduct productImages={product.master.images} />
+          {product.master.images.length > 0 && (
+            <PickImageProduct productImages={product.master.images} />
+          )}
         </div>
         <div className="product-page-row col-md-6">
           <ProductDetails

@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import { OptionType, Variant } from 'app/interfaces/product';
 import { VariantSelection } from '../variant-selection/variant-selection';
 

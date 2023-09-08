@@ -5,27 +5,37 @@ interface ProductDetailsProps {
   name: string;
   price: string;
   description: string;
-  classifications: Classification[];
+  classifications?: Classification[];
 }
 
 export function ProductDetails(props: ProductDetailsProps) {
   const { name, price, description, classifications } = props;
-  const classification = classifications.length > 1 ? classifications[1] : classifications[0]; //get main category
-  const { taxon: { permalink }  } =  classification;
-  const linkUrl = permalink.split('/').pop();
-  console.log(classification);
-  
+
+  const LinkToCategory = ({
+    classifications,
+  }: {
+    classifications: Classification[];
+  }) => {
+    const classification =
+      classifications.length > 1 ? classifications[1] : classifications[0]; //get main category
+    const {
+      taxon: { permalink },
+    } = classification;
+    const linkUrl = permalink.split('/').pop();
+
+    return (
+      <Link href={`/${linkUrl}`} className="product-category">
+        Ver mas {classification.taxon.name}
+      </Link>
+    );
+  };
+
   return (
     <div className="product-page__info product-details">
       <header className="product-header">
         <h1 className="product-title">{name}</h1>
-        {classification && (
-          <Link
-            href={`/${linkUrl}`}
-            className="product-category"
-          >
-            Ver mas {classification.taxon.name}
-          </Link>
+        {classifications && classifications.length && (
+          <LinkToCategory classifications={classifications} />
         )}
         <h2 className="product-price" id="product-price">
           {price}

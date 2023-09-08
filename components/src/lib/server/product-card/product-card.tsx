@@ -20,13 +20,15 @@ export async function ProductCard(props: ProductCardProps) {
   return (
     <article className="product product-2">
       <figure className="product-media">
-        <Link href={`products/${id}`}>
-          <img
-            alt={image.alt}
-            className="product-image"
-            src={image.product_url}
-          />
-        </Link>
+        { image && 
+          <Link href={`products/${id}`}>
+            <img
+              alt={image.alt}
+              className="product-image"
+              src={image.product_url}
+            />
+          </Link>
+        }
         <div className="product-action-vertical">
           <a
             href="#"
