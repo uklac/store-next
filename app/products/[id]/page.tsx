@@ -19,6 +19,7 @@ export default async function ProductPage({ params }: { params: any }) {
             name={product.name}
             price={product.display_price}
             description={product.description}
+            classifications={product.classifications}
           />
           <div className="details-filter-row details-row-size">
             <label>Qty:</label>
