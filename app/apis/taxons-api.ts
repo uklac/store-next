@@ -12,6 +12,7 @@ export async function getTaxons(): Promise<ListTaxon> {
 
 export async function getTaxonsProducts(id:number): Promise<ListProducts> {
   const response = await fetch(`${BASE_URL_TAXONS}/products?id=${id}`, {
+    cache: 'no-cache',
     headers: HEADERS_REQUEST,
   });
   return await response.json();
