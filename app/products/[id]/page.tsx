@@ -21,6 +21,12 @@ export default async function ProductPage({ params }: { params: any }) {
             description={product.description}
             classifications={product.classifications}
           />
+          {product.has_variants && (
+            <VariantsList
+              optionTypes={product.option_types}
+              variants={product.variants}
+            />
+          )}
           <div className="details-filter-row details-row-size">
             <label>Qty:</label>
             <div className="product-details-quantity">
@@ -64,12 +70,6 @@ export default async function ProductPage({ params }: { params: any }) {
               </div>
             </div>
           </div>
-          {product.has_variants && (
-            <VariantsList
-              optionTypes={product.option_types}
-              variants={product.variants}
-            />
-          )}
           <div className="product-details-action">
             <a href="#" className="btn-product btn-cart">
               <span>add to cart</span>

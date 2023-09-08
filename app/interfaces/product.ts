@@ -71,6 +71,7 @@ export interface OptionType {
   option_values: OptionValue[];
   position: number;
   presentation: string;
+  option_type_name: string;
 }
 
 export interface Variant {
