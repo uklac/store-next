@@ -90,3 +90,11 @@ export interface ProductProperty {
   property_name: string;
   value: string;
 }
+
+export interface OptionType {
+    id: number;
+    name: string;
+    option_values: OptionValue[];
+    position: number;
+    presentation: string;
+}

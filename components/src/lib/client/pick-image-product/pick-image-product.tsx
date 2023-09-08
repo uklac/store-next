@@ -29,7 +29,6 @@ export default function PickImageProduct(props: PickImageProductProps) {
               />
               {/* <img src={selectedImage.product_url} /> */}
               </div>
-         
             </picture>
           </div>
           <div className="product-zoom-gallery">

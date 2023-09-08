@@ -2,14 +2,16 @@ import React from 'react';
 import { getProduct } from 'app/apis/products-api';
 import PickImageProduct from 'components/src/lib/client/pick-image-product/pick-image-product';
 import { ProductInformation } from 'components';
+import { getOptionTypes } from 'app/apis/option-types';
 
 export default async function ProductPage({ params }: { params: any }) {
   const product = await getProduct(params.id);
+  const optionTypes = await getOptionTypes();
 
   return (
     <article className="product-page container mt-5">
       <div className="row">
-        <PickImageProduct productImages={product.master.images}/>
+        <PickImageProduct productImages={product.master.images} />
         <div className="product-page-row col-md-6">
           <div className="product-page__info product-details">
             <header className="product-header">
