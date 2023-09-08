@@ -10,7 +10,7 @@ interface ProductDetailsProps {
 
 export function ProductDetails(props: ProductDetailsProps) {
   const { name, price, description, classifications } = props;
-  const classification = classifications.length > 0 ? classifications[1] : classifications[0]; //get main category
+  const classification = classifications.length > 1 ? classifications[1] : classifications[0]; //get main category
   const { taxon: { permalink }  } =  classification;
   const linkUrl = permalink.split('/').pop();
   console.log(classification);
