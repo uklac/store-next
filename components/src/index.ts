@@ -6,3 +6,4 @@ export * from './lib/client/product-information/product-information';
 export * from './lib/client/variants-list/variants-list';
 export * from './lib/client/variant-selection/variant-selection';
 export * from './lib/client/pick-image-product/pick-image-product';
+export * from './lib/client/filters/filters';
