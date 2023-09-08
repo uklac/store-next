@@ -5,7 +5,7 @@ import {
   ProductsLatest,
   IconBoxes,
 } from 'components/server';
-import { Slider } from 'components';
+import { SliderHero } from 'components/src/lib/client/slider-hero/slider-hero';
 import { LinkButton } from 'components/src/lib/server/link-button/link-button';
 
 export default function Index() {
@@ -68,7 +68,7 @@ export default function Index() {
 
   return (
     <>
-      <Slider slides={slides} />
+      <SliderHero slides={slides} />
       <div className="icon-boxes-container">
         <div className="container">
           <IconBoxes options={options} position="left" />

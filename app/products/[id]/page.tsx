@@ -1,8 +1,6 @@
 import React from 'react';
 import { getProduct } from 'app/apis/products-api';
-import PickImageProduct from 'components/src/lib/client/pick-image-product/pick-image-product';
-import { ProductInformation } from 'components';
-import VariantsList from 'components/src/lib/client/variants-list/variants-list';
+import { ProductInformation, VariantsList, PickImageProduct } from 'components';
 import { ProductDetails } from 'components/server';
 
 export default async function ProductPage({ params }: { params: any }) {

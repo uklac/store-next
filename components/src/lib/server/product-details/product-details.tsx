@@ -11,14 +11,16 @@ interface ProductDetailsProps {
 export function ProductDetails(props: ProductDetailsProps) {
   const { name, price, description, classifications } = props;
   const classification = classifications[1]; //get main category
-
+  const { taxon: { permalink }  } =  classification;
+  const linkUrl = permalink.split('/').pop();
+  console.log(classification);
   return (
     <div className="product-page__info product-details">
       <header className="product-header">
         <h1 className="product-title">{name}</h1>
         {classification && (
           <Link
-            href={`/${classification.taxon.permalink}`}
+            href={`/${linkUrl}`}
             className="product-category"
           >
             Ver mas {classification.taxon.name}

@@ -1,8 +1,5 @@
 'use client';
-
-import React from 'react';
 import { OptionType } from 'app/interfaces/product';
-
 interface VariantSelectionProps {
   title: string;
   optionTypes: OptionType[];

@@ -4,11 +4,11 @@ import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Hero, HeroProps } from 'components/server';
 
-interface SliderProps {
+interface SliderHeroProps {
   slides: HeroProps[];
 }
 
-export async function Slider(props: SliderProps) {
+export function SliderHero(props: SliderHeroProps) {
   const { slides } = props;
   return (
     <Swiper

@@ -9,7 +9,7 @@ interface VariantsListProps {
   variants: Variant[];
 }
 
-export default function VariantsList(props: VariantsListProps) {
+export function VariantsList(props: VariantsListProps) {
   const { optionTypes, variants } = props;
   const variantsItems = optionTypes.map((optionType) => {
     return {
@@ -18,8 +18,6 @@ export default function VariantsList(props: VariantsListProps) {
     };
   });
   
-  console.log('variantsItems: ', variantsItems);
-
   function optionValues(variants: any, optionType: any) {
     return variants
       .map((variant: any) =>

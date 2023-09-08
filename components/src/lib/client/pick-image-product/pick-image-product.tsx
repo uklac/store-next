@@ -7,7 +7,7 @@ interface PickImageProductProps {
   productImages: ImageAttribute[];
 }
 
-export default function PickImageProduct(props: PickImageProductProps) {
+export function PickImageProduct(props: PickImageProductProps) {
   const { productImages } = props;
   const [selectedImage, setSelectedImage] = useState(productImages[0]);
 
