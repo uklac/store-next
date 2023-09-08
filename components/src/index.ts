@@ -3,3 +3,5 @@
 export * from './lib/components';
 export * from './lib/client/slider/slider';
 export * from './lib/client/product-information/product-information';
+export * from './lib/client/variants-list/variants-list';
+export * from './lib/client/variant-selection/variant-selection';

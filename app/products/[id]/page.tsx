@@ -2,12 +2,11 @@ import React from 'react';
 import { getProduct } from 'app/apis/products-api';
 import PickImageProduct from 'components/src/lib/client/pick-image-product/pick-image-product';
 import { ProductInformation } from 'components';
-import { getOptionTypes } from 'app/apis/option-types';
+import VariantsList from 'components/src/lib/client/variants-list/variants-list';
 
 export default async function ProductPage({ params }: { params: any }) {
   const product = await getProduct(params.id);
-  const optionTypes = await getOptionTypes();
-
+  
   return (
     <article className="product-page container mt-5">
       <div className="row">
@@ -69,6 +68,7 @@ export default async function ProductPage({ params }: { params: any }) {
               </div>
             </div>
           </div>
+          <VariantsList optionTypes={product.option_types} variants={product.variants} />
           <div className="product-details-action">
             <a href="#" className="btn-product btn-cart">
               <span>add to cart</span>
