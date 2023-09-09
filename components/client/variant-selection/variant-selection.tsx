@@ -1,10 +1,16 @@
 'use client';
-import { OptionType } from 'interfaces';
+import { Variant } from 'interfaces';
 import styles from './variant-selection.module.scss';
+import { ItemOptionValue } from '../item-option-value/item-option-value';
 
 interface VariantSelectionProps {
   title: string;
-  optionTypes: OptionType[];
+  optionTypes: {
+    name: string;
+    presentation: string;
+  }[];
+  combinations: any[];
+  onClick: (variant: any) => void;
 }
 
 const optionTypeNameToStyleClass: Record<string, string> = {
@@ -12,8 +18,8 @@ const optionTypeNameToStyleClass: Record<string, string> = {
 };
 
 export function VariantSelection(props: VariantSelectionProps) {
-  const { title, optionTypes } = props;
-  const optionTypeName = optionTypes[0]?.option_type_name || 'defaultStyle';
+  const { title, optionTypes, onClick, combinations } = props;
+  const optionTypeName = optionTypes[0]?.name || 'defaultStyle';
   const styleClass =
     optionTypeNameToStyleClass[optionTypeName] || 'default-styles';
 
@@ -22,9 +28,13 @@ export function VariantSelection(props: VariantSelectionProps) {
       <h4 className="s">{title}</h4>
       <div className={`${styles['option-types']}`}>
         {optionTypes.map((optionType, index) => (
-          <div className={`${styles[styleClass]}`} key={index}>
-            {optionType.presentation}
-          </div>
+          <ItemOptionValue
+            key={index}
+            className={styles[styleClass]}
+            variants={combinations[index]}
+            presentation={optionType.presentation}
+            onClick={onClick}
+          />
         ))}
       </div>
     </div>

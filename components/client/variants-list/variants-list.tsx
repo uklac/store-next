@@ -10,14 +10,35 @@ interface VariantsListProps {
 
 export function VariantsList(props: VariantsListProps) {
   const { optionTypes, variants } = props;
+  const selectedVariant = variants[0];
+  console.log('selectedVariant: ', selectedVariant);
+  // console.log('optionTypes: ', optionTypes);
+  // console.log('variants: ', variants);
+  // const mainVariante  = variants[0];
+
   const variantsItems = optionTypes.map((optionType) => {
+    const variantOptions = options(variants, optionType);
+    const combinations = getCombinations(variantOptions);
     return {
       title: optionType.presentation,
-      optionValues: optionValues(variants, optionType),
+      options: variantOptions,
+      combinations: combinations,
     };
   });
-  
-  function optionValues(variants: any, optionType: any) {
+
+  function getCombinations(optionsTypes: any[]) {
+    return optionsTypes.map((optionType) => {
+      return {
+        options: variants.filter((variant) =>
+          variant.option_values.find((op) => op.id === optionType.id)
+        ),
+        title: optionType.presentation,
+        id: optionType.id,
+      };
+    });
+  }
+
+  function options(variants: any, optionType: any) {
     return variants
       .map((variant: any) =>
         variant.option_values.find(
@@ -31,13 +52,21 @@ export function VariantsList(props: VariantsListProps) {
       );
   }
 
+  function onClickVariant(optionType: OptionType) {
+    console.log('selected: ', optionType);
+  }
+
   return (
     <>
       {variantsItems.map((variant, index) => (
         <VariantSelection
           key={index}
           title={variant.title}
-          optionTypes={variant.optionValues}
+          optionTypes={variant.options}
+          combinations={variant.combinations}
+          onClick={(option) => {
+            onClickVariant(option);
+          }}
         />
       ))}
     </>
