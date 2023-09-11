@@ -115,7 +115,7 @@ export async function Header(props: HeaderProps) {
 
             <div className="dropdown cart-dropdown">
               <a
-                href="#"
+                href="/cart"
                 className="dropdown-toggle"
                 role="button"
                 data-toggle="dropdown"
