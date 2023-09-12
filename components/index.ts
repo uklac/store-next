@@ -7,6 +7,7 @@ export * from './client/pick-image-product/pick-image-product';
 export * from './client/filters/filters';
 export * from './client/button/button';
 export * from './client/item-option-value/item-option-value';
+export * from './client/register-form/register-form';
 
 //server
 export * from './server/header/header';
