@@ -1,5 +1,4 @@
-import { API_URL } from './constants';
-const ACCOUNT_URL = `${API_URL}/users`;
+const ACCOUNT_URL = 'http://localhost:3000/api/sign_up';
 type Account = {
   email: string, 
   password: string,
