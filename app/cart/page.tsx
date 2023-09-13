@@ -209,7 +209,7 @@ export default async function Account() {
                 </table>
 
                 <a
-                  href="checkout.html"
+                  href="/checkout"
                   className="btn btn-outline-primary-2 btn-order btn-block"
                 >
                   PROCEED TO CHECKOUT
