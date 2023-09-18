@@ -1,5 +1,19 @@
+'use client';
+import { getItemsCart } from 'apis/cart-api';
 
 export default async function Account() {
+  const productsCart = await getItemsCart();
+  console.log('Productos',productsCart);
+
+  // const obtenerItemsDelCarrito = async () => {
+  //   try {
+  //     const items = await getItemsCart();
+  //     console.log('Items del carrito:', items);
+  //   } catch (error) {
+  //     console.error('Error al obtener los items del carrito:', error);
+  //   }
+  // }
+
   return (
     <div className="page-content">
       <div className="cart">
@@ -18,84 +32,49 @@ export default async function Account() {
                 </thead>
 
                 <tbody>
-                  <tr>
-                    <td className="product-col">
-                      <div className="product">
-                        <figure className="product-media">
-                          <a href="#">
-                            <img
-                              src="assets/images/products/table/product-1.jpg"
-                              alt="Product image"
-                            />
-                          </a>
-                        </figure>
+                  {productsCart.items.map((item, index) => (
+                    <tr key={index}>
+                      <td className="product-col">
+                        <div className="product">
+                          <figure className="product-media">
+                            <a href="#">
+                              <img
+                                src={item.gallery_image.url}
+                                alt="Product image"
+                              />
+                            </a>
+                          </figure>
 
-                        <h3 className="product-title">
-                          <a href="#">Beige knitted elastic runner shoes</a>
-                        </h3>
-                      </div>
-                    </td>
-                    <td className="price-col">$84.00</td>
-                    <td className="quantity-col">
-                      <div className="cart-product-quantity">
-                        <input
-                          type="number"
-                          className="form-control"
-                          value="1"
-                          min="1"
-                          max="10"
-                          step="1"
-                          data-decimals="0"
-                          required
-                        />
-                      </div>
-                    </td>
-                    <td className="total-col">$84.00</td>
-                    <td className="remove-col">
-                      <button className="btn-remove">
-                        <i className="icon-close"></i>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="product-col">
-                      <div className="product">
-                        <figure className="product-media">
-                          <a href="#">
-                            <img
-                              src="assets/images/products/table/product-2.jpg"
-                              alt="Product image"
-                            />
-                          </a>
-                        </figure>
-
-                        <h3 className="product-title">
-                          <a href="#">Blue utility pinafore denim dress</a>
-                        </h3>
-                      </div>
-                    </td>
-                    <td className="price-col">$76.00</td>
-                    <td className="quantity-col">
-                      <div className="cart-product-quantity">
-                        <input
-                          type="number"
-                          className="form-control"
-                          value="1"
-                          min="1"
-                          max="10"
-                          step="1"
-                          data-decimals="0"
-                          required
-                        />
-                      </div>
-                    </td>
-                    <td className="total-col">$76.00</td>
-                    <td className="remove-col">
-                      <button className="btn-remove">
-                        <i className="icon-close"></i>
-                      </button>
-                    </td>
-                  </tr>
+                          <h3 className="product-title">
+                            <a href="#">{item.product.name}</a>
+                          </h3>
+                        </div>
+                      </td>
+                      <td className="price-col">
+                        {item.product.display_amount}
+                      </td>
+                      <td className="quantity-col">
+                        <div className="cart-product-quantity">
+                          <input
+                            type="number"
+                            className="form-control"
+                            value="1"
+                            min="1"
+                            max="10"
+                            step="1"
+                            data-decimals="0"
+                            required
+                          />
+                        </div>
+                      </td>
+                      <td className="total-col">$84.00</td>
+                      <td className="remove-col">
+                        <button className="btn-remove">
+                          <i className="icon-close"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
 
@@ -121,7 +100,11 @@ export default async function Account() {
                   </form>
                 </div>
 
-                <a href="#" className="btn btn-outline-dark-2">
+                <a
+                  href="#"
+                  className="btn btn-outline-dark-2"
+                  // onClick={obtenerItemsDelCarrito}
+                >
                   <span>UPDATE CART</span>
                   <i className="icon-refresh"></i>
                 </a>
@@ -203,7 +186,7 @@ export default async function Account() {
 
                     <tr className="summary-total">
                       <td>Total:</td>
-                      <td>$160.00</td>
+                      <td>{productsCart.order.total}</td>
                     </tr>
                   </tbody>
                 </table>
