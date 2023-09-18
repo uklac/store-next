@@ -1,6 +1,7 @@
 import React from 'react';
 import { getProduct } from 'apis/products-api';
 import { PickImageProduct, ProductDetails, ProductInformation, VariantsList } from 'components';
+import { AddItemCart } from 'components/client/add-item-cart/add-item-cart';
 
 export default async function ProductPage({ params }: { params: any }) {
   const product = await getProduct(params.id);
@@ -20,13 +21,16 @@ export default async function ProductPage({ params }: { params: any }) {
             description={product.description}
             classifications={product.classifications}
           />
-          {product.has_variants && (
+
+          <AddItemCart variants={product.variants}/>
+          
+          {/* {product.has_variants && (
             <VariantsList
               optionTypes={product.option_types}
               variants={product.variants}
             />
-          )}
-          <div className="details-filter-row details-row-size">
+          )} */}
+          {/* <div className="details-filter-row details-row-size">
             <label>Qty:</label>
             <div className="product-details-quantity">
               <input
@@ -81,7 +85,7 @@ export default async function ProductPage({ params }: { params: any }) {
                 <span>Add to Compare</span>
               </a>
             </div>
-          </div>
+          </div> */}
         </div>
         <ProductInformation />
       </div>
