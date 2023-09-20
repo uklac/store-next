@@ -4,18 +4,20 @@ import Link from 'next/link';
 import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
 import { Button } from 'components';
 import { useRef } from 'react';
-import { createAccount } from 'apis/account-api';
+import { createAccount, loginAccount } from 'apis/account-api';
 
 interface Props {}
 
 export function RegisterForm(props: Props) {
   const {} = props;
+  const emailLoginRef = useRef<HTMLInputElement>(null);
+  const passwordLoginRef = useRef<HTMLInputElement>(null);
+
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const passwordConfirmationRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = async () => {
-    // event?.preventDefault
     const email = emailRef.current?.value || '';
     const password = passwordRef.current?.value || '';
     const password_confirmation = passwordConfirmationRef.current?.value || '';
@@ -31,6 +33,21 @@ export function RegisterForm(props: Props) {
       console.error('Error al registrar usuario:', error);
     }
   };
+
+    const loginSubmit = async () => {
+    const email = emailLoginRef.current?.value || '';
+    const password = passwordLoginRef.current?.value || '';
+
+    try {
+      const login = await loginAccount({
+        email,
+        password,
+      });
+      console.log('Inicio de sesión exitoso:', login);
+    } catch (error) {
+      console.error('No se pudo logear:', error);
+    }
+  };
   return (
     <Tabs selectedTabClassName="show" defaultIndex={0}>
       <TabList className="nav nav-pills nav-fill">
@@ -44,6 +61,67 @@ export function RegisterForm(props: Props) {
       </TabList>
 
       <div className="tab-content">
+        <TabPanel style={{ paddingTop: '2rem' }}>
+          <div>
+            <form action="#">
+              <div className="form-group">
+                <label htmlFor="singin-email-2">
+                  Username or email address *
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="singin-email-2"
+                  ref={emailLoginRef}
+                  name="singin-email"
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="singin-password-2">Password *</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="singin-password-2"
+                  name="singin-password"
+                  ref={passwordLoginRef}
+                  required
+                />
+              </div>
+
+              <div className="form-footer">
+                <Button
+                  onClick={loginSubmit}
+                  outline="primary"
+                >
+                  <div>
+                    <span>LOG IN</span>
+                    <i className="icon-long-arrow-right"></i>
+                  </div>
+                </Button>
+
+                <div className="custom-control custom-checkbox">
+                  <input
+                    type="checkbox"
+                    className="custom-control-input"
+                    id="signin-remember-2"
+                  />
+                  <label
+                    className="custom-control-label"
+                    htmlFor="signin-remember-2"
+                  >
+                    Remember Me
+                  </label>
+                </div>
+
+                <Link href="/password-recover" className="forgot-link">
+                  Forgot Your Password?
+                </Link>
+              </div>
+            </form>
+          </div>
+        </TabPanel>
         <TabPanel>
           <div>
             <div className="form-group">
@@ -109,23 +187,6 @@ export function RegisterForm(props: Props) {
                 >
                   I agree to the privacy policy *
                 </label>
-              </div>
-            </div>
-          </div>
-          <div className="form-choice">
-            <p className="text-center">or sign in with</p>
-            <div className="row">
-              <div className="col-sm-6">
-                <Link href="/pages/login" className="btn btn-login btn-g">
-                  <i className="icon-google"></i>
-                  Login With Google
-                </Link>
-              </div>
-              <div className="col-sm-6">
-                <Link href="/pages/login" className="btn btn-login  btn-f">
-                  <i className="icon-facebook-f"></i>
-                  Login With Facebook
-                </Link>
               </div>
             </div>
           </div>
