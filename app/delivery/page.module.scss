@@ -1,0 +1,41 @@
+.delivery-step {
+  &__delivery {
+    background: #fafbfc;
+    border: solid 1px #f2f2f2;
+    margin-bottom: 2rem;
+    padding: 3rem 1.5rem;
+
+    > legend {
+      font-size: 1.4rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+  }
+}
+
+
+.textarea-input {
+  label {
+    display: block;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: .3rem;
+    text-transform: uppercase;
+  }
+
+  textarea {
+    border: solid 1px #ddd;
+    border-radius: 1px;
+    display: block;
+    font-size: 1.3rem;
+    height: 8rem;
+    padding: 1rem;
+    width: 100%;
+
+    &:focus {
+      border-color: transparent;
+      box-shadow: none;
+      outline: solid 1px #222;
+    }
+  }
+}
