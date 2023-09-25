@@ -23,19 +23,4 @@
     text-transform: uppercase;
   }
 
-  textarea {
-    border: solid 1px #ddd;
-    border-radius: 1px;
-    display: block;
-    font-size: 1.3rem;
-    height: 8rem;
-    padding: 1rem;
-    width: 100%;
-
-    &:focus {
-      border-color: transparent;
-      box-shadow: none;
-      outline: solid 1px #222;
-    }
-  }
 }
