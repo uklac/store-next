@@ -1,0 +1,14 @@
+.confirm-step {
+  &__info {
+    background: #fafbfc;
+    border: solid 1px #f2f2f2;
+    margin-bottom: 2rem;
+    padding: 3rem 1.5rem;
+
+    > legend {
+      font-size: 1.4rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+  }
+}
