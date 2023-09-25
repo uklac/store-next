@@ -24,3 +24,5 @@ export * from './server/product-details/product-details';
 export * from './server/link-button/link-button';
 export * from './server/footer/footer';
 export * from './server/shipping-methods/shipping-methods';
+export * from './server/shipment-items/shipment-items';
+
