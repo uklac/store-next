@@ -29,6 +29,8 @@ export * from './server/order-details/order-details';
 export * from './server/order-items/order-items';
 export * from './server/order-info/order-info';
 export * from './server/line-items/line-items';
+export * from './server/payment-info/payment-info';
+
 
 
 
