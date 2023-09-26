@@ -1,0 +1,21 @@
+.line-items {
+  font-size: 1.4rem;
+  margin-top: 3rem;
+
+  > div {
+    display: flex;
+    justify-content: flex-end;
+    margin: .5rem 0;
+
+    &:last-child {
+      margin: 2rem 0 0;
+    }
+  }
+
+  dd {
+    font-weight: 500;
+    margin-inline-start: 0;
+    min-width: 8rem;
+    text-align: right;
+  }
+}
