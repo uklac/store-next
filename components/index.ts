@@ -30,6 +30,7 @@ export * from './server/order-items/order-items';
 export * from './server/order-info/order-info';
 export * from './server/line-items/line-items';
 export * from './server/payment-info/payment-info';
+export * from './server/address-overview/address-overview';
 
 
 
