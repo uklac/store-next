@@ -27,7 +27,6 @@ export * from './server/shipping-methods/shipping-methods';
 export * from './server/shipment-items/shipment-items';
 export * from './server/order-details/order-details';
 export * from './server/order-items/order-items';
-export * from './server/order-info/order-info';
 export * from './server/line-items/line-items';
 export * from './server/payment-info/payment-info';
 export * from './server/address-overview/address-overview';

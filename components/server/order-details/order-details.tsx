@@ -1,5 +1,7 @@
-import { OrderInfo } from '../order-info/order-info';
+import { AddressOverview } from '../address-overview/address-overview';
 import { OrderItems } from '../order-items/order-items';
+import { OrderShipments } from '../order-shipments/order-shipments';
+import { PaymentInfo } from '../payment-info/payment-info';
 import styles from './order-details.module.scss';
 
 interface OrderDetailsProps {}
@@ -42,7 +44,10 @@ export function OrderDetails(props: OrderDetailsProps) {
   return (
     <div className={`${styles['order-details']}`}>
       <div className={`${styles['order-details__info']}`}>
-        <OrderInfo title={'Pago'} name={'direccion'}/>
+        {/* <AddressOverview address={undefined}/>
+        <OrderShipments shipment={undefined}/>
+        <AddressOverview address={undefined}/>
+        <PaymentInfo orderPayments={undefined}/> */}
       </div>
       <div className={`${styles['order-items']}`}>
         <OrderItems orderItems={shipmentItemsData}/>
