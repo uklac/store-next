@@ -9,15 +9,12 @@ interface OrderItemsProps {
 export function OrderItems(props: OrderItemsProps) {
   const { orderItems } = props;
   return (
-    <div>
+    <section className={`${styles['order-items--summary']}`} >
       {orderItems.items.map((item, index) => (
         <article className={`${styles['order-item']}`} key={index}>
           <div className={`${styles['order-item__image']}`}>
             <img src={item.gallery_image.url} alt="Product Image" />
           </div>
-          {/* <div className={`${styles['order-item__name']}`}>
-            {item.product.name}
-          </div> */}
           <ItemInfo
             name={item.product.name}
             options_text={item.variant.options_text}
@@ -34,6 +31,6 @@ export function OrderItems(props: OrderItemsProps) {
           </div>
         </article>
       ))}
-    </div>
+    </section>
   );
 }
