@@ -1,0 +1,30 @@
+.checkout-summary {
+  font-size: 1.4rem - 0.1;
+
+  &__title {
+    font-size: 1.6rem;
+  }
+
+  &__entry,
+  &__total {
+    display: flex;
+
+    > dt {
+      flex-grow: 1;
+    }
+
+    > dd {
+      font-weight: 500;
+    }
+  }
+
+  &__entry {
+    margin: 0.5rem 0;
+  }
+
+  &__total {
+    border-top: solid 1px #ddd;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+  }
+}

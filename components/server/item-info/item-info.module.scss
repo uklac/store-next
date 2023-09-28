@@ -1,0 +1,41 @@
+$small-screen: 900px;
+
+@mixin desktop {
+  @media (min-width: $small-screen) {
+    @content;
+  }
+}
+
+.item-info {
+  &__name {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+
+    a {
+      font-weight: 700;
+    }
+  }
+
+  &__options {
+    margin-bottom: 1rem;
+  }
+
+  &__description {
+    color: #777;
+    font-size: 1.4rem - 0.1;
+    font-style: italic;
+    margin: 0;
+  }
+
+  .order-items--summary & {
+    &__name {
+      @include desktop {
+        font-size: 1.4rem;
+      }
+    }
+
+    &__description {
+      display: none;
+    }
+  }
+}
