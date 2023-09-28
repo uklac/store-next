@@ -31,6 +31,10 @@ export * from './server/line-items/line-items';
 export * from './server/payment-info/payment-info';
 export * from './server/address-overview/address-overview';
 export * from './server/order-shipments/order-shipments';
+export * from './server/checkout-summary/checkout-summary';
+export * from './server/item-info/item-info';
+
+
 
 
 

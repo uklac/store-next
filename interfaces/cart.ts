@@ -15,10 +15,14 @@ export interface ItemsCart {
     product: {
       id: number;
       name: string;
+      description: string;
       display_amount: string;
     };
     gallery_image: {
       url: string;
+    };
+    variant: {
+      options_text: string;
     };
   }>;
 }

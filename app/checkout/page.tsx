@@ -1,3 +1,4 @@
+import { CheckoutSummary } from "components";
 
 export default async function Checkout() {
   return (
@@ -62,7 +63,7 @@ export default async function Checkout() {
                 ></textarea>
               </div>
               <aside className="col-lg-3">
-                <div className="summary">
+                {/* <div className="summary">
                   <h3 className="summary-title">Su pedido</h3>
 
                   <table className="table table-summary">
@@ -134,7 +135,8 @@ export default async function Checkout() {
                     <span className="btn-text">Realizar pedido</span>
                     <span className="btn-hover-text">Proceder a Pagar</span>
                   </button>
-                </div>
+                </div> */}
+                <CheckoutSummary/>
               </aside>
             </div>
           </form>
