@@ -21,7 +21,8 @@ export function AddItemCart(props: AddItemCartProps) {
         quantity: quantity,
       });
       console.log('Agregado al carrito:', result);
-      localStorage.setItem('order_number', result.order.number)
+      localStorage.setItem('order_number', result.order.number);
+      localStorage.setItem('guest_token', result.order.guest_token);
     } catch (error) {
       console.error('Error al agregar el ítem al carrito:', error);
     }

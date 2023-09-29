@@ -4,15 +4,16 @@ import { useCallback, useEffect } from 'react';
 
 export async function CartView() {
   
-  const fetchOrder = useCallback(async (orderNumber: string) => {
-    const response = await getCart(orderNumber);
+  const fetchOrder = useCallback(async (orderNumber: string, token: string) => {
+    const response = await getCart(orderNumber, token);
     console.log('response: ', response);
   }, []);
   
   useEffect(() => {
     const orderNumber = localStorage.getItem('order_number');
-    if (orderNumber) {
-      fetchOrder(orderNumber)
+    const guestToken = localStorage.getItem('guest_token');
+    if (orderNumber && guestToken) {
+      fetchOrder(orderNumber, guestToken)
     }
   }, [])
   
