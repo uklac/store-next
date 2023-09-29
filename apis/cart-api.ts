@@ -35,7 +35,7 @@ export async function getItemsCart( ): Promise<ItemsCart> {
 }
 
 export async function getCart(orderNumber: string): Promise<ItemsCart> {
-  const url = `'http://localhost:3000/api/orders/'${orderNumber}`;
+  const url = `http://localhost:3000/api/orders/${orderNumber}`;
   const response = await fetch(url, {
     method: 'GET',
     headers: {
