@@ -12,7 +12,7 @@ export function ShipmentItems(props: ShipmentItemsProps) {
 
   return (
     <ul className={`${styles['shipment-items']}`}>
-      {shipmentItems.items.map((shipmentItem, index) => (
+      {shipmentItems?.line_items?.map((shipmentItem, index) => (
         <li key={index}>
           <div className={`${styles['shipment-items__image']}`}>
             <img src={shipmentItem.gallery_image.url} alt="Product Image" />

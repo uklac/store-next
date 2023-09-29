@@ -32,7 +32,7 @@ export default async function Account() {
                 </thead>
 
                 <tbody>
-                  {productsCart.items.map((item, index) => (
+                  {productsCart.line_items.map((item, index) => (
                     <tr key={index}>
                       <td className="product-col">
                         <div className="product">

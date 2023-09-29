@@ -1,3 +1,5 @@
+import { BillAddress } from "./order";
+
 export interface Item {
   variant_id: number, 
   quantity: number,
@@ -8,7 +10,8 @@ export interface ItemsCart {
     id: number;
     total: string;
   };
-  items: Array<{
+  billAddress: BillAddress;
+  line_items: Array<{
     id: number;
     variant_id: number;
     quantity: number;

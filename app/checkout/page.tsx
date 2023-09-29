@@ -1,6 +1,8 @@
+import { getItemsCart } from "apis/cart-api";
 import { CheckoutSummary } from "components";
 
 export default async function Checkout() {
+  const order = await getItemsCart();
   return (
     <div className="page-content">
       <div className="checkout">
@@ -136,7 +138,7 @@ export default async function Checkout() {
                     <span className="btn-hover-text">Proceder a Pagar</span>
                   </button>
                 </div> */}
-                <CheckoutSummary/>
+                <CheckoutSummary order={order}/>
               </aside>
             </div>
           </form>

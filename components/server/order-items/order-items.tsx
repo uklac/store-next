@@ -10,7 +10,7 @@ export function OrderItems(props: OrderItemsProps) {
   const { orderItems } = props;
   return (
     <section className={`${styles['order-items--summary']}`} >
-      {orderItems.items.map((item, index) => (
+      {orderItems?.line_items?.map((item, index) => (
         <article className={`${styles['order-item']}`} key={index}>
           <div className={`${styles['order-item__image']}`}>
             <img src={item.gallery_image.url} alt="Product Image" />

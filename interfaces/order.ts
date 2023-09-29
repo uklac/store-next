@@ -106,3 +106,20 @@ export interface Payment {
   updated_at: string;
 }
 
+export interface Adjustment {
+  adjustable_id: number;
+  adjustable_type: string;
+  amount: string;
+  created_at: string;
+  display_amount: string;
+  eligible: boolean;
+  finalized: boolean;
+  id: number;
+  label: string;
+  promotion_code_id: number;
+  source_id: number;
+  source_type: string;
+  updated_at: string;
+}
+
+
