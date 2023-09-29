@@ -1,3 +1,4 @@
+import { OrderData } from 'interfaces';
 import { Item, ItemsCart } from 'interfaces/cart';
 
 const ACCOUNT_URL = 'http://localhost:3000/api/cart/add_item';
@@ -37,7 +38,7 @@ export async function getItemsCart(): Promise<ItemsCart> {
 export async function getCart(
   orderNumber: string,
   token: string
-): Promise<ItemsCart> {
+): Promise<OrderData> {
   const url = `http://localhost:3000/api/orders/${orderNumber}`;
   const response = await fetch(url, {
     method: 'GET',
