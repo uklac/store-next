@@ -8,6 +8,7 @@ export * from './client/filters/filters';
 export * from './client/button/button';
 export * from './client/item-option-value/item-option-value';
 export * from './client/register-form/register-form';
+export * from './client/cart-view';
 
 //server
 export * from './server/header/header';

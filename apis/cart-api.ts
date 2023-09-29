@@ -33,3 +33,15 @@ export async function getItemsCart( ): Promise<ItemsCart> {
   });
   return await response.json();
 }
+
+export async function getCart(orderNumber: string): Promise<ItemsCart> {
+  const url = `'http://localhost:3000/api/orders/'${orderNumber}`;
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      Authorization: 'Bearer undefined'
+    },
+  });
+  return await response.json();
+}

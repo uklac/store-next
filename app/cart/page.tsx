@@ -1,9 +1,12 @@
-'use client';
-import { getItemsCart } from 'apis/cart-api';
+import { CartView } from "components";
 
-export default async function Account() {
-  const productsCart = await getItemsCart();
-  console.log('Productos',productsCart);
+export default async function Cart() {
+  // const productsCart = await getItemsCart();
+  
+  // const orderNumber = localStorage.getItem('order_number') || '';
+  // const order = await getCart(orderNumber);
+  // console.log('order: ',order);
+  
 
   // const obtenerItemsDelCarrito = async () => {
   //   try {
@@ -16,7 +19,8 @@ export default async function Account() {
 
   return (
     <div className="page-content">
-      <div className="cart">
+      <CartView />
+      {/* <div className="cart">
         <div className="container">
           <div className="row">
             <div className="col-lg-9">
@@ -209,7 +213,7 @@ export default async function Account() {
             </aside>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
