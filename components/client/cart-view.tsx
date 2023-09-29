@@ -10,8 +10,10 @@ export async function CartView() {
   }, []);
   
   useEffect(() => {
-    const orderNumber = localStorage.getItem('order_number') || '';
-    fetchOrder(orderNumber)
+    const orderNumber = localStorage.getItem('order_number');
+    if (orderNumber) {
+      fetchOrder(orderNumber)
+    }
   }, [])
   
   // const order = await getCart(orderNumber);
