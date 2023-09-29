@@ -21,6 +21,7 @@ export function AddItemCart(props: AddItemCartProps) {
         quantity: quantity,
       });
       console.log('Agregado al carrito:', result);
+      localStorage.setItem('order_number', result.order.number)
     } catch (error) {
       console.error('Error al agregar el ítem al carrito:', error);
     }
