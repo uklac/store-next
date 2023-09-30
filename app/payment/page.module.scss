@@ -1,0 +1,46 @@
+.payment-step {
+  &__payment {
+    background: #fafbfc;
+    border: solid 1px #f2f2f2;
+    margin-bottom: 2rem;
+    padding: 1.5rem 3rem;
+
+    > legend {
+      font-size: 1.4rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+  }
+
+  &__details {
+    display: block;
+    border: 0;
+    padding: 0;
+    margin: 1em;
+
+    &:disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+
+  &__selector {
+    list-style-type: none;
+    padding-left: 0;
+    > li {
+      margin-bottom: 1.5em;
+      > label {
+        font-weight: bold;
+      }
+      > div {
+        padding: 1em;
+      }
+    }
+  }
+}
+
+.spacing {
+  display: flex;
+  gap: 1rem;
+}
