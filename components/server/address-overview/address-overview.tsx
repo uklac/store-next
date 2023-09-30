@@ -1,8 +1,8 @@
-import { ShipAddress } from 'interfaces';
+import { Address } from 'interfaces';
 import styles from './address-overview.module.scss';
 
 interface AddressOverviewProps {
-  address: ShipAddress;
+  address: Address;
 }
 
 export function AddressOverview(props: AddressOverviewProps) {

@@ -1,6 +1,5 @@
 import { ShipmentItems, ShippingMethods } from 'components';
 import styles from './page.module.scss';
-import { getItemsCart } from 'apis/cart-api';
 import { OrderData } from 'interfaces';
 
 interface Delivery {
@@ -9,12 +8,6 @@ interface Delivery {
 
 export default async function Delivery(props: Delivery) {
   const { order } = props;
-
-  const shippingRates = [
-    { id: 1, name: 'Envío Estándar', display_cost: '$10.00' },
-    { id: 2, name: 'Envío Rápido', display_cost: '$20.00' },
-    { id: 3, name: 'Envío Express', display_cost: '$30.00' },
-  ];
 
   return (
     <div className="container">

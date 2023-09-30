@@ -1,4 +1,4 @@
-import { ItemsCart } from 'interfaces';
+import { ItemsCart, OrderData } from 'interfaces';
 import { AddressOverview } from '../address-overview/address-overview';
 import { OrderItems } from '../order-items/order-items';
 import { OrderShipments } from '../order-shipments/order-shipments';
@@ -6,7 +6,7 @@ import { PaymentInfo } from '../payment-info/payment-info';
 import styles from './order-details.module.scss';
 
 interface OrderDetailsProps {
-  order: ItemsCart;
+  order: OrderData;
 }
 
 export function OrderDetails(props: OrderDetailsProps) {
@@ -15,13 +15,13 @@ export function OrderDetails(props: OrderDetailsProps) {
   return (
     <div className={`${styles['order-details']}`}>
       <div className={`${styles['order-details__info']}`}>
-        {/* <AddressOverview address={undefined}/>
-        <OrderShipments shipment={undefined}/>
-        <AddressOverview address={undefined}/>
-        <PaymentInfo orderPayments={undefined}/> */}
+        <AddressOverview address={order.ship_address}/> 
+        <OrderShipments shipments={order.shipments}/>
+        <AddressOverview address={order.ship_address}/>
+        <PaymentInfo orderPayments={order.payments}/> 
       </div>
       <div className={`${styles['order-items']}`}>
-        <OrderItems orderItems={order}/>
+        {/* <OrderItems orderItems={order}/> */}
       </div>
 
     </div>
