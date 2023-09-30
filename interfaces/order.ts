@@ -317,36 +317,36 @@ export interface BillAddress {
 //   tracking_url: string;
 // }
 
-// export interface ShipAddress {
-//   address1: string;
-//   address2: string;
-//   alternative_phone: string;
-//   city: string;
-//   company: string;
-//   country: {
-//     id: number;
-//     iso: string;
-//     iso3: string;
-//     iso_name: string;
-//     name: string;
-//     numcode: number;
-//   };
-//   country_id: number;
-//   country_iso: string;
-//   id: number;
-//   name: string;
-//   phone: string;
-//   state: {
-//     abbr: string;
-//     country_id: number;
-//     id: number;
-//     name: string;
-//   };
-//   state_id: number;
-//   state_name: string;
-//   state_text: string;
-//   zipcode: string;
-// }
+export interface ShipAddress {
+  address1: string;
+  address2: string;
+  alternative_phone: string;
+  city: string;
+  company: string;
+  country: {
+    id: number;
+    iso: string;
+    iso3: string;
+    iso_name: string;
+    name: string;
+    numcode: number;
+  };
+  country_id: number;
+  country_iso: string;
+  id: number;
+  name: string;
+  phone: string;
+  state: {
+    abbr: string;
+    country_id: number;
+    id: number;
+    name: string;
+  };
+  state_id: number;
+  state_name: string;
+  state_text: string;
+  zipcode: string;
+}
 
 // export interface PaymentMethod {
 //   id: number;
