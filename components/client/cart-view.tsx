@@ -4,6 +4,7 @@ import { OrderData } from 'interfaces';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
 import { CartOrderSummary } from './cart-order-summary';
+import { CartLineItem } from './cart-line-item';
 
 export async function CartView() {
   const [order, setOrder] = useState<OrderData>();
@@ -28,31 +29,6 @@ export async function CartView() {
     }
   }, []);
 
-  async function updateQuantityProduct(id: number, quantity: number) {
-    if (order) {
-      const response = await updateLineItem({
-        itemId: id,
-        quantity: quantity,
-        token: guestToken,
-        orderNumber: order.number,
-      });
-      console.log('response: ', response);
-      fetchOrder(order.number, guestToken);
-    }
-  }
-
-  async function removeProduct(id: number) {
-    if (order) {
-      const response = await removeLineItem({
-        itemId: id,
-        token: guestToken,
-        orderNumber: order.number,
-      });
-      console.log('response: ', response);
-      fetchOrder(order.number, guestToken);
-    }
-  }
-
   return (
     <div className="cart">
       <div className="container">
@@ -71,85 +47,21 @@ export async function CartView() {
               <tbody>
                 {order &&
                   order.line_items.map((item, index) => (
-                    <tr key={index}>
-                      <td className="product-col">
-                        <div className="product">
-                          <figure className="product-media">
-                            <img
-                              src={item.variant.images[0].product_url}
-                              alt={item.variant.images[0].alt}
-                            />
-                          </figure>
-                          <div className="">
-                            <h3 className="product-title">
-                              <Link
-                                href={`products/${item.variant.product_id}`}
-                              >
-                                {item.variant.name}
-                              </Link>
-                            </h3>
-                            <h6>{item.variant.options_text}</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="price-col">{item.price}</td>
-                      <td className="quantity-col">
-                        <div className="cart-product-quantity">
-                          <select
-                            className="form-control"
-                            onChange={(ev: any) => {
-                              const quantity = ev.target.value || item.quantity;
-                              updateQuantityProduct(item.id, quantity);
-                            }}
-                          >
-                            <option value={1} selected={item.quantity === 1}>
-                              1
-                            </option>
-                            <option value={2} selected={item.quantity === 2}>
-                              2
-                            </option>
-                            <option value={3} selected={item.quantity === 3}>
-                              3
-                            </option>
-                            <option value={4} selected={item.quantity === 4}>
-                              4
-                            </option>
-                            <option value={5} selected={item.quantity === 5}>
-                              5
-                            </option>
-                            <option value={6} selected={item.quantity === 6}>
-                              6
-                            </option>
-                            <option value={7} selected={item.quantity === 7}>
-                              7
-                            </option>
-                            <option value={8} selected={item.quantity === 8}>
-                              8
-                            </option>
-                          </select>
-                        </div>
-                      </td>
-                      <td className="total-col">{item.display_amount}</td>
-                      <td className="remove-col">
-                        <button className="btn-remove">
-                          <i
-                            className="icon-close"
-                            onClick={() => {
-                              removeProduct(item.id);
-                            }}
-                          ></i>
-                        </button>
-                      </td>
-                    </tr>
+                    <CartLineItem
+                      item={item}
+                      key={index}
+                      orderNumber={order.number}
+                      token={guestToken}
+                    />
                   ))}
               </tbody>
             </table>
           </div>
-          { order && 
+          {order && (
             <aside className="col-lg-3">
-              <CartOrderSummary order={order}/>
+              <CartOrderSummary order={order} />
             </aside>
-          }
+          )}
         </div>
       </div>
     </div>
