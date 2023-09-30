@@ -1,9 +1,14 @@
 import { ShipmentItems, ShippingMethods } from 'components';
 import styles from './page.module.scss';
 import { getItemsCart } from 'apis/cart-api';
+import { OrderData } from 'interfaces';
 
-export default async function Delivery() {
-  const order = await getItemsCart();
+interface Delivery {
+  order: OrderData;
+}
+
+export default async function Delivery(props: Delivery) {
+  const { order } = props;
 
   const shippingRates = [
     { id: 1, name: 'Envío Estándar', display_cost: '$10.00' },
@@ -21,11 +26,15 @@ export default async function Delivery() {
             <h2 className={`${styles['proposed-shipment__title']}`}>
               package from default
             </h2>
-            <ShipmentItems shipmentItems={order} />
+            <ShipmentItems shipmentItems={order.line_items} />
             <h3 className={`${styles['proposed-shipment__secondary-title']}`}>
               Shipping Method:
             </h3>
-            <ShippingMethods shippingRates={shippingRates} />
+            {order.shipments.map((shipment, index) => (
+              <div key={index}>
+                <ShippingMethods shippingRates={shipment.shipping_rates} />
+              </div>
+            ))}
           </div>
 
           <div className={`${styles['textarea-input']}`}>

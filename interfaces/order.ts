@@ -217,11 +217,21 @@ export interface Shipment {
   selected_shipping_rate: SelectedShippingRate;
   shipped_at: string;
   shipping_methods: ShippingMethod[];
-  // shipping_rates: ShippingRate[];
+  shipping_rates: ShippingRate[];
   state: string;
   stock_location_name: string;
   tracking: string;
   tracking_url: string;
+}
+
+export interface ShippingRate {
+  cost: string;
+  display_cost: string;
+  id: number;
+  name: string;
+  selected: boolean;
+  shipping_method_code: string;
+  shipping_method_id: number;
 }
 
 export interface Manifest {

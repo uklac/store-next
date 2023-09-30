@@ -1,10 +1,5 @@
+import { ShippingRate } from 'interfaces';
 import styles from './shipping-methods.module.scss';
-
-interface ShippingRate {
-  id: number;
-  name: string;
-  display_cost: string;
-}
 
 interface ShippingMethodsProps {
   shippingRates: ShippingRate[];
@@ -15,8 +10,8 @@ export function ShippingMethods(props: ShippingMethodsProps) {
 
   return (
     <ul className={`${styles['shipping-methods']}`}>
-      {shippingRates.map((rate) => (
-        <li key={rate.id} className={`${styles['shipping-rate']}`}>
+      {shippingRates.map((rate, index) => (
+        <li key={index} className={`${styles['shipping-rate']}`}>
           <label className={`${styles['radio-input']}`}>
             <input
               type="radio"
