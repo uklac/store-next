@@ -1,7 +1,9 @@
+'use client';
+
 import { removeLineItem, updateLineItem } from 'apis/cart-api';
 import { LineItem } from 'interfaces';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 
 interface Props {
   item: LineItem;
@@ -12,14 +14,20 @@ interface Props {
 
 export function CartLineItem(props: Props) {
   const { item, orderNumber, token, onRemove } = props;
+  const [processing, setProcessing] = useState(false);
+  const [total, setTotal] = useState(item.display_amount);
+
 
   async function updateQuantityProduct(id: number, quantity: number) {
+    setProcessing(true);
     const response = await updateLineItem({
       itemId: id,
       quantity: quantity,
       token: token,
       orderNumber: orderNumber,
     });
+    setProcessing(false);
+    setTotal(response.display_amount);
     console.log('response: ', response);
   }
 
@@ -34,7 +42,7 @@ export function CartLineItem(props: Props) {
   }
 
   return (
-    <tr>
+    <tr className={`line-item-row ${processing ? 'spinner' : ''}`}>
       <td className="product-col">
         <div className="product">
           <figure className="product-media">
@@ -90,7 +98,7 @@ export function CartLineItem(props: Props) {
           </select>
         </div>
       </td>
-      <td className="total-col">{item.display_amount}</td>
+      <td className="total-col">{total}</td>
       <td className="remove-col">
         <button className="btn-remove">
           <i

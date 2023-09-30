@@ -200,3 +200,9 @@
 		min-width: 0;
 	}
 }
+
+.line-item-row {
+  &.spinner {
+    background: yellow;
+  }
+}
