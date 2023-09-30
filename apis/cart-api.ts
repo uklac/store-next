@@ -1,12 +1,18 @@
 import { OrderData } from 'interfaces';
 import { Item, ItemsCart } from 'interfaces/cart';
 
-const ACCOUNT_URL = 'http://localhost:3000/api/cart/add_item';
+type AddItemToOrder = {
+  item: Item,
+  orderNumber?: string;
+  token?: string;
+}
 
-const ACCOUNT_URL1 = 'http://localhost:3000/api/cart';
+const ADD_ITEM_URL = 'http://localhost:3000/api/cart/add_item';
+const ADD_ITEM_URL1 = 'http://localhost:3000/api/cart';
 
-export async function addItemCart(params: Item): Promise<any> {
-  const url = `${ACCOUNT_URL}`;
+export async function addItemCart(params: AddItemToOrder): Promise<any> {
+  const { item } = params;
+  const url = `${ADD_ITEM_URL}`;
   const options = {
     method: 'POST',
     headers: {
@@ -15,8 +21,29 @@ export async function addItemCart(params: Item): Promise<any> {
       Authorization: 'Bearer undefined',
     },
     body: JSON.stringify({
-      variant_id: params.variant_id,
-      quantity: params.quantity,
+      variant_id: item.variant_id,
+      quantity: item.quantity,
+    }),
+  };
+  const response = await fetch(url, options);
+  return await response.json();
+}
+
+export async function addItemToOrder(params: AddItemToOrder): Promise<any> {
+  const { item, token, orderNumber } = params;
+  const url = `http://localhost:3000/api/orders/${orderNumber}/line_items`;
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      'X-Spree-Order-Token': token || ''
+    },
+    body: JSON.stringify({
+      line_item: {
+        variant_id: item.variant_id,
+        quantity: item.quantity,
+      }
     }),
   };
   const response = await fetch(url, options);
@@ -24,7 +51,7 @@ export async function addItemCart(params: Item): Promise<any> {
 }
 
 export async function getItemsCart(): Promise<ItemsCart> {
-  const url = `${ACCOUNT_URL1}`;
+  const url = `${ADD_ITEM_URL1}`;
   const response = await fetch(url, {
     method: 'GET',
     headers: {

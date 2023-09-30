@@ -1,7 +1,7 @@
 'use client';
-import { addItemCart } from 'apis/cart-api';
+import { addItemCart, addItemToOrder } from 'apis/cart-api';
 import { Variant } from 'interfaces';
-import React, { ReactElement, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 interface AddItemCartProps {
   variants: Variant[];
@@ -14,11 +14,19 @@ export function AddItemCart(props: AddItemCartProps) {
   const [selectedVariant, setSelectedVariant] = useState<number>(0);
 
   const handleAddToCart = async () => {
+    const tokenOrder = localStorage.getItem('guest_token');
+    const orderNumber = localStorage.getItem('order_number');
     const quantity = quantityRef.current?.valueAsNumber || 0;
+    const methodAddItem = tokenOrder ? addItemToOrder : addItemCart;
+
     try {
-      const result = await addItemCart({
-        variant_id: selectedVariant,
-        quantity: quantity,
+      const result = await methodAddItem({
+        item: {
+          variant_id: selectedVariant,
+          quantity: quantity,
+        },
+        token: tokenOrder || '',
+        orderNumber: orderNumber || '',
       });
       console.log('Agregado al carrito:', result);
       localStorage.setItem('order_number', result.order.number);
