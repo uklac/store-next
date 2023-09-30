@@ -54,7 +54,6 @@ export async function CartView() {
                               />
                             </a>
                           </figure>
-
                           <h3 className="product-title">
                             <a href="#">{item.variant.name}</a>
                           </h3>
@@ -63,7 +62,19 @@ export async function CartView() {
                       <td className="price-col">{item.price}</td>
                       <td className="quantity-col">
                         <div className="cart-product-quantity">
-                          <input
+                          <select className="form-control" onChange={()=>{
+                            //update cart
+                          }}>
+                            <option value={1} selected={item.quantity === 1}>1</option>
+                            <option value={2} selected={item.quantity === 2}>2</option>
+                            <option value={3} selected={item.quantity === 3}>3</option>
+                            <option value={4} selected={item.quantity === 4}>4</option>
+                            <option value={5} selected={item.quantity === 5}>5</option>
+                            <option value={6} selected={item.quantity === 6}>6</option>
+                            <option value={7} selected={item.quantity === 7}>7</option>
+                            <option value={8} selected={item.quantity === 8}>8</option>
+                          </select>
+                          {/* <input
                             type="number"
                             className="form-control"
                             value={item.quantity}
@@ -73,7 +84,7 @@ export async function CartView() {
                             step="1"
                             data-decimals="0"
                             required
-                          />
+                          /> */}
                         </div>
                       </td>
                       <td className="total-col">{item.display_amount}</td>
