@@ -11,6 +11,7 @@ export * from './client/register-form/register-form';
 export * from './client/cart-view';
 export * from './client/cart';
 export * from './client/cart-order-summary';
+export * from './client/cart-line-items';
 export * from './client/cart-line-item';
 
 //server

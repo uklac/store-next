@@ -7,10 +7,11 @@ interface Props {
   item: LineItem;
   orderNumber: string;
   token: string;
+  onRemove: (id: number) => void;
 }
 
 export function CartLineItem(props: Props) {
-  const { item, orderNumber, token } = props;
+  const { item, orderNumber, token, onRemove } = props;
 
   async function updateQuantityProduct(id: number, quantity: number) {
     const response = await updateLineItem({
@@ -20,7 +21,6 @@ export function CartLineItem(props: Props) {
       orderNumber: orderNumber,
     });
     console.log('response: ', response);
-    // fetchOrder(order.number, guestToken);
   }
 
   async function removeProduct(id: number) {
@@ -30,7 +30,7 @@ export function CartLineItem(props: Props) {
       orderNumber: orderNumber,
     });
     console.log('response: ', response);
-    // fetchOrder(order.number, guestToken);
+    onRemove(id);
   }
 
   return (
