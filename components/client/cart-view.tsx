@@ -28,22 +28,28 @@ export async function CartView() {
   }, []);
 
   async function updateQuantityProduct(id: number, quantity: number) {
-    const response = await updateLineItem({
-      itemId: id,
-      quantity: quantity,
-      token: guestToken,
-      orderNumber: order?.number || '',
-    });
-    console.log('response: ', response);
+    if (order) {
+      const response = await updateLineItem({
+        itemId: id,
+        quantity: quantity,
+        token: guestToken,
+        orderNumber: order.number,
+      });
+      console.log('response: ', response);
+      fetchOrder(order.number, guestToken);
+    }
   }
 
   async function removeProduct(id: number) {
-    const response = await removeLineItem({
-      itemId: id,
-      token: guestToken,
-      orderNumber: order?.number || '',
-    });
-    console.log('response: ', response);
+    if (order) {
+      const response = await removeLineItem({
+        itemId: id,
+        token: guestToken,
+        orderNumber: order.number,
+      });
+      console.log('response: ', response);
+      fetchOrder(order.number, guestToken);
+    }
   }
 
   return (
@@ -75,7 +81,11 @@ export async function CartView() {
                           </figure>
                           <div className="">
                             <h3 className="product-title">
-                              <Link href={`products/${item.variant.product_id}`}>{item.variant.name}</Link>
+                              <Link
+                                href={`products/${item.variant.product_id}`}
+                              >
+                                {item.variant.name}
+                              </Link>
                             </h3>
                             <h6>{item.variant.options_text}</h6>
                           </div>
@@ -133,70 +143,62 @@ export async function CartView() {
                   ))}
               </tbody>
             </table>
-            <div className="cart-bottom">
-              <div className="cart-discount">
-                <form action="#">
-                  <div className="input-group">
-                    <input
-                      type="text"
-                      className="form-control"
-                      required
-                      placeholder="coupon code"
-                    />
-                    <div className="input-group-append">
-                      <button
-                        className="btn btn-outline-primary-2"
-                        type="submit"
-                      >
-                        <i className="icon-long-arrow-right"></i>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-
-              <a
-                href="#"
-                className="btn btn-outline-dark-2"
-                // onClick={obtenerItemsDelCarrito}
-              >
-                <span>UPDATE CART</span>
-                <i className="icon-refresh"></i>
-              </a>
-            </div>
           </div>
-          <aside className="col-lg-3">
-            <div className="summary summary-cart">
-              <h3 className="summary-title">Order Summary</h3>
-              <table className="table table-summary">
-                <tbody>
-                  <tr className="summary-subtotal">
-                    <td>Subtotal:</td>
-                    <td>{order && order.display_item_total}</td>
-                  </tr>
-                  <tr className="summary-total">
-                    <td>Total:</td>
-                    <td>{order && order.total}</td>
-                  </tr>
-                </tbody>
-              </table>
-
-              <a
-                href="/checkout"
-                className="btn btn-primary btn-order btn-block"
-              >
-                PROCEED TO CHECKOUT
-              </a>
-            </div>
-
-            <a
-              href="category.html"
-              className="btn btn-outline-dark-2 btn-block mb-3"
-            >
-              <span>CONTINUE SHOPPING</span>
-              <i className="icon-refresh"></i>
-            </a>
-          </aside>
+          { order && 
+            <aside className="col-lg-3">
+              <div className="summary summary-cart">
+                <h3 className="summary-title">Order Summary</h3>
+                <table className="table table-summary">
+                  <tbody>
+                    <tr className="summary-subtotal">
+                      <td>Subtotal:</td>
+                      <td>{order.display_item_total}</td>
+                    </tr>
+                    <tr className="summary-subtotal">
+                      <td>Envio:</td>
+                      <td>N/A</td>
+                    </tr>
+                    <tr className="summary-subtotal">
+                      <td>Discount:</td>
+                      <td>$0.0</td>
+                    </tr>
+                    <tr className="summary-total">
+                      <td>Total:</td>
+                      <td>{order.total}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div className="pb-3">
+                  <div className="cart-discount">
+                    <form action="#">
+                      <div className="input-group">
+                        <input
+                          type="text"
+                          className="form-control"
+                          required
+                          placeholder="coupon code"
+                        />
+                        <div className="input-group-append">
+                          <button
+                            className="btn btn-outline-primary-2"
+                            type="submit"
+                          >
+                            <i className="icon-long-arrow-right"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <a
+                  href="/checkout"
+                  className="btn btn-primary btn-order btn-block"
+                >
+                  PROCEED TO CHECKOUT
+                </a>
+              </div>
+            </aside>
+          }
         </div>
       </div>
     </div>
