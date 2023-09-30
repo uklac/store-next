@@ -139,6 +139,7 @@ export interface Variant {
   option_values: OptionValue[];
   options_text: string;
   price: string;
+  product_id: number;
   sku: string;
   slug: string;
   total_on_hand: number;

@@ -2,15 +2,30 @@ import { OrderData } from 'interfaces';
 import { Item, ItemsCart } from 'interfaces/cart';
 
 type AddItemToOrder = {
-  item: Item,
+  item: Item;
   orderNumber?: string;
   token?: string;
-}
+};
+
+type UpdateLineItemParams = {
+  itemId: number;
+  orderNumber: string;
+  quantity: number;
+  token: string;
+};
+
+type RemoveLineItemParams = {
+  itemId: number;
+  orderNumber: string;
+  token: string;
+};
 
 const ADD_ITEM_URL = 'http://localhost:3000/api/cart/add_item';
 const ADD_ITEM_URL1 = 'http://localhost:3000/api/cart';
 
-export async function addItemToOrderAndCreate(params: AddItemToOrder): Promise<any> {
+export async function addItemToOrderAndCreate(
+  params: AddItemToOrder
+): Promise<any> {
   const { item } = params;
   const url = `${ADD_ITEM_URL}`;
   const options = {
@@ -37,14 +52,52 @@ export async function addItemToOrder(params: AddItemToOrder): Promise<any> {
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
-      'X-Spree-Order-Token': token || ''
+      'X-Spree-Order-Token': token || '',
     },
     body: JSON.stringify({
       line_item: {
         variant_id: item.variant_id,
         quantity: item.quantity,
-      }
+      },
     }),
+  };
+  const response = await fetch(url, options);
+  return await response.json();
+}
+
+export async function updateLineItem(
+  params: UpdateLineItemParams
+): Promise<any> {
+  const { quantity, itemId, orderNumber, token } = params;
+  const url = `http://localhost:3000/api/orders/${orderNumber}/line_items/${itemId}`;
+  const options = {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      'X-Spree-Order-Token': token,
+    },
+    body: JSON.stringify({
+      line_item: {
+        quantity: quantity,
+      },
+    }),
+  };
+  const response = await fetch(url, options);
+  return await response.json();
+}
+
+export async function removeLineItem(
+  params: RemoveLineItemParams
+): Promise<any> {
+  const { itemId, orderNumber, token } = params;
+  const url = `http://localhost:3000/api/orders/${orderNumber}/line_items/${itemId}`;
+  const options = {
+    method: 'DELETE',
+    headers: {
+      Accept: 'application/json',
+      'X-Spree-Order-Token': token,
+    }
   };
   const response = await fetch(url, options);
   return await response.json();

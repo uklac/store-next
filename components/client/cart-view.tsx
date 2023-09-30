@@ -1,15 +1,17 @@
 'use client';
-import { getCart } from 'apis/cart-api';
+import { getCart, updateLineItem, removeLineItem } from 'apis/cart-api';
 import { OrderData } from 'interfaces';
+import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
 
 export async function CartView() {
-  const [productsCart, setProductsCart] = useState<OrderData>();
+  const [order, setOrder] = useState<OrderData>();
+  const [guestToken, setGuestToken] = useState<string>('');
 
   const fetchOrder = useCallback(async (orderNumber: string, token: string) => {
     try {
       const response = await getCart(orderNumber, token);
-      setProductsCart(response);
+      setOrder(response);
       console.error('response:', response);
     } catch (error) {
       console.error('Error fetching cart:', error);
@@ -17,13 +19,33 @@ export async function CartView() {
   }, []);
 
   useEffect(() => {
-    const orderNumber = localStorage.getItem('order_number');
-    const guestToken = localStorage.getItem('guest_token');
-    if (orderNumber && guestToken) {
-      fetchOrder(orderNumber, guestToken);
+    const storeOrderNumber = localStorage.getItem('order_number');
+    const storeGuestToken = localStorage.getItem('guest_token');
+    if (storeOrderNumber && storeGuestToken) {
+      setGuestToken(storeGuestToken);
+      fetchOrder(storeOrderNumber, storeGuestToken);
     }
   }, []);
-  
+
+  async function updateQuantityProduct(id: number, quantity: number) {
+    const response = await updateLineItem({
+      itemId: id,
+      quantity: quantity,
+      token: guestToken,
+      orderNumber: order?.number || '',
+    });
+    console.log('response: ', response);
+  }
+
+  async function removeProduct(id: number) {
+    const response = await removeLineItem({
+      itemId: id,
+      token: guestToken,
+      orderNumber: order?.number || '',
+    });
+    console.log('response: ', response);
+  }
+
   return (
     <div className="cart">
       <div className="container">
@@ -39,65 +61,78 @@ export async function CartView() {
                   <th></th>
                 </tr>
               </thead>
-
               <tbody>
-                {productsCart &&
-                  productsCart.line_items.map((item, index) => (
+                {order &&
+                  order.line_items.map((item, index) => (
                     <tr key={index}>
                       <td className="product-col">
                         <div className="product">
                           <figure className="product-media">
-                            <a href="#">
-                              <img
-                                src={item.variant.images[0].product_url}
-                                alt="Product image"
-                              />
-                            </a>
+                            <img
+                              src={item.variant.images[0].product_url}
+                              alt={item.variant.images[0].alt}
+                            />
                           </figure>
-                          <h3 className="product-title">
-                            <a href="#">{item.variant.name}</a>
-                          </h3>
+                          <div className="">
+                            <h3 className="product-title">
+                              <Link href={`products/${item.variant.product_id}`}>{item.variant.name}</Link>
+                            </h3>
+                            <h6>{item.variant.options_text}</h6>
+                          </div>
                         </div>
                       </td>
                       <td className="price-col">{item.price}</td>
                       <td className="quantity-col">
                         <div className="cart-product-quantity">
-                          <select className="form-control" onChange={()=>{
-                            //update cart
-                          }}>
-                            <option value={1} selected={item.quantity === 1}>1</option>
-                            <option value={2} selected={item.quantity === 2}>2</option>
-                            <option value={3} selected={item.quantity === 3}>3</option>
-                            <option value={4} selected={item.quantity === 4}>4</option>
-                            <option value={5} selected={item.quantity === 5}>5</option>
-                            <option value={6} selected={item.quantity === 6}>6</option>
-                            <option value={7} selected={item.quantity === 7}>7</option>
-                            <option value={8} selected={item.quantity === 8}>8</option>
-                          </select>
-                          {/* <input
-                            type="number"
+                          <select
                             className="form-control"
-                            value={item.quantity}
-                            onChange={() => console.log(item.quantity)}
-                            min="1"
-                            max="10"
-                            step="1"
-                            data-decimals="0"
-                            required
-                          /> */}
+                            onChange={(ev: any) => {
+                              const quantity = ev.target.value || item.quantity;
+                              updateQuantityProduct(item.id, quantity);
+                            }}
+                          >
+                            <option value={1} selected={item.quantity === 1}>
+                              1
+                            </option>
+                            <option value={2} selected={item.quantity === 2}>
+                              2
+                            </option>
+                            <option value={3} selected={item.quantity === 3}>
+                              3
+                            </option>
+                            <option value={4} selected={item.quantity === 4}>
+                              4
+                            </option>
+                            <option value={5} selected={item.quantity === 5}>
+                              5
+                            </option>
+                            <option value={6} selected={item.quantity === 6}>
+                              6
+                            </option>
+                            <option value={7} selected={item.quantity === 7}>
+                              7
+                            </option>
+                            <option value={8} selected={item.quantity === 8}>
+                              8
+                            </option>
+                          </select>
                         </div>
                       </td>
                       <td className="total-col">{item.display_amount}</td>
                       <td className="remove-col">
                         <button className="btn-remove">
-                          <i className="icon-close"></i>
+                          <i
+                            className="icon-close"
+                            onClick={() => {
+                              removeProduct(item.id);
+                            }}
+                          ></i>
                         </button>
                       </td>
                     </tr>
                   ))}
               </tbody>
             </table>
-
             <div className="cart-bottom">
               <div className="cart-discount">
                 <form action="#">
@@ -132,86 +167,23 @@ export async function CartView() {
           </div>
           <aside className="col-lg-3">
             <div className="summary summary-cart">
-              <h3 className="summary-title">Cart Total</h3>
-
+              <h3 className="summary-title">Order Summary</h3>
               <table className="table table-summary">
                 <tbody>
                   <tr className="summary-subtotal">
                     <td>Subtotal:</td>
-                    <td>{productsCart && productsCart.display_item_total}</td>
+                    <td>{order && order.display_item_total}</td>
                   </tr>
-                  <tr className="summary-shipping">
-                    <td>Shipping:</td>
-                    <td>&nbsp;</td>
-                  </tr>
-
-                  <tr className="summary-shipping-row">
-                    <td>
-                      <div className="custom-control custom-radio">
-                        <input
-                          type="radio"
-                          id="free-shipping"
-                          name="shipping"
-                          className="custom-control-input"
-                        />
-                        <label className="custom-control-label">
-                          Free Shipping
-                        </label>
-                      </div>
-                    </td>
-                    <td>$0.00</td>
-                  </tr>
-
-                  <tr className="summary-shipping-row">
-                    <td>
-                      <div className="custom-control custom-radio">
-                        <input
-                          type="radio"
-                          id="standart-shipping"
-                          name="shipping"
-                          className="custom-control-input"
-                        />
-                        <label className="custom-control-label">
-                          Standart:
-                        </label>
-                      </div>
-                    </td>
-                    <td>$10.00</td>
-                  </tr>
-
-                  <tr className="summary-shipping-row">
-                    <td>
-                      <div className="custom-control custom-radio">
-                        <input
-                          type="radio"
-                          id="express-shipping"
-                          name="shipping"
-                          className="custom-control-input"
-                        />
-                        <label className="custom-control-label">Express:</label>
-                      </div>
-                    </td>
-                    <td>$20.00</td>
-                  </tr>
-
-                  <tr className="summary-shipping-estimate">
-                    <td>
-                      Estimate for Your Country <br />{' '}
-                      <a href="dashboard.html">Change address</a>
-                    </td>
-                    <td>&nbsp;</td>
-                  </tr>
-
                   <tr className="summary-total">
                     <td>Total:</td>
-                    <td>{productsCart && productsCart.total}</td>
+                    <td>{order && order.total}</td>
                   </tr>
                 </tbody>
               </table>
 
               <a
                 href="/checkout"
-                className="btn btn-outline-primary-2 btn-order btn-block"
+                className="btn btn-primary btn-order btn-block"
               >
                 PROCEED TO CHECKOUT
               </a>
