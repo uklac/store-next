@@ -1,5 +1,5 @@
 'use client';
-import { addItemCart, addItemToOrder } from 'apis/cart-api';
+import { addItemToOrderAndCreate, addItemToOrder } from 'apis/cart-api';
 import { Variant } from 'interfaces';
 import React, { useRef, useState } from 'react';
 
@@ -17,7 +17,7 @@ export function AddItemCart(props: AddItemCartProps) {
     const tokenOrder = localStorage.getItem('guest_token');
     const orderNumber = localStorage.getItem('order_number');
     const quantity = quantityRef.current?.valueAsNumber || 0;
-    const methodAddItem = tokenOrder ? addItemToOrder : addItemCart;
+    const methodAddItem = tokenOrder ? addItemToOrder : addItemToOrderAndCreate;
 
     try {
       const result = await methodAddItem({

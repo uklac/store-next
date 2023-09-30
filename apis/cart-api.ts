@@ -10,7 +10,7 @@ type AddItemToOrder = {
 const ADD_ITEM_URL = 'http://localhost:3000/api/cart/add_item';
 const ADD_ITEM_URL1 = 'http://localhost:3000/api/cart';
 
-export async function addItemCart(params: AddItemToOrder): Promise<any> {
+export async function addItemToOrderAndCreate(params: AddItemToOrder): Promise<any> {
   const { item } = params;
   const url = `${ADD_ITEM_URL}`;
   const options = {
