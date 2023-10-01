@@ -6,10 +6,11 @@ interface Props {
   lineItems: LineItem[];
   orderNumber: string;
   token: string;
+  onChange: (id: number) => void;
 }
 
 export function CartLineItems(props: Props) {
-  const { lineItems, orderNumber, token } = props;
+  const { lineItems, orderNumber, token, onChange } = props;
 
   return (
     <table className="table table-cart table-mobile">
@@ -29,7 +30,7 @@ export function CartLineItems(props: Props) {
             key={index}
             orderNumber={orderNumber}
             token={token}
-            onRemove={() => {}}
+            onChange={onChange}
           />
         ))}
       </tbody>

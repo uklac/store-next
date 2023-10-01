@@ -9,14 +9,15 @@ interface Props {
   item: LineItem;
   orderNumber: string;
   token: string;
-  onRemove: (id: number) => void;
+  onChange: (id: number) => void;
 }
 
 export function CartLineItem(props: Props) {
-  const { item, orderNumber, token, onRemove } = props;
+  const { item, orderNumber, token, onChange } = props;
   const [updating, setUpdating] = useState(false);
   const [deleted, setDeleted] = useState(false);
   const [total, setTotal] = useState(item.display_amount);
+  const [quantity, setQuantity] = useState(item.quantity);
 
   async function updateQuantityProduct(id: number, quantity: number) {
     setUpdating(true);
@@ -28,7 +29,8 @@ export function CartLineItem(props: Props) {
     });
     setUpdating(false);
     setTotal(response.display_amount);
-    console.log('response: ', response);
+    setQuantity(response.quantity);
+    onChange(id);
   }
 
   async function removeProduct(id: number) {
@@ -41,7 +43,7 @@ export function CartLineItem(props: Props) {
       });
       setUpdating(false);
       setDeleted(true);
-      onRemove(id);
+      onChange(id);
     } catch (error) {
       console.log(error);
     }
@@ -75,34 +77,35 @@ export function CartLineItem(props: Props) {
       <td className="quantity-col">
         <div className="cart-product-quantity">
           <select
+            value={quantity}
             className="form-control"
             onChange={(ev: any) => {
               const quantity = ev.target.value || item.quantity;
               updateQuantityProduct(item.id, quantity);
             }}
           >
-            <option value={1} selected={item.quantity === 1}>
+            <option value={1}>
               1
             </option>
-            <option value={2} selected={item.quantity === 2}>
+            <option value={2}>
               2
             </option>
-            <option value={3} selected={item.quantity === 3}>
+            <option value={3}>
               3
             </option>
-            <option value={4} selected={item.quantity === 4}>
+            <option value={4}>
               4
             </option>
-            <option value={5} selected={item.quantity === 5}>
+            <option value={5}>
               5
             </option>
-            <option value={6} selected={item.quantity === 6}>
+            <option value={6}>
               6
             </option>
-            <option value={7} selected={item.quantity === 7}>
+            <option value={7}>
               7
             </option>
-            <option value={8} selected={item.quantity === 8}>
+            <option value={8}>
               8
             </option>
           </select>

@@ -12,6 +12,7 @@ export async function CartView() {
   const fetchOrder = useCallback(async (orderNumber: string, token: string) => {
     try {
       const order = await getCart(orderNumber, token);
+      debugger
       setOrder(order);
       console.error('response:', order);
     } catch (error) {
@@ -38,6 +39,13 @@ export async function CartView() {
                 lineItems={order.line_items}
                 orderNumber={order.number}
                 token={guestToken}
+                onChange={()=>{
+                  const storeOrderNumber = localStorage.getItem('order_number');
+                  const storeGuestToken = localStorage.getItem('guest_token');
+                  if (storeOrderNumber && storeGuestToken) {
+                    fetchOrder(storeOrderNumber, storeGuestToken);
+                  }
+                }}
               />
             </div>
             <aside className="col-lg-3">
