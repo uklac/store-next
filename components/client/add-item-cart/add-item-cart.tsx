@@ -18,7 +18,6 @@ export function AddItemCart(props: AddItemCartProps) {
     const orderNumber = localStorage.getItem('order_number');
     const quantity = quantityRef.current?.valueAsNumber || 0;
     const methodAddItem = tokenOrder ? addItemToOrder : addItemToOrderAndCreate;
-
     try {
       const result = await methodAddItem({
         item: {
@@ -28,9 +27,11 @@ export function AddItemCart(props: AddItemCartProps) {
         token: tokenOrder || '',
         orderNumber: orderNumber || '',
       });
-      console.log('Agregado al carrito:', result);
-      localStorage.setItem('order_number', result.order.number);
-      localStorage.setItem('guest_token', result.order.guest_token);
+      if (result.order) {
+        console.log('Agregado al carrito:', result);
+        localStorage.setItem('order_number', result.order.number);
+        localStorage.setItem('guest_token', result.order.guest_token);
+      }
     } catch (error) {
       console.error('Error al agregar el ítem al carrito:', error);
     }

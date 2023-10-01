@@ -97,10 +97,11 @@ export async function removeLineItem(
     headers: {
       Accept: 'application/json',
       'X-Spree-Order-Token': token,
-    }
+    },
   };
-  const response = await fetch(url, options);
-  return await response.json();
+  //rails not return anything
+  await fetch(url, options);
+  return 'ok';
 }
 
 export async function getItemsCart(): Promise<ItemsCart> {

@@ -14,35 +14,45 @@ interface Props {
 
 export function CartLineItem(props: Props) {
   const { item, orderNumber, token, onRemove } = props;
-  const [processing, setProcessing] = useState(false);
+  const [updating, setUpdating] = useState(false);
+  const [deleted, setDeleted] = useState(false);
   const [total, setTotal] = useState(item.display_amount);
 
-
   async function updateQuantityProduct(id: number, quantity: number) {
-    setProcessing(true);
+    setUpdating(true);
     const response = await updateLineItem({
       itemId: id,
       quantity: quantity,
       token: token,
       orderNumber: orderNumber,
     });
-    setProcessing(false);
+    setUpdating(false);
     setTotal(response.display_amount);
     console.log('response: ', response);
   }
 
   async function removeProduct(id: number) {
-    const response = await removeLineItem({
-      itemId: id,
-      token: token,
-      orderNumber: orderNumber,
-    });
-    console.log('response: ', response);
-    onRemove(id);
+    setUpdating(true);
+    try {
+      await removeLineItem({
+        itemId: id,
+        token: token,
+        orderNumber: orderNumber,
+      });
+      setUpdating(false);
+      setDeleted(true);
+      onRemove(id);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
-    <tr className={`line-item-row ${processing ? 'spinner' : ''}`}>
+    <tr
+      className={`line-item-row ${updating ? 'spinner' : ''} ${
+        deleted ? 'deleted' : ''
+      }`}
+    >
       <td className="product-col">
         <div className="product">
           <figure className="product-media">
