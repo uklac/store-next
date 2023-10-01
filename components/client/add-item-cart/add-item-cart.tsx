@@ -44,14 +44,16 @@ export function AddItemCart(props: AddItemCartProps) {
 
   return (
     <div>
-      <select onChange={handleVariantChange} value={selectedVariant}>
-        <option value="">Seleccione una variante</option>
-        {variants.map((variant, index) => (
-          <option value={variant.id} key={index}>
-            {variant.options_text}
-          </option>
-        ))}
-      </select>
+      { variants.length > 0 &&
+        <select onChange={handleVariantChange} value={selectedVariant}>
+          <option value="">Seleccione una variante</option>
+          {variants.map((variant, index) => (
+            <option value={variant.id} key={index}>
+              {variant.options_text}
+            </option>
+          ))}
+        </select>
+      }
       <div className="details-filter-row details-row-size">
         <label>Qty:</label>
         <div className="product-details-quantity">
