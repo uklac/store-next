@@ -46,7 +46,6 @@ $small-screen: 900px;
     @include desktop {
       float: none;
     }
-
   }
 
   &__price-single,
@@ -114,4 +113,23 @@ $small-screen: 900px;
       width: auto;
     }
   }
+}
+
+.item-entry,
+.item-total {
+  display: flex;
+  margin: 0.5rem 0;
+
+  dt {
+    flex-grow: 1;
+  }
+  dd {
+    font-weight: 500;
+  }
+}
+
+.item-total {
+  border-top: solid 1px #ddd;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
 }

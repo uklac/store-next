@@ -4,7 +4,7 @@ import styles from './item-info.module.scss';
 interface ItemInfoProps {
   name: string;
   options_text: string;
-  description: string;
+  description?: string;
 }
 
 export function ItemInfo(props: ItemInfoProps) {
@@ -15,14 +15,14 @@ export function ItemInfo(props: ItemInfoProps) {
         <a href="">{name}</a>
       </h2>
       <p className={`${styles['item-info__options']}`}>{options_text}</p>
-
-      {description ? (
+      {/* {description ? (
         <p className={`${styles['item-info__description']}`}>{description}</p>
       ) : (
         <p className={`${styles['item-info__description']}`}>
           Este producto no tiene descripción
         </p>
-      )}
+      )} */}
+      
     </div>
   );
 }

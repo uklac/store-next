@@ -13,6 +13,8 @@ export * from './client/cart';
 export * from './client/cart-order-summary';
 export * from './client/cart-line-items';
 export * from './client/cart-line-item';
+export * from './client/address-step';
+export * from './client/checkout-summary/checkout-summary';
 
 //server
 export * from './server/header/header';
@@ -36,7 +38,6 @@ export * from './server/line-items/line-items';
 export * from './server/payment-info/payment-info';
 export * from './server/address-overview/address-overview';
 export * from './server/order-shipments/order-shipments';
-export * from './server/checkout-summary/checkout-summary';
 export * from './server/item-info/item-info';
 
 

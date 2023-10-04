@@ -8,6 +8,7 @@ interface CartOrderSummaryProps {
 
 export function CartOrderSummary(props: CartOrderSummaryProps) {
   const { order } = props;
+
   return (
     <div className="summary summary-cart">
       <h3 className="summary-title">Order Summary</h3>
@@ -50,7 +51,7 @@ export function CartOrderSummary(props: CartOrderSummaryProps) {
           </form>
         </div>
       </div>
-      <a href="/checkout" className="btn btn-primary btn-order btn-block">
+      <a href={order.email ? '/checkout' : '/account'} className="btn btn-primary btn-order btn-block">
         PROCEED TO CHECKOUT
       </a>
     </div>
