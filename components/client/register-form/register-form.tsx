@@ -34,7 +34,7 @@ export function RegisterForm(props: Props) {
     }
   };
 
-    const loginSubmit = async () => {
+  const loginSubmit = async () => {
     const email = emailLoginRef.current?.value || '';
     const password = passwordLoginRef.current?.value || '';
 
@@ -63,63 +63,58 @@ export function RegisterForm(props: Props) {
       <div className="tab-content">
         <TabPanel style={{ paddingTop: '2rem' }}>
           <div>
-            <form action="#">
-              <div className="form-group">
-                <label htmlFor="singin-email-2">
-                  Username or email address *
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="singin-email-2"
-                  ref={emailLoginRef}
-                  name="singin-email"
-                  required
-                />
-              </div>
+            <div className="form-group">
+              <label htmlFor="singin-email-2">
+                Username or email address *
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="singin-email-2"
+                ref={emailLoginRef}
+                name="singin-email"
+                required
+              />
+            </div>
 
-              <div className="form-group">
-                <label htmlFor="singin-password-2">Password *</label>
-                <input
-                  type="password"
-                  className="form-control"
-                  id="singin-password-2"
-                  name="singin-password"
-                  ref={passwordLoginRef}
-                  required
-                />
-              </div>
+            <div className="form-group">
+              <label htmlFor="singin-password-2">Password *</label>
+              <input
+                type="password"
+                className="form-control"
+                id="singin-password-2"
+                name="singin-password"
+                ref={passwordLoginRef}
+                required
+              />
+            </div>
 
-              <div className="form-footer">
-                <Button
-                  onClick={loginSubmit}
-                  outline="primary"
-                >
-                  <div>
-                    <span>LOG IN</span>
-                    <i className="icon-long-arrow-right"></i>
-                  </div>
-                </Button>
-
-                <div className="custom-control custom-checkbox">
-                  <input
-                    type="checkbox"
-                    className="custom-control-input"
-                    id="signin-remember-2"
-                  />
-                  <label
-                    className="custom-control-label"
-                    htmlFor="signin-remember-2"
-                  >
-                    Remember Me
-                  </label>
+            <div className="form-footer">
+              <Button onClick={loginSubmit} outline="primary">
+                <div>
+                  <span>LOG IN</span>
+                  <i className="icon-long-arrow-right"></i>
                 </div>
+              </Button>
 
-                <Link href="/password-recover" className="forgot-link">
-                  Forgot Your Password?
-                </Link>
+              <div className="custom-control custom-checkbox">
+                <input
+                  type="checkbox"
+                  className="custom-control-input"
+                  id="signin-remember-2"
+                />
+                <label
+                  className="custom-control-label"
+                  htmlFor="signin-remember-2"
+                >
+                  Remember Me
+                </label>
               </div>
-            </form>
+
+              <Link href="/password-recover" className="forgot-link">
+                Forgot Your Password?
+              </Link>
+            </div>
           </div>
         </TabPanel>
         <TabPanel>

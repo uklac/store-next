@@ -43,7 +43,7 @@ export async function loginAccount(params: AccountLogin): Promise<any> {
       Authorization: 'Bearer undefined'
     },
     body: JSON.stringify({
-      user: {
+      spree_user: {
         email: params.email,
         password: params.password,
       }
