@@ -14,20 +14,20 @@ export default async function Delivery(props: Delivery) {
       <div className={`${styles['delivery-step']}`}>
         <fieldset className={`${styles['delivery-step__delivery']}`}>
           <legend>Delivery</legend>
-
           <div className={`${styles['proposed-shipment']}`}>
             <h2 className={`${styles['proposed-shipment__title']}`}>
               package from default
             </h2>
-            <ShipmentItems shipmentItems={order.line_items} />
+            {order && <ShipmentItems shipmentItems={order.line_items} />}
             <h3 className={`${styles['proposed-shipment__secondary-title']}`}>
               Shipping Method:
             </h3>
-            {order.shipments.map((shipment, index) => (
-              <div key={index}>
-                <ShippingMethods shippingRates={shipment.shipping_rates} />
-              </div>
-            ))}
+            {order &&
+              order.shipments.map((shipment, index) => (
+                <div key={index}>
+                  <ShippingMethods shippingRates={shipment.shipping_rates} />
+                </div>
+              ))}
           </div>
 
           <div className={`${styles['textarea-input']}`}>

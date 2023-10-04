@@ -1,6 +1,5 @@
 import { OrderDetails } from 'components';
 import styles from './page.module.scss';
-import { getItemsCart } from 'apis/cart-api';
 import { OrderData } from 'interfaces';
 
 interface ConfirmProps {
@@ -14,7 +13,7 @@ export default async function Confirm(props: ConfirmProps) {
       <div className={`${styles['confirm-step']}`}>
         <fieldset className={`${styles['confirm-step__info']}`}>
           <legend>Confirmar</legend>
-          <OrderDetails order={order}/>
+          {order && <OrderDetails order={order} />}
         </fieldset>
       </div>
     </div>
