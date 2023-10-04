@@ -8,7 +8,7 @@ export default async function Payment(props: PaymentProps) {
   const { payments } = props;
   return (
     <div className="container">
-      <div className={`${styles['payment-step']}`}>
+      <div className={`${styles['payment-step']} col-lg-9`}>
         <fieldset className={`${styles['payment-step__payment']}`}>
           <legend>PAYMENT INFORMATION</legend>
           <ul className={`${styles['payment-step__selector']}`}>

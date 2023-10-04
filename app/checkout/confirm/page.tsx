@@ -10,7 +10,7 @@ export default async function Confirm(props: ConfirmProps) {
 
   return (
     <div className="container">
-      <div className={`${styles['confirm-step']}`}>
+      <div className={`${styles['confirm-step']} col-lg-9`}>
         <fieldset className={`${styles['confirm-step__info']}`}>
           <legend>Confirmar</legend>
           {order && <OrderDetails order={order} />}

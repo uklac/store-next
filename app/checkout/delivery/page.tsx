@@ -11,7 +11,7 @@ export default async function Delivery(props: Delivery) {
 
   return (
     <div className="container">
-      <div className={`${styles['delivery-step']}`}>
+      <div className={`${styles['delivery-step']} col-lg-9`}>
         <fieldset className={`${styles['delivery-step__delivery']}`}>
           <legend>Delivery</legend>
           <div className={`${styles['proposed-shipment']}`}>
