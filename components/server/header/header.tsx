@@ -105,15 +105,15 @@ export async function Header(props: HeaderProps) {
               </form>
             </div>
           </div>
-
+          
           <div className="header-right">
             <div className="account">
-              <a href="/account" title="My account">
+              <Link href='/account'>
                 <div className="icon">
                   <i className="icon-user"></i>
                 </div>
                 <p>Account</p>
-              </a>
+              </Link>
             </div>
             <Suspense fallback={<ProductsSkeleton />}>
               <Cart />
