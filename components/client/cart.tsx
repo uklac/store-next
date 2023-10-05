@@ -11,23 +11,25 @@ interface Props {}
 
 export async function Cart(props: Props) {
   const [order, setOrder] = useState<OrderData>();
-  const { totalProductsInCart } = useCart();
+  const { totalProductsInCart, _getCart } = useCart();
 
   const fetchOrder = useCallback(async (orderNumber: string, token: string) => {
     try {
-      const response = await getCart(orderNumber, token);
-      setOrder(response);
+      const { success, data } = await _getCart();
+      // const response = await getCart(orderNumber, token);
+      setOrder(data);
     } catch (error) {
       console.error('Error fetching cart:', error);
     }
   }, []);
 
   useEffect(() => {
-    const orderNumber = localStorage.getItem('order_number');
-    const guestToken = localStorage.getItem('guest_token');
-    if (orderNumber && guestToken) {
-      fetchOrder(orderNumber, guestToken);
-    }
+    fetchOrder('','');
+    // const orderNumber = localStorage.getItem('order_number');
+    // const guestToken = localStorage.getItem('guest_token');
+    // if (orderNumber && guestToken) {
+    //   fetchOrder(orderNumber, guestToken);
+    // }
   }, []);
 
   return (

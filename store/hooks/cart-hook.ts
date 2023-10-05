@@ -1,11 +1,10 @@
-import { useAppStore } from "../store";
+import { useAppStore } from '../store';
 
 export const useCart = () => {
-  const {
-    totalProductsInCart
-  } = useAppStore();
+  const { totalProductsInCart, _getCart } = useAppStore();
 
   return {
-    totalProductsInCart
-  }
-}
+    totalProductsInCart,
+    _getCart,
+  };
+};
