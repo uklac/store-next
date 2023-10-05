@@ -4,6 +4,7 @@ import { getCart } from 'apis/cart-api';
 import { OrderData } from 'interfaces';
 import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
+// import { currentUser } from 'apis/account-api';
 
 interface Props {}
 
@@ -32,7 +33,9 @@ export async function Cart(props: Props) {
       <Link href='/cart' className="dropdown-toggle">
         <div className="icon">
           <i className="icon-shopping-cart"></i>
-          <span className="cart-count">{order?.line_items.length}</span>
+          {(order && order.line_items.length > 0) &&
+            <span className="cart-count">{order.line_items.length}</span>
+          }
         </div>
         <p>Cart</p>
       </Link>
