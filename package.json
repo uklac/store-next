@@ -18,7 +18,8 @@
     "react-inner-image-zoom": "3.0.2",
     "react-tabs": "6.0.2",
     "swiper": "10.2.0",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "zustand": "4.4.3"
   },
   "devDependencies": {
     "@nx/cypress": "16.7.4",
