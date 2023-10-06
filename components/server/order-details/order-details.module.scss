@@ -1,9 +1,24 @@
+$small-screen: 900px;
+
+@mixin desktop {
+  @media (min-width: $small-screen) {
+    @content;
+  }
+}
+
 .order-details {
   &__info {
+    @include desktop {
+      display: flex;
+    }
+
     > * {
       margin-bottom: 2em;
-      padding: 0 0.8rem;
-      width: 25%;
+
+      @include desktop {
+        padding: 0 .8rem;
+        width: 25%;
+      }
     }
   }
 }

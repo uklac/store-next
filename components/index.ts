@@ -18,6 +18,9 @@ export * from './client/checkout-summary/checkout-summary';
 export * from './client/checkout-container';
 export * from './client/account-icon';
 export * from './client/account-page';
+export * from './client/delivery-step/delivery-step';
+export * from './client/confirm-step/confirm-step';
+export * from './client/payment-step/payment-step';
 
 //server
 export * from './server/header/header';

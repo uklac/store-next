@@ -14,9 +14,9 @@ export function AddressOverview(props: AddressOverviewProps) {
       </h3>
 
       <ul className={`${styles['address-overview__info']}`}>
-        <li>{address.name}</li>
+      {address.name && <li>{address.name}</li>}
         {address.company && <li>{address.company}</li>}
-        <li>{address.address1}</li>
+        {address.address1 && <li>{address.address1}</li>}
         {address.address2 && <li>{address.address2}</li>}
         <li>
           {address.city} {address.state_text} {address.zipcode}

@@ -9,7 +9,7 @@ export function OrderShipments(props: OrderShipmentsProps) {
   const { shipments } = props;
   return (
     <div className={`${styles['order-shipments']}`}>
-      <h3 className="order-shipments__title">Shipments</h3>
+      <h3 className={`${styles['order-shipments__title']}`}>Shipments</h3>
 
       <ul className="order-shipments__info">
         {shipments.map((shipment, index) => (

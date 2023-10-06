@@ -1,14 +1,17 @@
 'use client';
 
-interface AddressStepProps {}
+interface AddressStepProps {
+  email?: string;
+}
 
 export async function AddressStep(props: AddressStepProps) {
+  const { email } = props;
 
   return (
-    <div className="col-lg-9">
+    <div>
       <h2 className="checkout-title">Detalles de facturación</h2>
       <label>Correo electrónico del cliente: *</label>
-      <input type="email" className="form-control" />
+      <input value={email} type="email" className="form-control" />
       <label>Nombre *</label>
       <input type="text" className="form-control" required />
       <label>Dirección *</label>
@@ -52,11 +55,15 @@ export async function AddressStep(props: AddressStepProps) {
         </div>
       </div>
 
-      <label>Nota de Orden (opcional)</label>
+      <button className="btn btn-primary btn-order" type="submit">
+        Guardar y Continuar
+      </button>
+
+      {/* <label>Nota de Orden (opcional)</label>
       <textarea
         className="form-control"
         placeholder="Notes about your order, e.g. special notes for delivery"
-      ></textarea>
+      ></textarea> */}
     </div>
   );
 }

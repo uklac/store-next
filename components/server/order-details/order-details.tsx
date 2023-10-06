@@ -21,7 +21,7 @@ export function OrderDetails(props: OrderDetailsProps) {
         <PaymentInfo orderPayments={order.payments}/> 
       </div>
       <div className={`${styles['order-items']}`}>
-        {/* <OrderItems orderItems={order}/> */}
+        <OrderItems orderItems={order}/>
       </div>
 
     </div>
