@@ -4,6 +4,7 @@ import {
   getCart,
   addItemToOrderAndCreate,
   addItemToOrder,
+  getCurrentOrder,
 } from 'apis/cart-api';
 import { LineItem, OrderData } from 'interfaces';
 
@@ -31,11 +32,17 @@ export const createCartSlice: StateCreator<StoreState, [], [], CartSlice> = (
     try {
       const orderNumber = getOrderNumber();
       const guestToken = getGuestToken();
-      const cart = await getCart(orderNumber, guestToken);
-      const { line_items } = cart;
-      const totalProducts = getTotalProductsInCart(line_items);
-      set({ totalProductsInCart: totalProducts, orderCart: cart });
-      return { success: true, data: cart };
+      const userToken = getUserToken();
+      if (orderNumber && guestToken) {
+        const cart = await getCart(orderNumber, guestToken);
+        const { line_items } = cart;
+        const totalProducts = getTotalProductsInCart(line_items);
+        set({ totalProductsInCart: totalProducts, orderCart: cart });
+        return { success: true, data: cart };
+      } else {
+        return { success: true, data: null };
+      }
+      // const cart = await getCurrentOrder(userToken);
     } catch (error) {
       return { success: false, error };
     }
@@ -82,9 +89,13 @@ function getTotalProductsInCart(items: LineItem[]) {
 }
 
 function getOrderNumber() {
-  return localStorage.getItem('order_number') || '';
+  return localStorage.getItem('order_number');
 }
 
 function getGuestToken() {
-  return localStorage.getItem('guest_token') || '';
+  return localStorage.getItem('guest_token');
+}
+
+function getUserToken() {
+  return localStorage.getItem('user_token');
 }

@@ -127,3 +127,34 @@ export async function getCart(
   });
   return await response.json();
 }
+
+export async function addUserToOrder(
+  email: string,
+  userId: number,
+  orderNumber: string,
+  token: string
+): Promise<OrderData> {
+  const url = `http://localhost:3000/api/orders/${orderNumber}`;
+  const response = await fetch(url, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      'X-Spree-Order-Token': token,
+    },
+    body: JSON.stringify({
+      email,
+      user_id: userId,
+    }),
+  });
+  return await response.json();
+}
+
+export async function getCurrentOrder(token: string): Promise<OrderData> {
+  const url = `http://localhost:3000/api/orders/current`;
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: { Accept: 'application/json', Authorization: `Bearer ${token}` },
+  });
+  return await response.json();
+}

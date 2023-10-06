@@ -5,6 +5,8 @@ import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
 import { Button } from 'components';
 import { useRef } from 'react';
 import { createAccount, loginAccount } from 'apis/account-api';
+import { useCart } from 'store/hooks/cart-hook';
+import { addUserToOrder } from 'apis/cart-api';
 
 interface Props {}
 
@@ -16,6 +18,8 @@ export function RegisterForm(props: Props) {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const passwordConfirmationRef = useRef<HTMLInputElement>(null);
+  
+  const { orderCart } = useCart();
 
   const handleSubmit = async () => {
     const email = emailRef.current?.value || '';
@@ -23,12 +27,24 @@ export function RegisterForm(props: Props) {
     const password_confirmation = passwordConfirmationRef.current?.value || '';
 
     try {
-      const newUser = await createAccount({
+      const user = await createAccount({
         email,
         password,
         password_confirmation,
       });
-      console.log('Usuario registrado:', newUser);
+      const orderNumber = localStorage.getItem('order_number') || '';
+      const token = localStorage.getItem('guest_token') || '';
+      localStorage.setItem('user_token', user.spree_api_key);
+      localStorage.setItem('user_id', user.id);
+      if (orderCart?.email ===  null) {
+        console.log('actualizar orden con email:', user);
+        try {
+          await addUserToOrder(email, user.id, orderNumber, token);
+        } catch (error) {
+          console.log('e: ', error);
+        }
+      }
+      console.log('Usuario registrado:', user);
     } catch (error) {
       console.error('Error al registrar usuario:', error);
     }
@@ -39,11 +55,23 @@ export function RegisterForm(props: Props) {
     const password = passwordLoginRef.current?.value || '';
 
     try {
-      const login = await loginAccount({
+      const user = await loginAccount({
         email,
         password,
       });
-      console.log('Inicio de sesión exitoso:', login);
+      const orderNumber = localStorage.getItem('order_number') || '';
+      const token = localStorage.getItem('guest_token') || '';
+      localStorage.setItem('user_token', user.spree_api_key);
+      localStorage.setItem('user_id', user.id);
+      if (orderCart?.email ===  null) {
+        console.log('actualizar orden con email:', user);
+        try {
+          await addUserToOrder(email, user.id, orderNumber, token);
+        } catch (error) {
+          console.log('e: ', error);
+        }
+      }
+      console.log('Inicio de sesión exitoso:', user);
     } catch (error) {
       console.error('No se pudo logear:', error);
     }
