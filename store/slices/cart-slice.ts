@@ -5,7 +5,7 @@ import {
   addItemToOrderAndCreate,
   addItemToOrder,
 } from 'apis/cart-api';
-import { LineItem } from 'interfaces';
+import { LineItem, OrderData } from 'interfaces';
 
 export type TResponse = {
   success: boolean;
@@ -14,6 +14,7 @@ export type TResponse = {
 };
 
 export type CartSlice = {
+  orderCart: OrderData | null;
   totalProductsInCart: number;
   _addProduct: (variantId: number, quantity: number) => Promise<TResponse>;
   _removeProduct: () => void;
@@ -24,6 +25,7 @@ export const createCartSlice: StateCreator<StoreState, [], [], CartSlice> = (
   set,
   get
 ) => ({
+  orderCart: null,
   totalProductsInCart: 0,
   _getCart: async () => {
     try {
@@ -32,7 +34,7 @@ export const createCartSlice: StateCreator<StoreState, [], [], CartSlice> = (
       const cart = await getCart(orderNumber, guestToken);
       const { line_items } = cart;
       const totalProducts = getTotalProductsInCart(line_items);
-      set({ totalProductsInCart: totalProducts });
+      set({ totalProductsInCart: totalProducts, orderCart: cart });
       return { success: true, data: cart };
     } catch (error) {
       return { success: false, error };
