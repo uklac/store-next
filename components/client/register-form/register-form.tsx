@@ -4,9 +4,6 @@ import Link from 'next/link';
 import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
 import { Button } from 'components';
 import { useRef } from 'react';
-import { createAccount, loginAccount } from 'apis/account-api';
-import { useCart } from 'store/hooks/cart-hook';
-import { addUserToOrder } from 'apis/cart-api';
 import { useUser } from 'store/hooks/user-hook';
 
 interface Props {}
@@ -20,28 +17,15 @@ export function RegisterForm(props: Props) {
   const passwordRef = useRef<HTMLInputElement>(null);
   const passwordConfirmationRef = useRef<HTMLInputElement>(null);
 
-  const { orderCart } = useCart();
-  const { _login } = useUser();
+  const { _login, _register } = useUser();
 
-  const handleSubmit = async () => {
+  const registerSubmit = async () => {
     const email = emailRef.current?.value || '';
     const password = passwordRef.current?.value || '';
     const password_confirmation = passwordConfirmationRef.current?.value || '';
-    try {
-      const orderNumber = localStorage.getItem('order_number');
-      const token = localStorage.getItem('guest_token');
-      const { user } = await createAccount({
-        email,
-        password,
-        password_confirmation,
-        order_number: orderNumber,
-        guest_token: token,
-      });
-      localStorage.setItem('user_token', user.spree_api_key);
-      localStorage.setItem('user_id', user.id);
-      console.log('Usuario registrado:', user);
-    } catch (error) {
-      console.error('Error al registrar usuario:', error);
+    const { error } = await _register(email, password, password_confirmation);
+    if (error) {
+      console.log('e: ', error);
     }
   };
 
@@ -50,7 +34,7 @@ export function RegisterForm(props: Props) {
     const password = passwordLoginRef.current?.value || '';
     const { error } = await _login(email, password);
     if (error) {
-      console.log('e: ', error)
+      console.log('e: ', error);
     }
   };
   return (
@@ -168,8 +152,8 @@ export function RegisterForm(props: Props) {
 
                     <div className="form-footer">
                       <button
-                        onSubmit={handleSubmit}
-                        onClick={handleSubmit}
+                        onSubmit={registerSubmit}
+                        onClick={registerSubmit}
                         type="submit"
                       >
                         <div>

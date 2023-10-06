@@ -1,8 +1,14 @@
 import { useAppStore } from '../store';
 
 export const useUser = () => {
-  const { getUserId, getUserToken, _getCurrentUser, currentUser, _login } =
-    useAppStore();
+  const {
+    getUserId,
+    getUserToken,
+    _getCurrentUser,
+    currentUser,
+    _login,
+    _register,
+  } = useAppStore();
 
   return {
     currentUser,
@@ -10,5 +16,6 @@ export const useUser = () => {
     getUserToken,
     _getCurrentUser,
     _login,
+    _register,
   };
 };
