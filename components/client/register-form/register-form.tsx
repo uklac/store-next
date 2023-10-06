@@ -5,11 +5,13 @@ import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
 import { Button } from 'components';
 import { useRef } from 'react';
 import { useUser } from 'store/hooks/user-hook';
+import { useRouter } from 'next/navigation';
+import { useCart } from 'store/hooks/cart-hook';
 
 interface Props {}
 
 export function RegisterForm(props: Props) {
-  const {} = props;
+  const router = useRouter();
   const emailLoginRef = useRef<HTMLInputElement>(null);
   const passwordLoginRef = useRef<HTMLInputElement>(null);
 
@@ -18,6 +20,7 @@ export function RegisterForm(props: Props) {
   const passwordConfirmationRef = useRef<HTMLInputElement>(null);
 
   const { _login, _register } = useUser();
+  const { orderCart } = useCart();
 
   const registerSubmit = async () => {
     const email = emailRef.current?.value || '';
@@ -26,6 +29,8 @@ export function RegisterForm(props: Props) {
     const { error } = await _register(email, password, password_confirmation);
     if (error) {
       console.log('e: ', error);
+    } else {
+      orderCart ? router.push('/cart') : router.push('/') ;
     }
   };
 
@@ -35,6 +40,8 @@ export function RegisterForm(props: Props) {
     const { error } = await _login(email, password);
     if (error) {
       console.log('e: ', error);
+    } else {
+      orderCart ? router.push('/cart') : router.push('/') ;
     }
   };
   return (
