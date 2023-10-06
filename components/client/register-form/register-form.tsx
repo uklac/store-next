@@ -7,6 +7,7 @@ import { useRef } from 'react';
 import { createAccount, loginAccount } from 'apis/account-api';
 import { useCart } from 'store/hooks/cart-hook';
 import { addUserToOrder } from 'apis/cart-api';
+import { useUser } from 'store/hooks/user-hook';
 
 interface Props {}
 
@@ -20,6 +21,7 @@ export function RegisterForm(props: Props) {
   const passwordConfirmationRef = useRef<HTMLInputElement>(null);
 
   const { orderCart } = useCart();
+  const { _login } = useUser();
 
   const handleSubmit = async () => {
     const email = emailRef.current?.value || '';
@@ -46,27 +48,9 @@ export function RegisterForm(props: Props) {
   const loginSubmit = async () => {
     const email = emailLoginRef.current?.value || '';
     const password = passwordLoginRef.current?.value || '';
-
-    try {
-      const user = await loginAccount({
-        email,
-        password,
-      });
-      const orderNumber = localStorage.getItem('order_number') || '';
-      const token = localStorage.getItem('guest_token') || '';
-      localStorage.setItem('user_token', user.spree_api_key);
-      localStorage.setItem('user_id', user.id);
-      if (orderCart?.email === null) {
-        console.log('actualizar orden con email:', user);
-        try {
-          await addUserToOrder(email, user.id, orderNumber, token);
-        } catch (error) {
-          console.log('e: ', error);
-        }
-      }
-      console.log('Inicio de sesión exitoso:', user);
-    } catch (error) {
-      console.error('No se pudo logear:', error);
+    const { error } = await _login(email, password);
+    if (error) {
+      console.log('e: ', error)
     }
   };
   return (

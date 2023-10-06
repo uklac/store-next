@@ -12,6 +12,8 @@ type AccountRegister = {
 type AccountLogin = {
   email: string, 
   password: string,
+  order_number?: string | null;
+  guest_token?: string | null;
 }
 
 export async function createAccount(params: AccountRegister): Promise<any> {
@@ -39,6 +41,8 @@ export async function createAccount(params: AccountRegister): Promise<any> {
 }
 
 export async function loginAccount(params: AccountLogin): Promise<any> {
+  const { email, password, order_number, guest_token} = params;
+  
   const url = `${LOGIN_URL}`;
   const options = {
     method: 'POST',
@@ -48,9 +52,11 @@ export async function loginAccount(params: AccountLogin): Promise<any> {
       Authorization: 'Bearer undefined'
     },
     body: JSON.stringify({
+      order_number,
+      guest_token,
       spree_user: {
-        email: params.email,
-        password: params.password,
+        email,
+        password,
       }
     })
   };

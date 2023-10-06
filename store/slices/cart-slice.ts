@@ -17,6 +17,8 @@ export type TResponse = {
 export type CartSlice = {
   orderCart: OrderData | null;
   totalProductsInCart: number;
+  getGuestOrderNumber: () => string;
+  getGuestToken: () => string;
   _addProduct: (variantId: number, quantity: number) => Promise<TResponse>;
   _removeProduct: () => void;
   _getCart: () => Promise<TResponse>;
@@ -28,11 +30,16 @@ export const createCartSlice: StateCreator<StoreState, [], [], CartSlice> = (
 ) => ({
   orderCart: null,
   totalProductsInCart: 0,
+  getGuestOrderNumber: () => {
+    return localStorage.getItem('order_number') || '';
+  },
+  getGuestToken: () => {
+    return localStorage.getItem('guest_token') || '';
+  },
   _getCart: async () => {
     try {
-      const orderNumber = getOrderNumber();
-      const guestToken = getGuestToken();
-      const userToken = getUserToken();
+      const orderNumber = get().getGuestOrderNumber();
+      const guestToken = get().getGuestToken();
       if (orderNumber && guestToken) {
         const cart = await getCart(orderNumber, guestToken);
         const { line_items } = cart;
@@ -42,15 +49,14 @@ export const createCartSlice: StateCreator<StoreState, [], [], CartSlice> = (
       } else {
         return { success: true, data: null };
       }
-      // const cart = await getCurrentOrder(userToken);
     } catch (error) {
       return { success: false, error };
     }
   },
   _addProduct: async (variantId, quantity) => {
     try {
-      const orderNumber = getOrderNumber();
-      const guestToken = getGuestToken();
+      const orderNumber = get().getGuestOrderNumber();
+      const guestToken = get().getGuestToken();
       const methodAddItem = guestToken
         ? addItemToOrder
         : addItemToOrderAndCreate;
@@ -86,16 +92,4 @@ function getTotalProductsInCart(items: LineItem[]) {
     return accumulator + currentValue.quantity;
   }, 0);
   return total;
-}
-
-function getOrderNumber() {
-  return localStorage.getItem('order_number');
-}
-
-function getGuestToken() {
-  return localStorage.getItem('guest_token');
-}
-
-function getUserToken() {
-  return localStorage.getItem('user_token');
 }
