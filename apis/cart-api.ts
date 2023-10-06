@@ -5,6 +5,8 @@ type AddItemToOrder = {
   item: Item;
   orderNumber?: string;
   token?: string;
+  email?: string;
+  userId?: number;
 };
 
 type UpdateLineItemParams = {
@@ -26,18 +28,20 @@ const ADD_ITEM_URL1 = 'http://localhost:3000/api/cart';
 export async function addItemToOrderAndCreate(
   params: AddItemToOrder
 ): Promise<any> {
-  const { item } = params;
+  const { item, email, userId } = params;
   const url = `${ADD_ITEM_URL}`;
   const options = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
-      Authorization: 'Bearer undefined',
+      // Authorization: 'Bearer undefined',
     },
     body: JSON.stringify({
       variant_id: item.variant_id,
       quantity: item.quantity,
+      email: email,
+      user_id: userId
     }),
   };
   const response = await fetch(url, options);

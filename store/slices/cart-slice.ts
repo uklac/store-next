@@ -4,7 +4,6 @@ import {
   getCart,
   addItemToOrderAndCreate,
   addItemToOrder,
-  getCurrentOrder,
 } from 'apis/cart-api';
 import { LineItem, OrderData } from 'interfaces';
 
@@ -57,6 +56,7 @@ export const createCartSlice: StateCreator<StoreState, [], [], CartSlice> = (
     try {
       const orderNumber = get().getGuestOrderNumber();
       const guestToken = get().getGuestToken();
+      const currentUser = get().currentUser;
       const methodAddItem = guestToken
         ? addItemToOrder
         : addItemToOrderAndCreate;
@@ -65,10 +65,11 @@ export const createCartSlice: StateCreator<StoreState, [], [], CartSlice> = (
           variant_id: variantId,
           quantity: quantity,
         },
+        email: currentUser.email,
+        userId: currentUser.id,
         token: guestToken || '',
         orderNumber: orderNumber || '',
       });
-      console.log('Agregado al carrito:', result);
       if (result.order) {
         localStorage.setItem('order_number', result.order.number);
         localStorage.setItem('guest_token', result.order.guest_token);
