@@ -26,7 +26,7 @@ export async function AccountIcon() {
         <div className="icon">
           <i className="icon-user"></i>
         </div>
-        <p>{ currentUser ? currentUser.email : 'Account'}</p>
+        <p>{ currentUser.email ? currentUser.email : 'Account'}</p>
       </Link>
     </div>
   );
