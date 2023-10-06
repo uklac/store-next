@@ -25,25 +25,18 @@ export function RegisterForm(props: Props) {
     const email = emailRef.current?.value || '';
     const password = passwordRef.current?.value || '';
     const password_confirmation = passwordConfirmationRef.current?.value || '';
-
     try {
-      const user = await createAccount({
+      const orderNumber = localStorage.getItem('order_number');
+      const token = localStorage.getItem('guest_token');
+      const { user } = await createAccount({
         email,
         password,
         password_confirmation,
+        order_number: orderNumber,
+        guest_token: token
       });
-      const orderNumber = localStorage.getItem('order_number') || '';
-      const token = localStorage.getItem('guest_token') || '';
       localStorage.setItem('user_token', user.spree_api_key);
       localStorage.setItem('user_id', user.id);
-      if (orderCart?.email ===  null) {
-        console.log('actualizar orden con email:', user);
-        try {
-          await addUserToOrder(email, user.id, orderNumber, token);
-        } catch (error) {
-          console.log('e: ', error);
-        }
-      }
       console.log('Usuario registrado:', user);
     } catch (error) {
       console.error('Error al registrar usuario:', error);

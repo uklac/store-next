@@ -1,10 +1,12 @@
 const ACCOUNT_URL = 'http://localhost:3000/api/sign_up';
 const LOGIN_URL = 'http://localhost:3000/api/sign_in';
 
-type Account = {
+type AccountRegister = {
   email: string, 
   password: string,
   password_confirmation: string,
+  order_number?: string | null;
+  guest_token?: string | null;
 }
 
 type AccountLogin = {
@@ -12,7 +14,8 @@ type AccountLogin = {
   password: string,
 }
 
-export async function createAccount(params: Account): Promise<any> {
+export async function createAccount(params: AccountRegister): Promise<any> {
+  const { email, password, password_confirmation, order_number, guest_token} = params;
   const url = `${ACCOUNT_URL}`;
   const options = {
     method: 'POST',
@@ -22,10 +25,12 @@ export async function createAccount(params: Account): Promise<any> {
       Authorization: 'Bearer undefined'
     },
     body: JSON.stringify({
+      order_number,
+      guest_token,
       user: {
-        email: params.email,
-        password: params.password,
-        password_confirmation: params.password
+        email,
+        password,
+        password_confirmation
       }
     })
   };
