@@ -16,6 +16,7 @@ export * from './client/cart-line-item';
 export * from './client/address-step';
 export * from './client/checkout-summary/checkout-summary';
 export * from './client/checkout-container';
+export * from './client/account-icon';
 
 //server
 export * from './server/header/header';

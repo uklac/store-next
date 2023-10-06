@@ -2,6 +2,7 @@ import { Cart } from 'components/client/cart';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import { ProductsSkeleton } from '../products-skeleton/products-skeleton';
+import { AccountIcon } from 'components/client/account-icon';
 
 interface HeaderProps {
   links: {
@@ -107,14 +108,9 @@ export async function Header(props: HeaderProps) {
           </div>
           
           <div className="header-right">
-            <div className="account">
-              <Link href='/account'>
-                <div className="icon">
-                  <i className="icon-user"></i>
-                </div>
-                <p>Account</p>
-              </Link>
-            </div>
+            <Suspense fallback={<ProductsSkeleton />}>
+              <AccountIcon />
+            </Suspense>
             <Suspense fallback={<ProductsSkeleton />}>
               <Cart />
             </Suspense>

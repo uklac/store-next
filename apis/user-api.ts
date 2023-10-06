@@ -7,7 +7,7 @@ type UserParams = {
 
 export async function getUser(params: UserParams): Promise<User> {
   const { userId, token } = params;
-  const url = `http://localhost:3000/api/users${userId}`;
+  const url = `http://localhost:3000/api/users/${userId}`;
   const options = {
     method: 'GET',
     headers: { Accept: 'application/json', Authorization: `Bearer ${token}` },
