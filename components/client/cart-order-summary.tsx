@@ -11,11 +11,12 @@ interface CartOrderSummaryProps {
 
 export function CartOrderSummary(props: CartOrderSummaryProps) {
   const { order } = props;
-  const { getGuestToken } = useCart();
+  const { getGuestToken, getGuestOrderNumber } = useCart();
 
   async function handleCheckout() {
     const token = getGuestToken();
-    const resp = await checkoutCart(token);
+    const orderNumber = getGuestOrderNumber();
+    const resp = await checkoutCart(token, orderNumber);
     console.log('resp: ', resp);
   }
 

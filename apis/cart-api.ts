@@ -159,11 +159,18 @@ export async function getCurrentOrder(token: string): Promise<OrderData> {
   return await response.json();
 }
 
-export async function checkoutCart(token: string): Promise<OrderData> {
+export async function checkoutCart(token: string, orderNumber: string): Promise<OrderData> {
   const url = `http://localhost:3000/api/cart/checkout`;
   const response = await fetch(url, {
     method: 'POST',
-    headers: { Accept: 'application/json', 'X-Spree-Order-Token': token },
+    headers: {       
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      'X-Spree-Order-Token': token 
+    },
+    body: JSON.stringify({
+      order_number: orderNumber
+    })
   });
   return await response.json();
 }
