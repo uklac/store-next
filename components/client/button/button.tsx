@@ -4,7 +4,7 @@ interface ButtonProps {
   style?: 'round' | 'square' | 'rounded';
   outline?: 'dark' | 'primary';
   onClick: (event?: any) => void;
-  children: ReactElement;
+  children: any;
 }
 
 const btnClasses = {

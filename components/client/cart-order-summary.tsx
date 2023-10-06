@@ -1,6 +1,9 @@
 'use client';
 import { OrderData } from 'interfaces';
 import React from 'react';
+import { Button } from './button/button';
+import { checkoutCart } from 'apis/cart-api';
+import { useCart } from 'store/hooks/cart-hook';
 
 interface CartOrderSummaryProps {
   order: OrderData;
@@ -8,6 +11,13 @@ interface CartOrderSummaryProps {
 
 export function CartOrderSummary(props: CartOrderSummaryProps) {
   const { order } = props;
+  const { getGuestToken } = useCart();
+
+  async function handleCheckout() {
+    const token = getGuestToken();
+    const resp = await checkoutCart(token);
+    console.log('resp: ', resp);
+  }
 
   return (
     <div className="summary summary-cart">
@@ -51,9 +61,13 @@ export function CartOrderSummary(props: CartOrderSummaryProps) {
           </form>
         </div>
       </div>
-      <a href={order.email ? '/checkout' : '/account'} className="btn btn-primary btn-order btn-block">
-        PROCEED TO CHECKOUT
-      </a>
+      {order.email ? (
+        <Button onClick={handleCheckout}>PROCEED TO CHECKOUT</Button>
+      ) : (
+        <a href={'/account'} className="btn btn-primary btn-order btn-block">
+          PROCEED TO CHECKOUT
+        </a>
+      )}
     </div>
   );
 }

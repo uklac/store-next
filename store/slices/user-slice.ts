@@ -63,7 +63,7 @@ export const createUserSlice: StateCreator<StoreState, [], [], UserSlice> = (
         guest_token: guestToken,
       });
       get().setUserId(user.id);
-      get().setUserToken(user.token);
+      get().setUserToken(user.spree_api_key);
       set({ currentUser: user });
       return { success: true, data: user };
     } catch (error) {
