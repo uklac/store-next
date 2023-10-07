@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Suspense } from 'react';
 import { ProductsSkeleton } from '../products-skeleton/products-skeleton';
 import { AccountIcon } from 'components/client/account-icon';
+import LoginModal from 'components/client/login-modal';
 
 interface HeaderProps {
   links: {
@@ -59,6 +60,7 @@ export async function Header(props: HeaderProps) {
                       </div>
                     </div>
                   </li>
+                  <LoginModal />
                 </ul>
               </li>
             </ul>
