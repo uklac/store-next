@@ -2,8 +2,8 @@
 import { OrderData } from 'interfaces';
 import React from 'react';
 import { Button } from './button/button';
-import { checkoutCart } from 'apis/cart-api';
 import { useCart } from 'store/hooks/cart-hook';
+import { useRouter } from 'next/navigation';
 
 interface CartOrderSummaryProps {
   order: OrderData;
@@ -11,13 +11,21 @@ interface CartOrderSummaryProps {
 
 export function CartOrderSummary(props: CartOrderSummaryProps) {
   const { order } = props;
-  const { getGuestToken, getGuestOrderNumber } = useCart();
+  const { _checkoutCart, orderCart } = useCart();
+  const router = useRouter();
 
   async function handleCheckout() {
-    const token = getGuestToken();
-    const orderNumber = getGuestOrderNumber();
-    const resp = await checkoutCart(token, orderNumber);
-    console.log('resp: ', resp);
+    if (orderCart?.state === 'cart') {
+      const { error } = await _checkoutCart();
+      if (error) {
+        console.log('e: ', error);
+      } else {
+        router.push('/checkout');
+      }
+    } else {
+      router.push('/checkout');
+    }
+
   }
 
   return (
@@ -66,7 +74,7 @@ export function CartOrderSummary(props: CartOrderSummaryProps) {
         <Button onClick={handleCheckout}>PROCEED TO CHECKOUT</Button>
       ) : (
         <a href={'/account'} className="btn btn-primary btn-order btn-block">
-          PROCEED TO CHECKOUT
+          PROCEED TO CHECKOUTss
         </a>
       )}
     </div>

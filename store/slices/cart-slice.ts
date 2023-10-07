@@ -4,6 +4,7 @@ import {
   getCart,
   addItemToOrderAndCreate,
   addItemToOrder,
+  checkoutCart,
 } from 'apis/cart-api';
 import { LineItem, OrderData } from 'interfaces';
 
@@ -21,6 +22,7 @@ export type CartSlice = {
   _addProduct: (variantId: number, quantity: number) => Promise<TResponse>;
   _removeProduct: () => void;
   _getCart: () => Promise<TResponse>;
+  _checkoutCart: () => Promise<TResponse>;
 };
 
 export const createCartSlice: StateCreator<StoreState, [], [], CartSlice> = (
@@ -86,6 +88,16 @@ export const createCartSlice: StateCreator<StoreState, [], [], CartSlice> = (
     const totalProductsInCart = get().totalProductsInCart;
     set({ totalProductsInCart: totalProductsInCart - 1 });
   },
+  _checkoutCart: async () => {
+    const token = get().getGuestToken();
+    const orderNumber = get().getGuestOrderNumber();
+    try {
+      const resp = await checkoutCart(token, orderNumber);
+      return { success: true, data: resp};
+    } catch (error) {
+      return { success: false, error };
+    }
+  }
 });
 
 function getTotalProductsInCart(items: LineItem[]) {
