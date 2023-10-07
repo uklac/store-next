@@ -7,33 +7,11 @@ import { useCallback, useEffect, useState } from 'react';
 import { getCart } from 'apis/cart-api';
 
 interface CheckoutSummaryProps {
-  // order: OrderData;
+  order: OrderData;
 }
 
 export function CheckoutSummary(props: CheckoutSummaryProps) {
-  // const { order } = props;
-
-  const [order, setOrder] = useState<OrderData>();
-  const [guestToken, setGuestToken] = useState<string>('');
-
-  const fetchOrder = useCallback(async (orderNumber: string, token: string) => {
-    try {
-      const order = await getCart(orderNumber, token);
-      setOrder(order);
-      console.error('response:', order);
-    } catch (error) {
-      console.error('Error fetching cart:', error);
-    }
-  }, []);
-
-  useEffect(() => {
-    const storeOrderNumber = localStorage.getItem('order_number');
-    const storeGuestToken = localStorage.getItem('guest_token');
-    if (storeOrderNumber && storeGuestToken) {
-      setGuestToken(storeGuestToken);
-      fetchOrder(storeOrderNumber, storeGuestToken);
-    }
-  }, []);
+  const { order } = props;
 
   return (
     <div className="summary">
