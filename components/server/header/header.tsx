@@ -113,9 +113,7 @@ export async function Header(props: HeaderProps) {
             <Suspense fallback={<ProductsSkeleton />}>
               <AccountIcon />
             </Suspense>
-            <Suspense fallback={<ProductsSkeleton />}>
-              <Cart />
-            </Suspense>
+            <Cart />
           </div>
         </div>
       </div>

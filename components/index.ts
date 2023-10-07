@@ -23,6 +23,7 @@ export * from './client/confirm-step/confirm-step';
 export * from './client/payment-step/payment-step';
 export * from './client/skeleton';
 export * from './client/login-modal';
+export * from './client/cart-counter';
 
 //server
 export * from './server/header/header';

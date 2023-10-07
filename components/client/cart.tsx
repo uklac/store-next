@@ -1,34 +1,11 @@
-'use client';
-
-import { useCallback, useEffect } from 'react';
 import Link from 'next/link';
-import { useCart } from 'store/hooks/cart-hook';
+import { CartCounter } from './cart-counter';
 
-interface Props {}
-
-export async function Cart(props: Props) {
-  const { totalProductsInCart, _getCart } = useCart();
-
-  const fetchOrder = useCallback(async () => {
-    const { error } = await _getCart();
-    if (error) {
-      console.error('Error fetching cart:', error);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchOrder();
-  }, []);
-
+export async function Cart() {
   return (
     <div className="dropdown cart-dropdown">
       <Link href="/cart" className="dropdown-toggle">
-        <div className="icon">
-          <i className="icon-shopping-cart"></i>
-          {totalProductsInCart > 0 && (
-            <span className="cart-count">{totalProductsInCart}</span>
-          )}
-        </div>
+        <CartCounter />
         <p>Cart</p>
       </Link>
     </div>
