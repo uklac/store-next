@@ -1,4 +1,4 @@
-import { CartLineItems } from 'components';
+import { CartLineItems, CartOrderSummary } from 'components';
 
 export default async function Cart() {
   return (
@@ -22,7 +22,9 @@ export default async function Cart() {
                 </tbody>
               </table>
             </div>
-            <div className="col-lg-3"></div>
+            <div className="col-lg-3">
+              <CartOrderSummary />
+            </div>
           </div>
         </div>
       </div>

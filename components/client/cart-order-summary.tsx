@@ -1,16 +1,10 @@
 'use client';
-import { OrderData } from 'interfaces';
 import React from 'react';
 import { Button } from './button/button';
 import { useCart } from 'store/hooks/cart-hook';
 import { useRouter } from 'next/navigation';
 
-interface CartOrderSummaryProps {
-  order: OrderData;
-}
-
-export function CartOrderSummary(props: CartOrderSummaryProps) {
-  const { order } = props;
+export function CartOrderSummary() {
   const { _checkoutCart, orderCart } = useCart();
   const router = useRouter();
 
@@ -25,7 +19,6 @@ export function CartOrderSummary(props: CartOrderSummaryProps) {
     } else {
       router.push('/checkout');
     }
-
   }
 
   return (
@@ -35,7 +28,7 @@ export function CartOrderSummary(props: CartOrderSummaryProps) {
         <tbody>
           <tr className="summary-subtotal">
             <td>Subtotal:</td>
-            <td>{order.display_item_total}</td>
+            <td>{orderCart?.display_item_total}</td>
           </tr>
           <tr className="summary-subtotal">
             <td>Envio:</td>
@@ -47,7 +40,7 @@ export function CartOrderSummary(props: CartOrderSummaryProps) {
           </tr>
           <tr className="summary-total">
             <td>Total:</td>
-            <td>{order.total}</td>
+            <td>{orderCart?.total}</td>
           </tr>
         </tbody>
       </table>
@@ -70,7 +63,7 @@ export function CartOrderSummary(props: CartOrderSummaryProps) {
           </form>
         </div>
       </div>
-      {order.email ? (
+      {orderCart?.email ? (
         <Button onClick={handleCheckout}>PROCEED TO CHECKOUT</Button>
       ) : (
         <a href={'/account'} className="btn btn-primary btn-order btn-block">
