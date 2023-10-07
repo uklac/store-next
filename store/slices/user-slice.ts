@@ -97,7 +97,7 @@ export const createUserSlice: StateCreator<StoreState, [], [], UserSlice> = (
   _logout: async () => {
     try {
       await localStorage.clear();
-      set({ orderCart: null, currentUser: null })
+      set({ orderCart: null, currentUser: null, totalProductsInCart: 0 })
       return { success: true, data: {} };
     } catch (error) {
       return { success: false, error };
