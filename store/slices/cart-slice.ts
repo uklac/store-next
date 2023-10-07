@@ -59,7 +59,7 @@ export const createCartSlice: StateCreator<StoreState, [], [], CartSlice> = (
       const orderNumber = get().getGuestOrderNumber();
       const guestToken = get().getGuestToken();
       const currentUser = get().currentUser;
-      const methodAddItem = guestToken
+      const methodAddItem = guestToken.length
         ? addItemToOrder
         : addItemToOrderAndCreate;
       const result = await methodAddItem({
@@ -67,8 +67,8 @@ export const createCartSlice: StateCreator<StoreState, [], [], CartSlice> = (
           variant_id: variantId,
           quantity: quantity,
         },
-        email: currentUser.email,
-        userId: currentUser.id,
+        email: currentUser?.email,
+        userId: currentUser?.id,
         token: guestToken || '',
         orderNumber: orderNumber || '',
       });
@@ -93,11 +93,11 @@ export const createCartSlice: StateCreator<StoreState, [], [], CartSlice> = (
     const orderNumber = get().getGuestOrderNumber();
     try {
       const resp = await checkoutCart(token, orderNumber);
-      return { success: true, data: resp};
+      return { success: true, data: resp };
     } catch (error) {
       return { success: false, error };
     }
-  }
+  },
 });
 
 function getTotalProductsInCart(items: LineItem[]) {

@@ -25,7 +25,7 @@ export function AccountPage() {
           </ol>
         </div>
       </nav>
-      {currentUser.id ? <UserDashboard /> : <RegisterForm />}
+      {currentUser ? <UserDashboard /> : <RegisterForm />}
     </div>
   );
 }

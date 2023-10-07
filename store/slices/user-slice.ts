@@ -30,7 +30,7 @@ export const createUserSlice: StateCreator<StoreState, [], [], UserSlice> = (
   set,
   get
 ) => ({
-  currentUser: {} as User,
+  currentUser: null,
   getUserId: () => {
     const id = localStorage.getItem('user_id');
     return id ? parseInt(id) : 0;

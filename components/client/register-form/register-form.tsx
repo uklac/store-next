@@ -30,7 +30,7 @@ export function RegisterForm(props: Props) {
     if (error) {
       console.log('e: ', error);
     } else {
-      orderCart ? router.push('/cart') : router.push('/') ;
+      orderCart ? router.push('/checkout') : router.push('/') ;
     }
   };
 
@@ -41,7 +41,7 @@ export function RegisterForm(props: Props) {
     if (error) {
       console.log('e: ', error);
     } else {
-      orderCart ? router.push('/cart') : router.push('/') ;
+      orderCart ? router.push('/checkout') : router.push('/') ;
     }
   };
   return (
