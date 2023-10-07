@@ -79,6 +79,8 @@ export const createCartSlice: StateCreator<StoreState, [], [], CartSlice> = (
       if (result.order) {
         localStorage.setItem('order_number', result.order.number);
         localStorage.setItem('guest_token', result.order.guest_token);
+        const totalProductsInCart = get().totalProductsInCart;
+        set({ totalProductsInCart: totalProductsInCart + 1, orderCart: result.order});
       } else {
         const totalProductsInCart = get().totalProductsInCart;
         set({ totalProductsInCart: totalProductsInCart + result.quantity });

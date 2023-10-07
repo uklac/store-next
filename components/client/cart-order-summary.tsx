@@ -28,19 +28,19 @@ export function CartOrderSummary() {
         <tbody>
           <tr className="summary-subtotal">
             <td>Subtotal:</td>
-            <td>{orderCart?.display_item_total}</td>
+            <td>{orderCart?.display_item_total || '-'}</td>
           </tr>
           <tr className="summary-subtotal">
             <td>Envio:</td>
-            <td>N/A</td>
+            <td>-</td>
           </tr>
           <tr className="summary-subtotal">
             <td>Discount:</td>
-            <td>$0.0</td>
+            <td>-</td>
           </tr>
           <tr className="summary-total">
             <td>Total:</td>
-            <td>{orderCart?.total}</td>
+            <td>{orderCart?.total || '-'}</td>
           </tr>
         </tbody>
       </table>
