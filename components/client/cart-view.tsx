@@ -38,7 +38,6 @@ export async function CartView() {
                 <CartLineItems
                   lineItems={order.line_items}
                   orderNumber={order.number}
-                  token={guestToken}
                   onChange={() => {
                     const storeOrderNumber =
                       localStorage.getItem('order_number');

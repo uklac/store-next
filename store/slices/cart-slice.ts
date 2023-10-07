@@ -5,6 +5,8 @@ import {
   addItemToOrderAndCreate,
   addItemToOrder,
   checkoutCart,
+  updateLineItem,
+  removeLineItem,
 } from 'apis/cart-api';
 import { LineItem, OrderData } from 'interfaces';
 
@@ -23,6 +25,8 @@ export type CartSlice = {
   _removeProduct: () => void;
   _getCart: () => Promise<TResponse>;
   _checkoutCart: () => Promise<TResponse>;
+  _updateAmountItem: (id: number, quantity: number) => Promise<TResponse>;
+  _removeCartItem: (id: number) => Promise<TResponse>;
 };
 
 export const createCartSlice: StateCreator<StoreState, [], [], CartSlice> = (
@@ -93,6 +97,35 @@ export const createCartSlice: StateCreator<StoreState, [], [], CartSlice> = (
     const orderNumber = get().getGuestOrderNumber();
     try {
       const resp = await checkoutCart(token, orderNumber);
+      return { success: true, data: resp };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
+  _updateAmountItem: async (id, quantity) => {
+    const token = get().getGuestToken();
+    const orderNumber = get().getGuestOrderNumber();
+    try {
+      const resp = await updateLineItem({
+        itemId: id,
+        quantity: quantity,
+        token: token,
+        orderNumber: orderNumber,
+      });
+      return { success: true, data: resp };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
+  _removeCartItem: async (id) => {
+    const token = get().getGuestToken();
+    const orderNumber = get().getGuestOrderNumber();
+    try {
+      const resp = await removeLineItem({
+        itemId: id,
+        token: token,
+        orderNumber: orderNumber,
+      });
       return { success: true, data: resp };
     } catch (error) {
       return { success: false, error };

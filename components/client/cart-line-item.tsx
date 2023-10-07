@@ -1,46 +1,40 @@
 'use client';
 
-import { removeLineItem, updateLineItem } from 'apis/cart-api';
 import { LineItem } from 'interfaces';
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { useCart } from 'store/hooks/cart-hook';
 
 interface Props {
   item: LineItem;
-  orderNumber: string;
-  token: string;
   onChange: (id: number) => void;
 }
 
 export function CartLineItem(props: Props) {
-  const { item, orderNumber, token, onChange } = props;
+  const { item, onChange } = props;
   const [updating, setUpdating] = useState(false);
   const [deleted, setDeleted] = useState(false);
   const [total, setTotal] = useState(item.display_amount);
   const [quantity, setQuantity] = useState(item.quantity);
+  const { _updateAmountItem, _removeCartItem } = useCart();
 
   async function updateQuantityProduct(id: number, quantity: number) {
     setUpdating(true);
-    const response = await updateLineItem({
-      itemId: id,
-      quantity: quantity,
-      token: token,
-      orderNumber: orderNumber,
-    });
+    const { error, data } = await _updateAmountItem(id, quantity);
     setUpdating(false);
-    setTotal(response.display_amount);
-    setQuantity(response.quantity);
-    onChange(id);
+    if (error) {
+      console.log('e: ', error);
+    } else {
+      setTotal(data.display_amount);
+      setQuantity(data.quantity);
+      onChange(id);
+    }
   }
 
   async function removeProduct(id: number) {
     setUpdating(true);
     try {
-      await removeLineItem({
-        itemId: id,
-        token: token,
-        orderNumber: orderNumber,
-      });
+      await _removeCartItem(id);
       setUpdating(false);
       setDeleted(true);
       onChange(id);
@@ -84,30 +78,14 @@ export function CartLineItem(props: Props) {
               updateQuantityProduct(item.id, quantity);
             }}
           >
-            <option value={1}>
-              1
-            </option>
-            <option value={2}>
-              2
-            </option>
-            <option value={3}>
-              3
-            </option>
-            <option value={4}>
-              4
-            </option>
-            <option value={5}>
-              5
-            </option>
-            <option value={6}>
-              6
-            </option>
-            <option value={7}>
-              7
-            </option>
-            <option value={8}>
-              8
-            </option>
+            <option value={1}>1</option>
+            <option value={2}>2</option>
+            <option value={3}>3</option>
+            <option value={4}>4</option>
+            <option value={5}>5</option>
+            <option value={6}>6</option>
+            <option value={7}>7</option>
+            <option value={8}>8</option>
           </select>
         </div>
       </td>

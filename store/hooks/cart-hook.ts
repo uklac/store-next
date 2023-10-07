@@ -9,6 +9,8 @@ export const useCart = () => {
     _getCart,
     _addProduct,
     _checkoutCart,
+    _updateAmountItem,
+    _removeCartItem
   } = useAppStore();
 
   return {
@@ -19,5 +21,7 @@ export const useCart = () => {
     _getCart,
     _addProduct,
     _checkoutCart,
+    _updateAmountItem,
+    _removeCartItem
   };
 };
