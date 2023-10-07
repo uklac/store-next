@@ -2,8 +2,22 @@
 
 import Link from 'next/link';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
+import { useRouter } from 'next/navigation';
+import { useUser } from 'store/hooks/user-hook';
 
 export function UserDashboard() {
+  const route = useRouter();
+  const { _logout } = useUser();
+
+  async function logout() {
+    const { success, error } = await _logout();
+    if (success) {
+      route.push('/');
+    } else {
+      console.log('e: ', error);
+    }
+  }
+
   return (
     <div className="page-content">
       <div className="dashboard">
@@ -37,9 +51,9 @@ export function UserDashboard() {
                     </Tab>
 
                     <Tab className="nav-item">
-                      <Link href="/" className="nav-link">
-                        Sign Out
-                      </Link>
+                      <button className="nav-link" onClick={logout}>
+                        Cerrar Session
+                      </button>
                     </Tab>
                   </TabList>
                 </aside>

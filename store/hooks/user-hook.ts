@@ -8,6 +8,7 @@ export const useUser = () => {
     currentUser,
     _login,
     _register,
+    _logout,
   } = useAppStore();
 
   return {
@@ -17,5 +18,6 @@ export const useUser = () => {
     _getCurrentUser,
     _login,
     _register,
+    _logout,
   };
 };

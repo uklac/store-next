@@ -11,14 +11,19 @@ export type TResponse = {
 };
 
 export type UserSlice = {
-  currentUser: User;
+  currentUser: User | null;
   getUserId: () => number;
   getUserToken: () => string;
   setUserId: (id: number) => void;
   setUserToken: (token: string) => void;
   _getCurrentUser: () => Promise<TResponse>;
   _login: (email: string, password: string) => Promise<TResponse>;
-  _register: (email: string, password: string, password_confirmation: string) => Promise<TResponse>;
+  _register: (
+    email: string,
+    password: string,
+    password_confirmation: string
+  ) => Promise<TResponse>;
+  _logout: () => Promise<TResponse>;
 };
 
 export const createUserSlice: StateCreator<StoreState, [], [], UserSlice> = (
@@ -87,6 +92,15 @@ export const createUserSlice: StateCreator<StoreState, [], [], UserSlice> = (
       return { success: true, data: user };
     } catch (error) {
       return { success: true, error };
+    }
+  },
+  _logout: async () => {
+    try {
+      await localStorage.clear();
+      set({ orderCart: null, currentUser: null })
+      return { success: true, data: {} };
+    } catch (error) {
+      return { success: false, error };
     }
   },
 });
