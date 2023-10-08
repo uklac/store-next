@@ -30,31 +30,11 @@ export function CartLineItems(props: Props) {
     fetchOrder();
   }, []);
 
-  const SkeletonItem = () => (
-    <>
-      <tr className="line-item-row">
-        <td className="product-col">
-          <Skeleton />
-        </td>
-        <td className="product-col">
-          <Skeleton />
-        </td>
-        <td className="product-col">
-          <Skeleton />
-        </td>
-        <td className="product-col">
-          <Skeleton />
-        </td>
-        <td className="remove-col"></td>
-      </tr>
-    </>
-  );
-
   if (status === 'idle' || status === 'pending') {
     return (
       <>
         {[1, 2, 3].map((item, index) => (
-          <SkeletonItem key={index} />
+          <Skeleton key={index} amount={3} />
         ))}
       </>
     );
@@ -66,14 +46,26 @@ export function CartLineItems(props: Props) {
 
   return (
     <>
-      {orderCart &&
-        orderCart.line_items.map((item, index) => (
-          <CartLineItem
-            item={item}
-            key={index}
-            onChange={() => {}}
-          />
-        ))}
+      {orderCart && orderCart.line_items ? (
+        <table className="table table-cart table-mobile">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Total</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {orderCart.line_items.map((item, index) => (
+              <CartLineItem item={item} key={index} onChange={() => {}} />
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <p>No hay productos en tu carrito</p>
+      )}
     </>
   );
 }
