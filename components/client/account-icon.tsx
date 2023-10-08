@@ -1,33 +1,31 @@
 'use client';
 
 import Link from 'next/link';
-import { useCallback, useEffect } from 'react';
 import { useUser } from 'store/hooks/user-hook';
+import LoginModal from './login-modal';
 
 export async function AccountIcon() {
-  const { _getCurrentUser, currentUser, getUserId } = useUser();
-
-  const fetchCurrentUser = useCallback(async () => {
-    const { error } = await _getCurrentUser();
-    if (error) {
-      console.error('Error fetching account:', error);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (getUserId() > 0) {
-      fetchCurrentUser();
-    }
-  }, []);
+  const { currentUser } = useUser();
 
   return (
     <div className="account">
-      <Link href='/account'>
-        <div className="icon">
-          <i className="icon-user"></i>
-        </div>
-        <p>{ currentUser?.email ? currentUser.email : 'Account'}</p>
-      </Link>
+      {currentUser ? (
+        <Link href="/account">
+          <div className="icon">
+            <i className="icon-user"></i>
+          </div>
+          <p>{currentUser?.email ? currentUser.email : 'Account'}</p>
+        </Link>
+      ) : (
+        <LoginModal>
+          <a href='#'>
+            <div className="icon">
+              <i className="icon-user"></i>
+            </div>
+            <p>Mi Cuenta</p>
+          </a>
+        </LoginModal>
+      )}
     </div>
   );
 }

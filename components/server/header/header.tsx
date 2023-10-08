@@ -1,10 +1,7 @@
 import { Cart } from 'components/client/cart';
 import Link from 'next/link';
 import { Suspense } from 'react';
-import { ProductsSkeleton } from '../products-skeleton/products-skeleton';
 import { AccountIcon } from 'components/client/account-icon';
-import LoginModal from 'components/client/login-modal';
-
 interface HeaderProps {
   links: {
     title: string;
@@ -60,7 +57,6 @@ export async function Header(props: HeaderProps) {
                       </div>
                     </div>
                   </li>
-                  <LoginModal />
                 </ul>
               </li>
             </ul>
@@ -108,9 +104,8 @@ export async function Header(props: HeaderProps) {
               </form>
             </div>
           </div>
-          
           <div className="header-right">
-            <Suspense fallback={<ProductsSkeleton />}>
+            <Suspense>
               <AccountIcon />
             </Suspense>
             <Cart />

@@ -8,9 +8,12 @@ import { useUser } from 'store/hooks/user-hook';
 import { useRouter } from 'next/navigation';
 import { useCart } from 'store/hooks/cart-hook';
 
-interface Props {}
+interface Props {
+  onSubmit: () => void;
+}
 
 export function RegisterForm(props: Props) {
+  const { onSubmit } = props;
   const router = useRouter();
   const emailLoginRef = useRef<HTMLInputElement>(null);
   const passwordLoginRef = useRef<HTMLInputElement>(null);
@@ -30,6 +33,7 @@ export function RegisterForm(props: Props) {
     if (error) {
       console.log('e: ', error);
     } else {
+      onSubmit();
       orderCart ? router.push('/checkout') : router.push('/') ;
     }
   };
@@ -41,6 +45,7 @@ export function RegisterForm(props: Props) {
     if (error) {
       console.log('e: ', error);
     } else {
+      onSubmit();
       orderCart ? router.push('/checkout') : router.push('/') ;
     }
   };

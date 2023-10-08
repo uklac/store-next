@@ -1,8 +1,8 @@
 'use client';
 import React from 'react';
-import { Button } from './button/button';
 import { useCart } from 'store/hooks/cart-hook';
 import { useRouter } from 'next/navigation';
+import LoginModal from './login-modal';
 
 export function CartOrderSummary() {
   const { _checkoutCart, orderCart } = useCart();
@@ -64,11 +64,13 @@ export function CartOrderSummary() {
         </div>
       </div>
       {orderCart?.email ? (
-        <Button onClick={handleCheckout}>PROCEED TO CHECKOUT</Button>
+        <button className="btn btn-primary btn-order btn-block" onClick={handleCheckout}>PROCEED TO CHECKOUT</button>
       ) : (
-        <a href={'/account'} className="btn btn-primary btn-order btn-block">
-          PROCEED TO CHECKOUTss
-        </a>
+        <LoginModal>
+          <button className="btn btn-primary btn-order btn-block">
+            PROCEED TO CHECKOUT
+          </button>
+        </LoginModal>
       )}
     </div>
   );

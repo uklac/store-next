@@ -13,7 +13,12 @@ const customStyles = {
 
 Modal.setAppElement('body');
 
-const LoginModal = () => {
+interface LoginProps {
+  children: any;
+}
+
+const LoginModal = (props: LoginProps) => {
+  const { children } = props;
   const [open, setOpen] = useState<boolean>(false);
   let timer: NodeJS.Timeout;
 
@@ -45,10 +50,10 @@ const LoginModal = () => {
   };
 
   return (
-    <li>
-      <a href="#" onClick={openModal}>
-        Sign in / Sign up
-      </a>
+    <>
+      <span onClick={openModal}>
+        {children}
+      </span>
       {open ? (
         <Modal
           isOpen={open}
@@ -67,14 +72,14 @@ const LoginModal = () => {
                   <i className="icon-close"></i>
                 </span>
               </button>
-              <RegisterForm />
+              <RegisterForm onSubmit={closeModal}/>
             </div>
           </div>
         </Modal>
       ) : (
         ''
       )}
-    </li>
+    </>
   );
 };
 
