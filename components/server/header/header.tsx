@@ -1,7 +1,6 @@
-import { Cart } from 'components/client/cart';
 import Link from 'next/link';
 import { Suspense } from 'react';
-import { AccountIcon } from 'components/client/account-icon';
+import { AccountIcon, Cart } from 'components';
 interface HeaderProps {
   links: {
     title: string;
@@ -57,6 +56,11 @@ export async function Header(props: HeaderProps) {
                       </div>
                     </div>
                   </li>
+                  <li>
+                    <Suspense>
+                      <AccountIcon />
+                    </Suspense>
+                  </li>
                 </ul>
               </li>
             </ul>
@@ -105,9 +109,6 @@ export async function Header(props: HeaderProps) {
             </div>
           </div>
           <div className="header-right">
-            <Suspense>
-              <AccountIcon />
-            </Suspense>
             <Cart />
           </div>
         </div>
