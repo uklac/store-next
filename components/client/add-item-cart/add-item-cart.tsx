@@ -1,21 +1,26 @@
 'use client';
-import { Variant } from 'interfaces';
+import { ProductMaster, Variant } from 'interfaces';
 import React, { useRef, useState } from 'react';
 import { useCart } from 'store/hooks/cart-hook';
 
 interface AddItemCartProps {
   variants: Variant[];
+  master?: ProductMaster;
 }
 
 export function AddItemCart(props: AddItemCartProps) {
-  const { variants } = props;
+  const { variants, master } = props;
   const { _addProduct } = useCart();
   const quantityRef = useRef<HTMLInputElement>(null);
   const [selectedVariant, setSelectedVariant] = useState<number>(0);
 
   const handleAddToCart = async () => {
     const quantity = quantityRef.current?.valueAsNumber || 0;
-    await _addProduct(selectedVariant, quantity);
+    if (variants.length === 0 && master) {
+      await _addProduct(master.id, quantity);
+    } else {
+      await _addProduct(selectedVariant, quantity);
+    }
   };
 
   const handleVariantChange = (event: React.ChangeEvent<HTMLSelectElement>) => {

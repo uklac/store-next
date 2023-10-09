@@ -22,7 +22,7 @@ export default async function ProductPage({ params }: { params: any }) {
             classifications={product.classifications}
           />
 
-          <AddItemCart variants={product.variants}/>
+          <AddItemCart variants={product.variants} master={product.master}/>
           
           {/* {product.has_variants && (
             <VariantsList
