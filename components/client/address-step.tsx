@@ -9,10 +9,8 @@ interface AddressStepProps {
 }
 
 export async function AddressStep(props: AddressStepProps) {
-  const { email } = props;
   const { register, handleSubmit } = useForm();
   const { _addAddressToOrder, orderCart } = useCart();
-  
   return (
     <>
       { orderCart &&
@@ -31,13 +29,14 @@ export async function AddressStep(props: AddressStepProps) {
           <label>Correo electrónico del cliente: *</label>
           <input
             {...register('email')}
-            value={orderCart.email}
+            value={orderCart.email || ''}
             type="email"
             className="form-control"
           />
           <label>Nombre *</label>
           <input
             {...register('name')}
+            value={orderCart.ship_address.name || ''}
             type="text"
             className="form-control"
             required
@@ -45,6 +44,7 @@ export async function AddressStep(props: AddressStepProps) {
           <label>Dirección *</label>
           <input
             {...register('address1')}
+            value={orderCart.ship_address.address1 || ''}
             type="text"
             className="form-control"
             placeholder="Número de casa y nombre de la calle"
@@ -52,6 +52,7 @@ export async function AddressStep(props: AddressStepProps) {
           />
           <input
             {...register('address2')}
+            value={orderCart.ship_address.address2 || ''}
             type="text"
             className="form-control"
             placeholder="Apartamentos, suite, unidad etc..."
@@ -61,6 +62,7 @@ export async function AddressStep(props: AddressStepProps) {
           <label>País *</label>
           <input
             {...register('country')}
+            value={orderCart.ship_address.country.name || ''}
             type="text"
             className="form-control"
             required
@@ -71,6 +73,7 @@ export async function AddressStep(props: AddressStepProps) {
               <label>Ciudad *</label>
               <input
                 {...register('city')}
+                value={orderCart.ship_address.city || ''}
                 type="text"
                 className="form-control"
                 required
@@ -81,6 +84,7 @@ export async function AddressStep(props: AddressStepProps) {
               <label>Estado *</label>
               <input
                 {...register('state')}
+                value={orderCart.ship_address.state.name || ''}
                 type="text"
                 className="form-control"
                 required
@@ -93,6 +97,7 @@ export async function AddressStep(props: AddressStepProps) {
               <label>Código postal / ZIP *</label>
               <input
                 {...register('zipcode')}
+                value={orderCart.ship_address.zipcode || ''}
                 type="text"
                 className="form-control"
                 required
@@ -103,6 +108,7 @@ export async function AddressStep(props: AddressStepProps) {
               <label>Teléfono *</label>
               <input
                 {...register('phone')}
+                value={orderCart.ship_address.phone || ''}
                 type="tel"
                 className="form-control"
                 required
