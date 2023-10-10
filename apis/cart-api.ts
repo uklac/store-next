@@ -178,3 +178,20 @@ export async function checkoutCart(token: string, orderNumber: string): Promise<
   });
   return await response.json();
 }
+
+export async function addAddressToOrder(token: string, orderNumber: string, addressParams: any): Promise<OrderData> {
+  const url = `http://localhost:3000/api/orders/${orderNumber}`;
+  const response = await fetch(url, {
+    method: 'PATCH',
+    headers: {       
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      'X-Spree-Order-Token': token 
+    },
+    body: JSON.stringify({
+      use_billing: true,
+      ship_address_attributes: addressParams
+    })
+  });
+  return await response.json();
+}
