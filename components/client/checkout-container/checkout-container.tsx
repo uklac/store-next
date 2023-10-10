@@ -58,7 +58,7 @@ export async function CheckoutContainer(props: Props) {
               <span className="nav-link">Confirm</span>
             </Tab>
           </TabList>
-          <form action="#">
+          <div>
             <div className="row">
               <div className="col-lg-9">
                 <TabPanel className={`${styles['tab-step']}`}>
@@ -74,7 +74,7 @@ export async function CheckoutContainer(props: Props) {
                 {order && <CheckoutSummary order={order} />}
               </aside>
             </div>
-          </form>
+          </div>
         </Tabs>
       </div>
     </div>

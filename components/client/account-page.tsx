@@ -25,7 +25,7 @@ export function AccountPage() {
           </ol>
         </div>
       </nav>
-      {currentUser ? <UserDashboard /> : <RegisterForm />}
+      {currentUser ? <UserDashboard /> : <RegisterForm onSubmit={()=>1}/>}
     </div>
   );
 }
