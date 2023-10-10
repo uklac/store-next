@@ -16,10 +16,14 @@ export function OrderShipments(props: OrderShipmentsProps) {
           <li key={index}>
             Shipment Details: {shipment.stock_location_name},{' '}
             {shipment.selected_shipping_rate.name}
-            <div className="order-shipments__info__tracking">
-              <h4>Tracking</h4>
-              <p>{shipment.tracking}</p>
-            </div>
+            {shipment.tracking && (
+              <div className="order-shipments__info__tracking">
+                <h4 className={`${styles['order-shipments__title']}`}>
+                  Tracking
+                </h4>
+                <p>{shipment.tracking}</p>
+              </div>
+            )}
           </li>
         ))}
       </ul>

@@ -62,7 +62,7 @@ export async function CheckoutContainer(props: Props) {
             <div className="row">
               <div className="col-lg-9">
                 <TabPanel className={`${styles['tab-step']}`}>
-                  <AddressStep />
+                  <AddressStep email={order?.email} />
                 </TabPanel>
                 <TabPanel>{order && <DeliveryStep order={order} />}</TabPanel>
                 <TabPanel>
