@@ -8,6 +8,7 @@ import {
   updateLineItem,
   removeLineItem,
   addAddressToOrder,
+  nextCheckoutStep,
 } from 'apis/cart-api';
 import { LineItem, OrderData } from 'interfaces';
 
@@ -29,6 +30,7 @@ export type CartSlice = {
   _updateAmountItem: (id: number, quantity: number) => Promise<TResponse>;
   _removeCartItem: (id: number) => Promise<TResponse>;
   _addAddressToOrder: (addressParams: any) => Promise<TResponse>;
+  // _nextCheckoutStep: () => Promise<TResponse>;
 };
 
 export const createCartSlice: StateCreator<StoreState, [], [], CartSlice> = (
@@ -140,6 +142,8 @@ export const createCartSlice: StateCreator<StoreState, [], [], CartSlice> = (
     const orderNumber = get().getGuestOrderNumber();
     try {
       const resp = await addAddressToOrder(token, orderNumber, params);
+      const nextStep = await nextCheckoutStep(token, orderNumber);
+      console.log('nextStep: ', nextStep);
       return { success: true, data: resp };
     } catch (error) {
       return { success: false, error };
