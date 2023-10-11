@@ -6,6 +6,7 @@ interface PaymentStepProps {
 
 export async function PaymentStep(props: PaymentStepProps) {
   const { payments } = props;
+  console.log('payments: ', payments);
   return (
     <div className={`${styles['payment-step']}`}>
       <fieldset className={`${styles['payment-step__payment']}`}>

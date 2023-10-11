@@ -13,14 +13,14 @@ export async function AddressStep(props: AddressStepProps) {
   const { register, handleSubmit } = useForm({
     defaultValues: {
       email: orderCart?.email,
-      name: orderCart?.ship_address.name,
-      address1: orderCart?.ship_address.address1,
-      address2: orderCart?.ship_address.address2,
-      country: orderCart?.ship_address.country.name,
-      city: orderCart?.ship_address.city,
-      state: orderCart?.ship_address.state.name,
-      zipcode: orderCart?.ship_address.zipcode,
-      phone: orderCart?.ship_address.phone,
+      name: orderCart?.ship_address?.name,
+      address1: orderCart?.ship_address?.address1,
+      address2: orderCart?.ship_address?.address2,
+      country: orderCart?.ship_address?.country?.name,
+      city: orderCart?.ship_address?.city,
+      state: orderCart?.ship_address?.state?.name,
+      zipcode: orderCart?.ship_address?.zipcode,
+      phone: orderCart?.ship_address?.phone,
     }
   });
   return (
