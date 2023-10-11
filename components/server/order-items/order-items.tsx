@@ -36,11 +36,18 @@ export function OrderItems(props: OrderItemsProps) {
           </article>
         ))}
       <dl>
-        <div className={`${styles['item-entry']}`} id="item-total">
+        <div className={`${styles['item-entry']}`}>
           <dt>Item Total</dt>
           <dd>{orderItems.display_item_total}</dd>
         </div>
-        <div className={`${styles['item-total']}`} id="item-total">
+        {orderItems.shipments &&
+          orderItems.shipments.map((shipment, index) => (
+            <div className={`${styles['item-entry']}`} key={index}>
+              <dt>{shipment.selected_shipping_rate.name}:</dt>
+              <dd>{shipment.cost}</dd>
+            </div>
+          ))}
+        <div className={`${styles['item-total']}`}>
           <dt>Order Total</dt>
           <dd>{orderItems.display_order_total_after_store_credit}</dd>
         </div>

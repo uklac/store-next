@@ -1,4 +1,4 @@
-import { ItemsCart, OrderData } from 'interfaces';
+import { OrderData } from 'interfaces';
 import { AddressOverview } from '../address-overview/address-overview';
 import { OrderItems } from '../order-items/order-items';
 import { OrderShipments } from '../order-shipments/order-shipments';
@@ -23,7 +23,6 @@ export function OrderDetails(props: OrderDetailsProps) {
       <div className={`${styles['order-items']}`}>
         <OrderItems orderItems={order}/>
       </div>
-
     </div>
   );
 }
