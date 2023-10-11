@@ -1,0 +1,193 @@
+
+@mixin animation-top-toggle {
+  animation: fadeInTop 0.5s;
+
+  &.dismiss {
+    animation: fadeOutTop 0.5s 1s;
+  }
+}
+
+@mixin animation-bottom-toggle {
+  animation: fadeInBottom 0.5s;
+
+  &.dismiss {
+    animation: fadeOutBottom 0.5s 1s;
+  }
+}
+
+.snackbar {
+  visibility: hidden;
+  width: 400px;
+  position: fixed;
+  max-height: 300px;
+  z-index: 1;
+  background-color: #ffffff;
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 25%);;
+  padding: 1.25rem;
+  border-radius: 8px;
+
+  .container {
+    display: grid;
+    grid-template-columns: 10% 80% 10%;
+
+    .icon-section {
+      display: flex;
+      justify-content: center;
+    }
+    .content-section {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      padding-left: 1rem;
+      h4 {
+        color: #2e4057;
+      }
+
+      .title {
+        color: #0e142a;
+        font-weight: 500;
+        font-size: 1rem;
+      }
+
+      p {
+        color: #334155;
+        text-align: justify;
+      }
+
+      .date {
+        color: #8a96a2;
+      }
+    }
+
+    .close-section {
+      display: flex;
+      justify-content: center;
+    }
+
+    .close-section svg {
+      cursor: pointer;
+      color: #8a96a2;
+    }
+  }
+
+  &.show {
+    visibility: visible;
+
+    &.top-snackbar {
+      top: 50px;
+      right: 10px;
+      @include animation-top-toggle;
+    }
+
+    &.center-top-snackbar {
+      top: 50px;
+      left: 35%;
+      @include animation-top-toggle;
+    }
+
+    &.bottom-snackbar {
+      bottom: 50px;
+      right: 10px;
+      @include animation-bottom-toggle;
+    }
+
+    &.center-bottom-snackbar {
+      bottom: 50px;
+      left: 35%;
+      @include animation-bottom-toggle;
+    }
+
+    &.center-bottom-right-snackbar {
+      bottom: 50px;
+      right: 100px;
+      @include animation-bottom-toggle;
+    }
+  }
+
+  &.message-snackbar {
+    .container {
+      .title {
+        color: #0e142a;
+      }
+    }
+  }
+
+  &.warning-snackbar {
+    .container {
+      .title {
+        color: #fbbf24;
+      }
+
+      .icon-section svg {
+        color: #fbbf24;
+      }
+    }
+  }
+
+  &.error-snackbar {
+    .container {
+      .title {
+        color: #ef4444;
+      }
+
+      .icon-section svg {
+        color: #ef4444;
+      }
+    }
+  }
+
+  &.success-snackbar {
+    .container {
+      .title {
+        color: #10b981;
+      }
+      .icon-section svg {
+        color: #10b981;
+      }
+    }
+  }
+}
+
+@keyframes fadeInTop {
+  from {
+    top: 0;
+    opacity: 0;
+  }
+  to {
+    top: 50px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInBottom {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 50px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOutTop {
+  from {
+    top: 50px;
+    opacity: 1;
+  }
+  to {
+    top: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeOutBottom {
+  from {
+    bottom: 50px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
