@@ -1,0 +1,40 @@
+.banner-notification {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  border-radius: 6px;
+
+  svg {
+    cursor: pointer;
+
+    &:hover {
+      color: #0e142a;
+    }
+  }
+
+  &.success {
+    background-color: #ecfdf5;
+  }
+
+  &.error {
+    background-color: #f87171;
+    color: #ffffff;
+  }
+
+  &.info {
+    background-color: #cffafe;
+  }
+
+  &.white {
+    background-color: #ffffff;
+  }
+
+  &.primary {
+    background-color: #00bdab;
+  }
+
+  &.secondary {
+    background-color: #2e4057;
+  }
+}

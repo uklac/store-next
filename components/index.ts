@@ -24,6 +24,7 @@ export * from './client/payment-step/payment-step';
 export * from './client/skeleton';
 export * from './client/login-modal';
 export * from './client/cart-counter';
+export * from './client/banner-notification/banner-notification';
 
 //server
 export * from './server/header/header';
