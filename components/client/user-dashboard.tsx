@@ -5,9 +5,11 @@ import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import { useRouter } from 'next/navigation';
 import { useUser } from 'store/hooks/user-hook';
 
-export function UserDashboard() {
+export async function UserDashboard() {
   const route = useRouter();
-  const { _logout } = useUser();
+  const { _logout, _getAddressesUser } = useUser();
+
+  const address = await _getAddressesUser();
 
   async function logout() {
     const { success, error } = await _logout();

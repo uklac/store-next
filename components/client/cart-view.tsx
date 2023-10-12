@@ -49,7 +49,7 @@ export async function CartView() {
                 />
               </div>
               <aside className="col-lg-3">
-                <CartOrderSummary order={order} />
+                <CartOrderSummary />
               </aside>
             </>
           ) : (

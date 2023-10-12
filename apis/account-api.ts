@@ -1,3 +1,5 @@
+import { BillAddress } from "interfaces";
+
 const ACCOUNT_URL = 'http://localhost:3000/api/sign_up';
 const LOGIN_URL = 'http://localhost:3000/api/sign_in';
 
@@ -61,5 +63,17 @@ export async function loginAccount(params: AccountLogin): Promise<any> {
     })
   };
   const response = await fetch(url, options);
+  return await response.json();
+}
+
+export async function getAddresses(userId: number, token: string): Promise<BillAddress> {
+  const url = `http://localhost:3000/api/users/${userId}/address_book`;
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return await response.json();
 }

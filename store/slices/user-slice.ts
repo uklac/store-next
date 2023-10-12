@@ -2,7 +2,7 @@ import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
 import { CurrentUser, User } from 'interfaces/user';
 import { getUser } from 'apis/user-api';
-import { createAccount, loginAccount } from 'apis/account-api';
+import { createAccount, getAddresses, loginAccount } from 'apis/account-api';
 
 export type TResponse = {
   success: boolean;
@@ -17,6 +17,7 @@ export type UserSlice = {
   setUserId: (id: number) => void;
   setUserToken: (token: string) => void;
   _getCurrentUser: () => Promise<TResponse>;
+  _getAddressesUser: () => Promise<TResponse>;
   _login: (email: string, password: string) => Promise<TResponse>;
   _register: (
     email: string,
@@ -53,6 +54,17 @@ export const createUserSlice: StateCreator<StoreState, [], [], UserSlice> = (
       console.log('user: ', user);
       set({ currentUser: user });
       return { success: true, data: user };
+    } catch (error) {
+      return { success: true, error };
+    }
+  },
+  _getAddressesUser: async () => {
+    try {
+      const userToken = get().getUserToken();
+      const userId = get().getUserId();
+      const address = await getAddresses(userId, userToken);
+      console.log('address: ', address);
+      return { success: true, data: address };
     } catch (error) {
       return { success: true, error };
     }
