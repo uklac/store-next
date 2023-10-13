@@ -3,11 +3,16 @@ import { StoreState } from '../store';
 import { CurrentUser, User } from 'interfaces/user';
 import { getUser } from 'apis/user-api';
 import { createAccount, getAddresses, loginAccount } from 'apis/account-api';
+import { Address } from 'interfaces';
 
 export type TResponse = {
   success: boolean;
   data?: any;
   error?: any;
+};
+
+export type AddressUser = {
+  data?: Address[];
 };
 
 export type UserSlice = {
@@ -17,7 +22,7 @@ export type UserSlice = {
   setUserId: (id: number) => void;
   setUserToken: (token: string) => void;
   _getCurrentUser: () => Promise<TResponse>;
-  _getAddressesUser: () => Promise<TResponse>;
+  _getAddressesUser: () => Promise<AddressUser>;
   _login: (email: string, password: string) => Promise<TResponse>;
   _register: (
     email: string,
@@ -31,6 +36,7 @@ export const createUserSlice: StateCreator<StoreState, [], [], UserSlice> = (
   set,
   get
 ) => ({
+  addressUser : null,
   currentUser: null,
   getUserId: () => {
     const id = localStorage.getItem('user_id');

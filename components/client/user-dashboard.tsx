@@ -88,24 +88,29 @@ export async function UserDashboard() {
                           <div className="card card-dashboard">
                             <div className="card-body">
                               <h3 className="card-title">Billing Address</h3>
-
-                              <p>
-                                User Name
-                                <br />
-                                User Company
-                                <br />
-                                John str
-                                <br />
-                                New York, NY 10001
-                                <br />
-                                1-234-987-6543
-                                <br />
-                                yourmail@mail.com
-                                <br />
-                                <Link href="/">
-                                  Edit <i className="icon-edit"></i>
-                                </Link>
-                              </p>
+                              {address.data && address.data?.map((item, index) => (
+                                <p key={index}>
+                                  {item.name}
+                                  <br />
+                                  {item.company}
+                                  <br />
+                                  {item.address1}
+                                  <br />
+                                  {item.address2}
+                                  <br />
+                                  {item.phone}
+                                  <br />
+                                  {item.country.name}
+                                  <br />
+                                  {item.city}
+                                  <br />
+                                  {item.zipcode}
+                                  <br />
+                                  <Link href="/">
+                                    Edit <i className="icon-edit"></i>
+                                  </Link>
+                                </p>
+                              ))}
                             </div>
                           </div>
                         </div>
@@ -114,7 +119,6 @@ export async function UserDashboard() {
                           <div className="card card-dashboard">
                             <div className="card-body">
                               <h3 className="card-title">Shipping Address</h3>
-
                               <p>
                                 You have not set up this type of address yet.
                                 <br />

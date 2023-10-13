@@ -1,4 +1,4 @@
-import { BillAddress } from "interfaces";
+import { Address } from "interfaces";
 
 const ACCOUNT_URL = 'http://localhost:3000/api/sign_up';
 const LOGIN_URL = 'http://localhost:3000/api/sign_in';
@@ -66,7 +66,7 @@ export async function loginAccount(params: AccountLogin): Promise<any> {
   return await response.json();
 }
 
-export async function getAddresses(userId: number, token: string): Promise<BillAddress> {
+export async function getAddresses(userId: number, token: string): Promise<Address[]> {
   const url = `http://localhost:3000/api/users/${userId}/address_book`;
   const response = await fetch(url, {
     method: 'GET',
