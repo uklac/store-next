@@ -70,6 +70,7 @@ export async function UserDashboard() {
                     </TabPanel>
 
                     <TabPanel>
+                      {/* <AccountSummary/> */}
                       <p>No order has been made yet.</p>
                     </TabPanel>
 

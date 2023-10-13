@@ -50,6 +50,8 @@ export * from './server/payment-info/payment-info';
 export * from './server/address-overview/address-overview';
 export * from './server/order-shipments/order-shipments';
 export * from './server/item-info/item-info';
+export * from './server/account-summary/account-summary';
+
 
 
 
