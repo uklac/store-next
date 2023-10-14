@@ -10,6 +10,7 @@ import {
   addAddressToOrder,
   nextCheckoutStep,
   addItemToCart,
+  getCartProducts,
 } from 'apis/cart-api';
 import { LineItem, OrderData } from 'interfaces';
 
@@ -48,19 +49,14 @@ export const createCartSlice: StateCreator<StoreState, [], [], CartSlice> = (
   },
   _getCart: async () => {
     try {
-      const orderNumber = get().getGuestOrderNumber();
-      const guestToken = get().getGuestToken();
-      if (orderNumber && guestToken) {
-        const cart = await getCart(orderNumber, guestToken);
-        const { line_items } = cart;
-        const totalProducts = getTotalProductsInCart(line_items);
-        set({ totalProductsInCart: totalProducts, orderCart: cart });
-        return { success: true, data: cart };
-      } else {
-        return { success: true, data: null };
-      }
+      const cart = await getCartProducts();
+      console.log('cart: ', cart);
+      const { line_items } = cart;
+      const totalProducts = getTotalProductsInCart(line_items);
+      set({ totalProductsInCart: totalProducts, orderCart: cart });
+      return { success: true, data: cart };
     } catch (error) {
-      return { success: false, error };
+      return { success: true, error };
     }
   },
   _addProduct: async (variantId, quantity) => {

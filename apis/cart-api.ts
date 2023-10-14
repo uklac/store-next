@@ -25,6 +25,16 @@ type RemoveLineItemParams = {
 const ADD_ITEM_URL = 'http://localhost:3000/api/cart/add_item';
 const ADD_ITEM_URL1 = 'http://localhost:3000/api/cart';
 
+export async function getCartProducts(): Promise<OrderData> {
+  const response = await fetch('/api/cart', {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+    },
+  });
+  return await response.json();
+}
+
 export async function addItemToCart(item: {
   item: {
     variant_id: number;
