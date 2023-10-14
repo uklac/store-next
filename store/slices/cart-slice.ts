@@ -9,6 +9,7 @@ import {
   removeLineItem,
   addAddressToOrder,
   nextCheckoutStep,
+  addItemToCart,
 } from 'apis/cart-api';
 import { LineItem, OrderData } from 'interfaces';
 
@@ -64,35 +65,47 @@ export const createCartSlice: StateCreator<StoreState, [], [], CartSlice> = (
   },
   _addProduct: async (variantId, quantity) => {
     try {
-      const orderNumber = get().getGuestOrderNumber();
-      const guestToken = get().getGuestToken();
-      const currentUser = get().currentUser;
-      const methodAddItem = guestToken.length
-        ? addItemToOrder
-        : addItemToOrderAndCreate;
-      const result = await methodAddItem({
+      const response = await addItemToCart({
         item: {
           variant_id: variantId,
           quantity: quantity,
         },
-        email: currentUser?.email,
-        userId: currentUser?.id,
-        token: guestToken || '',
-        orderNumber: orderNumber || '',
       });
-      if (result.order) {
-        localStorage.setItem('order_number', result.order.number);
-        localStorage.setItem('guest_token', result.order.guest_token);
-        const totalProductsInCart = get().totalProductsInCart;
-        set({ totalProductsInCart: totalProductsInCart + 1, orderCart: result.order});
-      } else {
-        const totalProductsInCart = get().totalProductsInCart;
-        set({ totalProductsInCart: totalProductsInCart + result.quantity });
-      }
-      return { success: true, data: result };
+      console.log('response: ', response);
+      return { success: true, data: response };
     } catch (error) {
-      return { success: false, error };
+      return { success: true, error };
     }
+    // try {
+    //   const orderNumber = get().getGuestOrderNumber();
+    //   const guestToken = get().getGuestToken();
+    //   const currentUser = get().currentUser;
+    //   const methodAddItem = guestToken.length
+    //     ? addItemToOrder
+    //     : addItemToOrderAndCreate;
+    //   const result = await methodAddItem({
+    //     item: {
+    //       variant_id: variantId,
+    //       quantity: quantity,
+    //     },
+    //     email: currentUser?.email,
+    //     userId: currentUser?.id,
+    //     token: guestToken || '',
+    //     orderNumber: orderNumber || '',
+    //   });
+    //   if (result.order) {
+    //     localStorage.setItem('order_number', result.order.number);
+    //     localStorage.setItem('guest_token', result.order.guest_token);
+    //     const totalProductsInCart = get().totalProductsInCart;
+    //     set({ totalProductsInCart: totalProductsInCart + 1, orderCart: result.order});
+    //   } else {
+    //     const totalProductsInCart = get().totalProductsInCart;
+    //     set({ totalProductsInCart: totalProductsInCart + result.quantity });
+    //   }
+    //   return { success: true, data: result };
+    // } catch (error) {
+    //   return { success: false, error };
+    // }
   },
   _removeProduct: () => {
     const totalProductsInCart = get().totalProductsInCart;
@@ -148,7 +161,7 @@ export const createCartSlice: StateCreator<StoreState, [], [], CartSlice> = (
     } catch (error) {
       return { success: false, error };
     }
-  }
+  },
 });
 
 function getTotalProductsInCart(items: LineItem[]) {

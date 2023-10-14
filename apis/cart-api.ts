@@ -25,6 +25,75 @@ type RemoveLineItemParams = {
 const ADD_ITEM_URL = 'http://localhost:3000/api/cart/add_item';
 const ADD_ITEM_URL1 = 'http://localhost:3000/api/cart';
 
+export async function addItemToCart(item: {
+  item: {
+    variant_id: number;
+    quantity: number;
+  }
+}): Promise<any> {
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(item),
+  };
+  const response = await fetch('/api/cart/add_item', options);
+  return await response.json();
+}
+
+export async function addItemAndSetOrder(
+  url: string,
+  params: {
+    item: {
+      variant_id: number;
+      quantity: number;
+    };
+    email?: string | null;
+    userId?: string | null;
+  }
+): Promise<any> {
+  const { item, email, userId } = params;
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify({
+      variant_id: item.variant_id,
+      quantity: item.quantity,
+      email: email,
+      user_id: userId,
+    }),
+  };
+  const response = await fetch(url, options);
+  return await response.json();
+}
+
+export async function addItemCart(
+  url: string,
+  params: { token: string; item: { variant_id: number; quantity: number } }
+): Promise<any> {
+  const { item, token } = params;
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      'X-Spree-Order-Token': token,
+    },
+    body: JSON.stringify({
+      line_item: {
+        variant_id: item.variant_id,
+        quantity: item.quantity,
+      },
+    }),
+  };
+  const response = await fetch(url, options);
+  return await response.json();
+}
+
 export async function addItemToOrderAndCreate(
   params: AddItemToOrder
 ): Promise<any> {
