@@ -1,48 +1,51 @@
 'use client';
 
-import { LineItem } from 'interfaces';
+import { LineItem, OrderData } from 'interfaces';
 import React, { useCallback, useEffect, useState } from 'react';
 import { CartLineItem } from './cart-line-item';
 import { useCart } from 'store/hooks/cart-hook';
 import Skeleton from './skeleton';
 
 interface Props {
+  order: OrderData;
   lineItems?: LineItem[];
   orderNumber?: string;
   onChange?: (id: number) => void;
 }
 
 export function CartLineItems(props: Props) {
+  const { order } = props;
+  // const orderCart = order;
   const { orderCart, _getCart } = useCart();
-  const [status, setStatus] = useState('idle');
+  // const [status, setStatus] = useState('idle');
 
-  const fetchOrder = useCallback(async () => {
-    setStatus('pending');
-    const { error } = await _getCart();
-    if (error) {
-      setStatus('rejected');
-    } else {
-      setStatus('successful');
-    }
-  }, []);
+  // const fetchOrder = useCallback(async () => {
+  //   setStatus('pending');
+  //   const { error } = await _getCart();
+  //   if (error) {
+  //     setStatus('rejected');
+  //   } else {
+  //     setStatus('successful');
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    fetchOrder();
-  }, []);
+  // useEffect(() => {
+  //   fetchOrder();
+  // }, []);
 
-  if (status === 'idle' || status === 'pending') {
-    return (
-      <>
-        {[1, 2, 3].map((item, index) => (
-          <Skeleton key={index} amount={3} />
-        ))}
-      </>
-    );
-  }
+  // if (status === 'idle' || status === 'pending') {
+  //   return (
+  //     <>
+  //       {[1, 2, 3].map((item, index) => (
+  //         <Skeleton key={index} amount={3} />
+  //       ))}
+  //     </>
+  //   );
+  // }
 
-  if (status === 'rejected') {
-    return <p>No se pudo cargar la orden, intenta refrescando</p>;
-  }
+  // if (status === 'rejected') {
+  //   return <p>No se pudo cargar la orden, intenta refrescando</p>;
+  // }
 
   return (
     <>

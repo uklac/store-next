@@ -14,7 +14,7 @@ export function CartCounter() {
   }, []);
 
   useEffect(() => {
-    fetchOrder();
+    // fetchOrder();
   }, []);
 
   return (
