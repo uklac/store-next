@@ -2,12 +2,18 @@ import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
 import { CurrentUser, User } from 'interfaces/user';
 import { getUser } from 'apis/user-api';
-import { createAccount, getAddresses, loginAccount } from 'apis/account-api';
-import { Address } from 'interfaces';
+import { createAccount, getAddresses, getUserOrders, loginAccount } from 'apis/account-api';
+import { Address, UserOrders } from 'interfaces';
 
 export type TResponse = {
   success: boolean;
   data?: any;
+  error?: any;
+};
+
+export type UserOrder = {
+  success: boolean;
+  data?: UserOrders;
   error?: any;
 };
 
@@ -22,6 +28,7 @@ export type UserSlice = {
   setUserId: (id: number) => void;
   setUserToken: (token: string) => void;
   _getCurrentUser: () => Promise<TResponse>;
+  _getUserOrders: () => Promise<UserOrder>;
   _getAddressesUser: () => Promise<AddressUser>;
   _login: (email: string, password: string) => Promise<TResponse>;
   _register: (
@@ -71,6 +78,16 @@ export const createUserSlice: StateCreator<StoreState, [], [], UserSlice> = (
       const address = await getAddresses(userId, userToken);
       console.log('address: ', address);
       return { success: true, data: address };
+    } catch (error) {
+      return { success: true, error };
+    }
+  },
+  _getUserOrders: async () => {
+    try {
+      const userToken = get().getUserToken();
+      const orders = await getUserOrders(userToken);
+      console.log('orders: ', orders);
+      return { success: true, data: orders };
     } catch (error) {
       return { success: true, error };
     }

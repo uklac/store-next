@@ -359,6 +359,15 @@ export interface ShipAddress {
   zipcode: string;
 }
 
+export interface UserOrders {
+  count: number;
+  current_page: number;
+  orders: OrderData[];
+  pages: number;
+  per_page: number;
+  total_count: number;
+}
+
 // export interface PaymentMethod {
 //   id: number;
 //   method_type: string;

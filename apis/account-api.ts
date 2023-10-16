@@ -1,4 +1,4 @@
-import { Address } from "interfaces";
+import { Address, UserOrders } from "interfaces";
 
 const ACCOUNT_URL = 'http://localhost:3000/api/sign_up';
 const LOGIN_URL = 'http://localhost:3000/api/sign_in';
@@ -77,3 +77,17 @@ export async function getAddresses(userId: number, token: string): Promise<Addre
   });
   return await response.json();
 }
+
+export async function getUserOrders(token: string): Promise<UserOrders> {
+  const url = `http://localhost:3000/api/orders/mine`;
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return await response.json();
+}
+
+

@@ -4,12 +4,14 @@ import Link from 'next/link';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import { useRouter } from 'next/navigation';
 import { useUser } from 'store/hooks/user-hook';
+import { AccountSummary } from 'components/server/account-summary/account-summary';
 
 export async function UserDashboard() {
   const route = useRouter();
-  const { _logout, _getAddressesUser } = useUser();
+  const { _logout, _getAddressesUser, _getUserOrders } = useUser();
 
   const address = await _getAddressesUser();
+  const orders = await _getUserOrders();
 
   async function logout() {
     const { success, error } = await _logout();
@@ -70,8 +72,12 @@ export async function UserDashboard() {
                     </TabPanel>
 
                     <TabPanel>
-                      {/* <AccountSummary/> */}
-                      <p>No order has been made yet.</p>
+                      {orders.data?.orders !== undefined &&
+                      orders.data.orders.length > 0 ? (
+                        <AccountSummary orders={orders.data?.orders} />
+                      ) : (
+                        <p>No order has been made yet.</p>
+                      )}
                     </TabPanel>
 
                     <TabPanel>
@@ -89,29 +95,30 @@ export async function UserDashboard() {
                           <div className="card card-dashboard">
                             <div className="card-body">
                               <h3 className="card-title">Billing Address</h3>
-                              {address.data && address.data?.map((item, index) => (
-                                <p key={index}>
-                                  {item.name}
-                                  <br />
-                                  {item.company}
-                                  <br />
-                                  {item.address1}
-                                  <br />
-                                  {item.address2}
-                                  <br />
-                                  {item.phone}
-                                  <br />
-                                  {item.country.name}
-                                  <br />
-                                  {item.city}
-                                  <br />
-                                  {item.zipcode}
-                                  <br />
-                                  <Link href="/">
-                                    Edit <i className="icon-edit"></i>
-                                  </Link>
-                                </p>
-                              ))}
+                              {address.data &&
+                                address.data?.map((item, index) => (
+                                  <p key={index}>
+                                    {item.name}
+                                    <br />
+                                    {item.company}
+                                    <br />
+                                    {item.address1}
+                                    <br />
+                                    {item.address2}
+                                    <br />
+                                    {item.phone}
+                                    <br />
+                                    {item.country.name}
+                                    <br />
+                                    {item.city}
+                                    <br />
+                                    {item.zipcode}
+                                    <br />
+                                    <Link href="/">
+                                      Edit <i className="icon-edit"></i>
+                                    </Link>
+                                  </p>
+                                ))}
                             </div>
                           </div>
                         </div>
