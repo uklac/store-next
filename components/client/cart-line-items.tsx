@@ -15,8 +15,8 @@ interface Props {
 
 export function CartLineItems(props: Props) {
   const { order } = props;
-  // const orderCart = order;
-  const { orderCart, _getCart } = useCart();
+  const orderCart = order;
+  // const { orderCart, _getCart } = useCart();
   // const [status, setStatus] = useState('idle');
 
   // const fetchOrder = useCallback(async () => {

@@ -4,10 +4,10 @@ import { OrderData } from 'interfaces';
 import { cookies } from 'next/headers'
 
 export default async function Cart() {
+  let order = {} as OrderData;
   const cookieStore = cookies();
   const orderNumber = cookieStore.get('order_number')?.value || '';
   const guestToken = cookieStore.get('guest_token')?.value || '';
-  let order = {} as OrderData;
   
   try {
     order = await getCart(orderNumber, guestToken);
@@ -19,7 +19,7 @@ export default async function Cart() {
     <div className="page-content">
       <div className="cart">
         <div className="container">
-          { order.id ?
+          { order.number ?
           <div className="row">
             <div className="col-lg-9">
               <h4>Tu carrito</h4>
