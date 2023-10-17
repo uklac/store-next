@@ -1,9 +1,24 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect, useState } from 'react';
+import { useApp } from 'store/hooks/app-hook';
+import { Taxon } from 'store/slices/app-slice';
 
 interface FiltersProps {}
 
 export function Filters(props: FiltersProps) {
   const {} = props;
+  const { _getTaxonomies } = useApp();
+  const [taxonomies, setTaxonomies] = useState<Taxon | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await _getTaxonomies();
+      setTaxonomies(result);
+    };
+
+    fetchData();
+  }, [_getTaxonomies]);
 
   return (
     <div className="sidebar sidebar-shop">
@@ -30,28 +45,27 @@ export function Filters(props: FiltersProps) {
         <div className="collapse show" id="widget-1">
           <div className="widget-body">
             <div className="filter-items filter-items-count">
-              <div className="filter-item">
-                <div className="custom-control custom-checkbox">
-                  <input
-                    type="checkbox"
-                    className="custom-control-input"
-                    id="cat-1"
-                  />
-                  <label className="custom-control-label">Dresses</label>
-                </div>
-                <span className="item-count">3</span>
-              </div>
-              <div className="filter-item">
-                <div className="custom-control custom-checkbox">
-                  <input
-                    type="checkbox"
-                    className="custom-control-input"
-                    id="cat-2"
-                  />
-                  <label className="custom-control-label">T-shirts</label>
-                </div>
-                <span className="item-count">0</span>
-              </div>
+              {taxonomies &&
+                taxonomies.data &&
+                taxonomies.data.taxonomies.map((category, index) => (
+                  <div key={index}>
+                    {category.root.taxons.map((taxon, index) => (
+                      <div className="filter-item" key={index}>
+                        <div className="custom-control custom-checkbox">
+                          <input
+                            type="checkbox"
+                            className="custom-control-input"
+                            id="cat-1"
+                          />
+                          <label className="custom-control-label">
+                            {taxon.name}
+                          </label>
+                        </div>
+                        <span className="item-count">3</span>
+                      </div>
+                    ))}
+                  </div>
+                ))}
             </div>
           </div>
         </div>

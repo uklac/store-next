@@ -5,13 +5,25 @@ import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import { useRouter } from 'next/navigation';
 import { useUser } from 'store/hooks/user-hook';
 import { AccountSummary } from 'components/server/account-summary/account-summary';
+import { useEffect, useState } from 'react';
+import { AddressUser, UserOrder } from 'store/slices/user-slice';
 
 export async function UserDashboard() {
   const route = useRouter();
   const { _logout, _getAddressesUser, _getUserOrders } = useUser();
+  const [address, setAddress] = useState<AddressUser | null>(null);
+  const [orders, setOrders] = useState<UserOrder | null>(null);
 
-  const address = await _getAddressesUser();
-  const orders = await _getUserOrders();
+  useEffect(() => {
+    const fetchData = async () => {
+      const addressData = await _getAddressesUser();
+      const ordersData = await _getUserOrders();
+      setAddress(addressData);
+      setOrders(ordersData);
+    };
+
+    fetchData();
+  }, [_getAddressesUser, _getUserOrders]);
 
   async function logout() {
     const { success, error } = await _logout();
@@ -72,7 +84,8 @@ export async function UserDashboard() {
                     </TabPanel>
 
                     <TabPanel>
-                      {orders.data?.orders !== undefined &&
+                      {orders &&
+                      orders.data?.orders !== undefined &&
                       orders.data.orders.length > 0 ? (
                         <AccountSummary orders={orders.data?.orders} />
                       ) : (
@@ -95,7 +108,8 @@ export async function UserDashboard() {
                           <div className="card card-dashboard">
                             <div className="card-body">
                               <h3 className="card-title">Billing Address</h3>
-                              {address.data &&
+                              {address &&
+                                address.data &&
                                 address.data?.map((item, index) => (
                                   <p key={index}>
                                     {item.name}

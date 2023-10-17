@@ -1,6 +1,7 @@
 import { StateCreator } from 'zustand';
 import { StoreState } from '../store';
 import { getTaxonomies } from 'apis/taxons-api';
+import { Taxonomies } from 'interfaces/taxonomies';
 
 export type TResponse = {
   success: boolean;
@@ -8,8 +9,14 @@ export type TResponse = {
   error?: any;
 };
 
+export type Taxon = {
+  success: boolean;
+  data?: Taxonomies;
+  error?: any;
+};
+
 export type AppSlice = {
-  _getTaxonomies: () => Promise<TResponse>;
+  _getTaxonomies: () => Promise<Taxon>;
 };
 
 export const createAppSlice: StateCreator<StoreState, [], [], AppSlice> = (

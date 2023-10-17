@@ -16,12 +16,12 @@ export function AccountSummary(props: AccountSummaryProps) {
             <div className={`${styles['account-order__detail']}`}>
               <dt>Number</dt>
               <dd>
-                <a href="">{order.number}</a>
+                <a href="">{order.number || "N/A"}</a>
               </dd>
             </div>
             <div className={`${styles['account-order__detail']}`}>
               <dt>Date</dt>
-              <dd>{order.completed_at}</dd>
+              <dd>{order.completed_at || "N/A"}</dd>
             </div>
             <div className={`${styles['account-order__detail']}`}>
               <dt>Status</dt>
@@ -29,15 +29,15 @@ export function AccountSummary(props: AccountSummaryProps) {
             </div>
             <div className={`${styles['account-order__detail']}`}>
               <dt>Payment State</dt>
-              <dd>{order.payment_state}</dd>
+              <dd>{order.payment_state || "N/A"}</dd>
             </div>
             <div className={`${styles['account-order__detail']}`}>
               <dt>Shipment State</dt>
-              <dd>{order.shipment_state}</dd>
+              <dd>{order.shipment_state || "N/A"}</dd>
             </div>
             <div className={`${styles['account-order__detail']}`}>
               <dt>Total</dt>
-              <dd>{order.display_total}</dd>
+              <dd>{order.display_total || "N/A"}</dd>
             </div>
           </dl>
         ))}
