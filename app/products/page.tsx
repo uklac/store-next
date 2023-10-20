@@ -1,4 +1,5 @@
 import { getProducts } from 'apis/products-api';
+import { getTaxonomies, getTaxons } from 'apis/taxons-api';
 import { Filters, Pagination, ProductList } from 'components';
 import React from 'react';
 
@@ -10,6 +11,8 @@ export default async function ProductsPage({
   searchParams: any;
 }) {
   const { page } = searchParams;
+  const taxons = await getTaxons();
+  
   const { products, current_page, total_count, pages } = await getProducts(
     page,
     PRODUCTS_PER_PAGE
@@ -29,7 +32,7 @@ export default async function ProductsPage({
       <div className="page-content">
         <div className="row">
           <aside className="col-lg-3">
-            <Filters />
+            <Filters taxons={taxons}/>
           </aside>
           <div className="col-lg-9">
             {productsList.length ? (
