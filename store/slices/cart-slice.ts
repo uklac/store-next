@@ -9,6 +9,8 @@ import {
   removeLineItem,
   addAddressToOrder,
   nextCheckoutStep,
+  addPaymentToOrder,
+  addDeliveryToOrder,
 } from 'apis/cart-api';
 import { LineItem, OrderData } from 'interfaces';
 
@@ -30,7 +32,8 @@ export type CartSlice = {
   _updateAmountItem: (id: number, quantity: number) => Promise<TResponse>;
   _removeCartItem: (id: number) => Promise<TResponse>;
   _addAddressToOrder: (addressParams: any) => Promise<TResponse>;
-  // _nextCheckoutStep: () => Promise<TResponse>;
+  _addPaymentToOrder: (payment_method_id: any) => Promise<TResponse>;
+  _addDeliveryToOrder: (deliveryParams: any) => Promise<TResponse>;
 };
 
 export const createCartSlice: StateCreator<StoreState, [], [], CartSlice> = (
@@ -142,6 +145,30 @@ export const createCartSlice: StateCreator<StoreState, [], [], CartSlice> = (
     const orderNumber = get().getGuestOrderNumber();
     try {
       const resp = await addAddressToOrder(token, orderNumber, params);
+      const nextStep = await nextCheckoutStep(token, orderNumber);
+      console.log('nextStep: ', nextStep);
+      return { success: true, data: resp };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
+  _addPaymentToOrder: async (params) => {
+    const token = get().getGuestToken();
+    const orderNumber = get().getGuestOrderNumber();
+    try {
+      const resp = await addPaymentToOrder(token, orderNumber, params);
+      const nextStep = await nextCheckoutStep(token, orderNumber);
+      console.log('nextStep: ', nextStep);
+      return { success: true, data: resp };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
+  _addDeliveryToOrder: async (params) => {
+    const token = get().getGuestToken();
+    const orderNumber = get().getGuestOrderNumber();
+    try {
+      const resp = await addDeliveryToOrder(token, orderNumber, params);
       const nextStep = await nextCheckoutStep(token, orderNumber);
       console.log('nextStep: ', nextStep);
       return { success: true, data: resp };

@@ -1,5 +1,9 @@
+'use client';
+
 import { PaymentMethod } from 'interfaces';
 import styles from './payment-step.module.scss';
+import { useCart } from 'store/hooks/cart-hook';
+import { useForm } from 'react-hook-form';
 interface PaymentStepProps {
   payments: PaymentMethod[];
 }
@@ -7,8 +11,27 @@ interface PaymentStepProps {
 export async function PaymentStep(props: PaymentStepProps) {
   const { payments } = props;
   console.log('payments: ', payments);
+  const { _addPaymentToOrder, orderCart } = useCart();
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      id: '',
+    },
+  });
   return (
-    <div className={`${styles['payment-step']}`}>
+    <form
+      className={`${styles['payment-step']}`}
+      onSubmit={handleSubmit(async (data) => {
+        let selectedPaymentId = parseInt(data.id);
+
+        if (selectedPaymentId) {
+          const params = {
+            payment_method_id: selectedPaymentId,
+          };
+          const resp = await _addPaymentToOrder(params);
+          console.log('resp: ', resp);
+        }
+      })}
+    >
       <fieldset className={`${styles['payment-step__payment']}`}>
         <legend>PAYMENT INFORMATION</legend>
         <ul className={`${styles['payment-step__selector']}`}>
@@ -16,15 +39,7 @@ export async function PaymentStep(props: PaymentStepProps) {
             payments.map((payment, index) => (
               <li key={index}>
                 <label className={`${styles['spacing']}`}>
-                  <input
-                    type="radio"
-                    name="order[wallet_payment_source_id]"
-                    value={1}
-                    // defaultChecked={defaultPayment}
-                    data-action="checkout-payment#paymentSelected"
-                    data-checkout-payment-target="paymentRadio"
-                    // data-fieldset-name={fieldsetName}
-                  />
+                  <input {...register('id')} type="radio" value={payment.id} />
                   {payment.name}
                 </label>
               </li>
@@ -34,6 +49,6 @@ export async function PaymentStep(props: PaymentStepProps) {
       <button className="btn btn-primary btn-order" type="submit">
         Guardar y Continuar
       </button>
-    </div>
+    </form>
   );
 }

@@ -203,13 +203,53 @@ export async function addAddressToOrder(
   return await response.json();
 }
 
+export async function addDeliveryToOrder(
+  token: string,
+  orderNumber: string,
+  params: any
+): Promise<OrderData> {
+  const url = `http://localhost:3000/api/orders/${orderNumber}`;
+  const response = await fetch(url, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      'X-Spree-Order-Token': token,
+    },
+    body: JSON.stringify({
+      shipments_attributes: [params],
+    }),
+  });
+  return await response.json();
+}
+
+export async function addPaymentToOrder(
+  token: string,
+  orderNumber: string,
+  params: any
+): Promise<OrderData> {
+  const url = `http://localhost:3000/api/orders/${orderNumber}`;
+  const response = await fetch(url, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      'X-Spree-Order-Token': token,
+    },
+    body: JSON.stringify({
+      payments_attributes: [params],
+    }),
+  });
+  return await response.json();
+}
+
 export async function nextCheckoutStep(
   token: string,
   orderNumber: string
 ): Promise<OrderData> {
-  const url = `http://localhost:3000/api/checkouts/${orderNumber}`;
+  const url = `http://localhost:3000/api/checkouts/${orderNumber}/next`;
   const response = await fetch(url, {
-    method: 'PATCH',
+    method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
