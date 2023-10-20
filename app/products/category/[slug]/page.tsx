@@ -1,8 +1,9 @@
-import { getTaxons, getTaxonsProducts } from "apis/taxons-api";
+import { getTaxonomies, getTaxons, getTaxonsProducts } from "apis/taxons-api";
 import { ProductList, Filters } from "components";
 
 export default async function ProductsCategoryPage({ params }: { params: any }) {
   const { taxons } = await getTaxons();
+  const taxonomies = await getTaxonomies();
   const taxon = taxons.find((taxon) => {
     const slugRoute = taxon.permalink.split('/').pop();
     return slugRoute == params.slug;
@@ -24,7 +25,7 @@ export default async function ProductsCategoryPage({ params }: { params: any }) 
       <div className="page-content">
         <div className="row">
           <aside className="col-lg-3">
-            <Filters taxons={taxons} />
+            <Filters taxonomies={taxonomies} />
           </aside>
           <div className="col-lg-9">
             <ProductList products={productsList} columns={3}/>

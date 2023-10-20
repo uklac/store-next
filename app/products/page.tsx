@@ -11,7 +11,7 @@ export default async function ProductsPage({
   searchParams: any;
 }) {
   const { page } = searchParams;
-  const { taxons } = await getTaxons();
+  const taxonomies = await getTaxonomies();
   
   const { products, current_page, total_count, pages } = await getProducts(
     page,
@@ -32,7 +32,7 @@ export default async function ProductsPage({
       <div className="page-content">
         <div className="row">
           <aside className="col-lg-3">
-            <Filters taxons={taxons}/>
+            <Filters taxonomies={taxonomies}/>
           </aside>
           <div className="col-lg-9">
             {productsList.length ? (
