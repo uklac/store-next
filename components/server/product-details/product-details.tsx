@@ -24,7 +24,7 @@ export function ProductDetails(props: ProductDetailsProps) {
     const linkUrl = permalink.split('/').pop();
 
     return (
-      <Link href={`/${linkUrl}`} className="product-category">
+      <Link href={`/products/category/${linkUrl}`} className="product-category">
         Ver mas {classification.taxon.name}
       </Link>
     );

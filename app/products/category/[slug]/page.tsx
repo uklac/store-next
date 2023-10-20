@@ -24,7 +24,7 @@ export default async function ProductsCategoryPage({ params }: { params: any }) 
       <div className="page-content">
         <div className="row">
           <aside className="col-lg-3">
-            <Filters />
+            <Filters taxons={taxons} />
           </aside>
           <div className="col-lg-9">
             <ProductList products={productsList} columns={3}/>

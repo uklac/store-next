@@ -7,6 +7,7 @@ const BASE_URL_TAXONOMIES = `${API_URL}/taxonomies`;
 
 export async function getTaxons(): Promise<ListTaxon> {
   const response = await fetch(BASE_URL_TAXONS, {
+    cache: 'default',
     headers: HEADERS_REQUEST,
   });
   return await response.json();

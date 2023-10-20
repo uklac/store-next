@@ -11,7 +11,7 @@ export default async function ProductsPage({
   searchParams: any;
 }) {
   const { page } = searchParams;
-  const taxons = await getTaxons();
+  const { taxons } = await getTaxons();
   
   const { products, current_page, total_count, pages } = await getProducts(
     page,
