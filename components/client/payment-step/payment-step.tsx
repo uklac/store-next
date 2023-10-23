@@ -26,6 +26,7 @@ export async function PaymentStep(props: PaymentStepProps) {
         if (selectedPaymentId) {
           const params = {
             payment_method_id: selectedPaymentId,
+            amount: orderCart?.display_total
           };
           const resp = await _addPaymentToOrder(params);
           console.log('resp: ', resp);

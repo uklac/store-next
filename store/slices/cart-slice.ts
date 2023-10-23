@@ -11,6 +11,7 @@ import {
   nextCheckoutStep,
   addPaymentToOrder,
   addDeliveryToOrder,
+  completeStep,
 } from 'apis/cart-api';
 import { LineItem, OrderData } from 'interfaces';
 
@@ -33,6 +34,7 @@ export type CartSlice = {
   _removeCartItem: (id: number) => Promise<TResponse>;
   _addAddressToOrder: (addressParams: any) => Promise<TResponse>;
   _addPaymentToOrder: (payment_method_id: any) => Promise<TResponse>;
+  _completeOrder: (total: string) => Promise<TResponse>; 
   _addDeliveryToOrder: (deliveryParams: any) => Promise<TResponse>;
 };
 
@@ -157,8 +159,8 @@ export const createCartSlice: StateCreator<StoreState, [], [], CartSlice> = (
     const orderNumber = get().getGuestOrderNumber();
     try {
       const resp = await addPaymentToOrder(token, orderNumber, params);
-      const nextStep = await nextCheckoutStep(token, orderNumber);
-      console.log('nextStep: ', nextStep);
+      // const nextStep = await nextCheckoutStep(token, orderNumber);
+      // console.log('nextStep: ', nextStep);
       return { success: true, data: resp };
     } catch (error) {
       return { success: false, error };
@@ -169,8 +171,20 @@ export const createCartSlice: StateCreator<StoreState, [], [], CartSlice> = (
     const orderNumber = get().getGuestOrderNumber();
     try {
       const resp = await addDeliveryToOrder(token, orderNumber, params);
-      const nextStep = await nextCheckoutStep(token, orderNumber);
-      console.log('nextStep: ', nextStep);
+      // const nextStep = await nextCheckoutStep(token, orderNumber);
+      // console.log('nextStep: ', nextStep);
+      return { success: true, data: resp };
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
+  _completeOrder: async (total) => {
+    const token = get().getGuestToken();
+    const orderNumber = get().getGuestOrderNumber();
+    try {
+      const resp = await completeStep(token, orderNumber, total);
+      // const nextStep = await nextCheckoutStep(token, orderNumber);
+      // console.log('nextStep: ', nextStep);
       return { success: true, data: resp };
     } catch (error) {
       return { success: false, error };

@@ -208,7 +208,8 @@ export async function addDeliveryToOrder(
   orderNumber: string,
   params: any
 ): Promise<OrderData> {
-  const url = `http://localhost:3000/api/orders/${orderNumber}`;
+  const url = `http://localhost:3000/api/checkouts/${orderNumber}`;
+  // const url = `http://localhost:3000/api/orders/${orderNumber}`;
   const response = await fetch(url, {
     method: 'PATCH',
     headers: {
@@ -217,7 +218,9 @@ export async function addDeliveryToOrder(
       'X-Spree-Order-Token': token,
     },
     body: JSON.stringify({
-      shipments_attributes: [params],
+      order: {
+        shipments_attributes: [params]
+      }
     }),
   });
   return await response.json();
@@ -228,7 +231,7 @@ export async function addPaymentToOrder(
   orderNumber: string,
   params: any
 ): Promise<OrderData> {
-  const url = `http://localhost:3000/api/orders/${orderNumber}`;
+  const url = `http://localhost:3000/api/checkouts/${orderNumber}`;
   const response = await fetch(url, {
     method: 'PATCH',
     headers: {
@@ -237,7 +240,29 @@ export async function addPaymentToOrder(
       'X-Spree-Order-Token': token,
     },
     body: JSON.stringify({
-      payments_attributes: [params],
+      order: {
+        payments_attributes: [params]
+      }
+    }),
+  });
+  return await response.json();
+}
+
+export async function completeStep(
+  token: string,
+  orderNumber: string,
+  total: string
+): Promise<OrderData> {
+  const url = `http://localhost:3000/api/checkouts/${orderNumber}/complete`;
+  const response = await fetch(url, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      'X-Spree-Order-Token': token,
+    },
+    body: JSON.stringify({
+      expected_total: total
     }),
   });
   return await response.json();

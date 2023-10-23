@@ -14,6 +14,7 @@ export const useCart = () => {
     _addAddressToOrder,
     _addPaymentToOrder,
     _addDeliveryToOrder,
+    _completeOrder
   } = useAppStore();
 
   return {
@@ -29,5 +30,6 @@ export const useCart = () => {
     _addAddressToOrder,
     _addPaymentToOrder,
     _addDeliveryToOrder,
+    _completeOrder
   };
 };

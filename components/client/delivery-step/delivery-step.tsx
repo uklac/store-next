@@ -24,18 +24,12 @@ export async function DeliveryStep(props: DeliveryStepProps) {
       className={`${styles['delivery-step']}`}
       onSubmit={handleSubmit(async (data) => {
         let selectedShippingRateId = parseInt(data.selected_shipping_rate_id);
-
         if (selectedShippingRateId) {
           const params = {
             id: order.shipments[0].id,
             selected_shipping_rate_id: selectedShippingRateId,
-            // special_instructions: data.special_instructions
+            special_instructions: data.special_instructions,
           };
-
-          // const formattedParams = {
-          //   shipments_attributes: [params],
-          // };
-
           const resp = await _addDeliveryToOrder(params);
           console.log('resp: ', resp);
         }
@@ -75,7 +69,7 @@ export async function DeliveryStep(props: DeliveryStepProps) {
         </div>
 
         <div className={`${styles['textarea-input']}`}>
-          <label>Shipping Instructions:</label>
+          <label>Shipping Instructions (Optional):</label>
           <textarea
             {...register('special_instructions')}
             className="form-control"
