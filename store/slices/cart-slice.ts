@@ -184,6 +184,7 @@ export const createCartSlice: StateCreator<StoreState, [], [], CartSlice> = (
     try {
       const resp = await completeStep(token, orderNumber, total);
       await localStorage.removeItem('order_number'); 
+      await localStorage.removeItem('guest_token'); 
       // const nextStep = await nextCheckoutStep(token, orderNumber);
       // console.log('nextStep: ', nextStep);
       return { success: true, data: resp };

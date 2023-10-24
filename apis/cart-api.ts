@@ -198,6 +198,7 @@ export async function addAddressToOrder(
     body: JSON.stringify({
       use_billing: true,
       ship_address_attributes: addressParams,
+      bill_address_attributes: addressParams
     }),
   });
   return await response.json();
