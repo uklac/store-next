@@ -7,6 +7,7 @@ import { useUser } from 'store/hooks/user-hook';
 import { AccountSummary } from 'components/server/account-summary/account-summary';
 import { useEffect, useState } from 'react';
 import { AddressUser, UserOrder } from 'store/slices/user-slice';
+import styles from './user-dashboard.module.scss';
 
 export async function UserDashboard() {
   const route = useRouter();
@@ -111,28 +112,33 @@ export async function UserDashboard() {
                               {address &&
                                 address.data &&
                                 address.data?.map((item, index) => (
-                                  <p key={index}>
-                                    {item.name}
-                                    <br />
-                                    {item.company}
-                                    <br />
-                                    {item.address1}
-                                    <br />
-                                    {item.address2}
-                                    <br />
-                                    {item.phone}
-                                    <br />
-                                    {item.country.name}
-                                    <br />
-                                    {item.city}
-                                    <br />
-                                    {item.zipcode}
-                                    <br />
-                                    <Link href="/">
-                                      Edit <i className="icon-edit"></i>
-                                    </Link>
-                                  </p>
+                                  <div
+                                    className={`${styles['address-information']}`}
+                                    key={index}
+                                  >
+                                    <div>
+                                      <p>Nombre: </p>
+                                      <p>Dirección 1: </p>
+                                      <p>Dirección 2: </p>
+                                      <p>Teléfono: </p>
+                                      <p>País: </p>
+                                      <p>Ciudad: </p>
+                                      <p>Código Postal: </p>
+                                    </div>
+                                    <div>
+                                      <p>{item.name}</p>
+                                      <p>{item.address1}</p>
+                                      <p>{item.address2}</p>
+                                      <p>{item.phone}</p>
+                                      <p>{item.country.name}</p>
+                                      <p>{item.city}</p>
+                                      <p>{item.zipcode}</p>
+                                    </div>
+                                  </div>
                                 ))}
+                              {/* <Link href="/">
+                                Edit <i className="icon-edit"></i>
+                              </Link> */}
                             </div>
                           </div>
                         </div>

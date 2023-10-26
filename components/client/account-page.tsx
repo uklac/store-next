@@ -2,7 +2,7 @@
 
 import { useUser } from 'store/hooks/user-hook';
 import RegisterForm from './register-form/register-form';
-import { UserDashboard } from './user-dashboard';
+import { UserDashboard } from './user-dashboard/user-dashboard';
 import Link from 'next/link';
 
 export function AccountPage() {
