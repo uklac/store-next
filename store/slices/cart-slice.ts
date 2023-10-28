@@ -12,6 +12,7 @@ import {
   addPaymentToOrder,
   addDeliveryToOrder,
   completeStep,
+  getCurrentOrder,
 } from 'apis/cart-api';
 import { LineItem, OrderData } from 'interfaces';
 
@@ -29,6 +30,7 @@ export type CartSlice = {
   _addProduct: (variantId: number, quantity: number) => Promise<TResponse>;
   _removeProduct: () => void;
   _getCart: () => Promise<TResponse>;
+  _getCurrentOrder: () => Promise<TResponse>;
   _checkoutCart: () => Promise<TResponse>;
   _updateAmountItem: (id: number, quantity: number) => Promise<TResponse>;
   _removeCartItem: (id: number) => Promise<TResponse>;
@@ -191,7 +193,23 @@ export const createCartSlice: StateCreator<StoreState, [], [], CartSlice> = (
     } catch (error) {
       return { success: false, error };
     }
-  }
+  },
+  _getCurrentOrder: async () => {
+    try {
+      const userToken = get().getUserToken();
+      if (userToken) {
+        const cart = await getCurrentOrder(userToken);
+        set({ orderCart: cart });
+        localStorage.setItem('order_number', cart.number);
+        localStorage.setItem('guest_token', cart.token);
+        return { success: true, data: cart };
+      } else {
+        return { success: true, data: null };
+      }
+    } catch (error) {
+      return { success: false, error };
+    }
+  },
 });
 
 function getTotalProductsInCart(items: LineItem[]) {

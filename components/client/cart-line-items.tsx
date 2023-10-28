@@ -13,16 +13,28 @@ interface Props {
 }
 
 export function CartLineItems(props: Props) {
-  const { orderCart, _getCart } = useCart();
+  const { orderCart, _getCart, _getCurrentOrder } = useCart();
   const [status, setStatus] = useState('idle');
 
   const fetchOrder = useCallback(async () => {
+    let guestToken = localStorage.getItem('guest_token');
+    let userToken = localStorage.getItem('user_token');
     setStatus('pending');
-    const { error } = await _getCart();
-    if (error) {
-      setStatus('rejected');
-    } else {
-      setStatus('successful');
+    if (guestToken) {
+      const { error } = await _getCart();
+      if (error) {
+        setStatus('rejected');
+      } else {
+        setStatus('successful');
+      }
+    }
+    if (userToken && !guestToken) {
+      const { error } = await _getCurrentOrder();
+      if (error) {
+        setStatus('rejected');
+      } else {
+        setStatus('successful');
+      }
     }
   }, []);
 
